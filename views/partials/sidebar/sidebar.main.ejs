@@ -1,0 +1,13 @@
+<!--noindex-->
+<!--googleoff: all-->
+
+<div class="ui vertical floating sidebar menu left uncover main-sidebar">
+  <% if (session.auth && session.user) { %>
+		<%- partial("sidebar.auth.ejs") %>
+  <% } else {%>
+		<%- partial("sidebar.unauth.ejs") %>
+  <% }; %>
+</div>
+
+<!-- googleon: all-->
+<!--/noindex-->

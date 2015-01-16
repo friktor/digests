@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /
+Disallow: /rss*
+Disallow: /byauthor*
+
+Sitemap: http://digests.me/sitemaps/otherwise.xml
+Sitemap: http://digests.me/sitemaps/profiles.xml
+Sitemap: http://digests.me/sitemaps/posts.xml

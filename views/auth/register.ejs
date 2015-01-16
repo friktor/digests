@@ -1,0 +1,59 @@
+<div class="ui basic segment">
+	<div class="row">
+		<div class="col-md-4"></div>
+		<div class="col-md-4 register">
+			<div class="paper box register">
+				<h2><%= __("Register") %></h2>
+				<div class="ui form register">
+					<div class="ui left icon input field">
+						<input type="text" name="username" placeholder="<%= __("username") %>">
+						<i class="ifc-user_male3 icon"></i>	
+					</div>
+					<div class="ui left icon input field">
+						<input type="password" name="password" placeholder="<%= __("password") %>">
+						<i class="ifc-password icon"></i>	
+					</div>
+					<div class="ui left icon input field">
+						<input type="password" name="confirmation" placeholder="<%= __("confirmation password") %>">
+						<i class="ifc-password icon"></i>	
+					</div>
+					<div class="ui left icon input field">
+						<input type="text" name="email" placeholder="E-mail">
+						<i class="ifc-message icon"></i>	
+					</div>
+					<div class="ui left icon input field">
+						<input type="text" name="firstname" placeholder="<%= __("firstname") %>">
+						<i class="ifc-user_male4 icon"></i>	
+					</div>
+					<div class="ui left icon input field">
+						<input type="text" name="lastname" placeholder="<%= __("lastname") %>">
+						<i class="ifc-user_male4 icon"></i>	
+					</div>
+					<div class="ui toggle field checkbox">
+					  <input name="terms" type="checkbox">
+					  <label><%= __("I agree with the rules of the resource") %></label>
+					</div>
+					<div id="message"></div>
+					<div class="ui button submit">
+						<%= __("Register") %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+</div>
+<script>
+	var i18n = {
+		hasBeenRegister: "<%= __('User has been register, activate your account from email. Redirect...') %>",
+		registerFailure: "<%= __('Register in failure. Please try again!') %>",
+		passNotMatchConfirm: "<%= __('password and confirmation do not match') %>",
+		minLengPass: "<%= __('Your password must be at least 7 characters') %>",
+		requiredField: "<%= __('this required field') %>",
+		confirmation: "<%= __('confirmation') %>",
+		username: "<%= __('username') %>",
+		password: "<%= __('password') %>",
+		register: "<%= __('Register') %>",
+	};
+</script>
+<script src="/js/auth/register.js" defer></script>

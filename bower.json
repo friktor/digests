@@ -1,0 +1,31 @@
+{
+  "name": "digest-engine",
+  "version": "0.1",
+  "main": "app.js",
+  "moduleType": [
+    "node"
+  ],
+  "authors": [
+    "Anton Shramko"
+  ],
+  "license": "EULA",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "masonry": "~3.1.5",
+    "jquery": "~2.1.1",
+    "waves": "~0.5.4",
+    "stalker": "~1.0.0",
+    "lodash": "~2.4.1",
+    "remarkable": "~1.4.1",
+    "highlightjs": "~8.3.0",
+    "jquery.cookie": "~1.4.1",
+    "blueimp-file-upload": "~9.8.1"
+  }
+}

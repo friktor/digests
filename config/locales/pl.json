@@ -1,0 +1,184 @@
+{
+	"Activate": "Aktywować",
+	"Activate your new account on {{website}}": "Aktywuj swoje konto w {{website}}",
+	"Welcome to our website {{firstname}} {{lastname}}! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link.": "Witamy na naszej stronie internetowej {{firstname}} {{lastname}}! Aby w pełni korzystać z konta, musisz zweryfikować swój adres e-mail. W ten sposób można aktywować konto - i być w stanie korzystać z pełnej funkcjonalności. Aby to zrobić, kliknij na odpowiedni link.",
+	"You have successfully updated your password on {{website}}": "Zaktualizowaniu hasła na {{website}}",
+	"Your new password on the site - {{password}}": "Twoje nowe hasło na witryna internetowa - {{password}}",
+
+	"Forbidden": "Zakazany",
+	"Access denied": "Odmowa dostępu",
+	"You don't have permission to see the page you're trying to reach.": "Nie masz wystarczających uprawnień, aby zobaczyć tę stronę.",
+
+	"Page not found": "Nie znaleziono strony",
+	"The page you were trying to reach doesn't exist.": "Strona, którą próbujesz otworzyć nie istnieje.",
+
+	"Server Error": "Błąd serwera",
+	"There was a server error, please try again later.": "Wystąpił błąd serwera, spróbuj ponownie później.",
+
+	"Search": "Poszukiwanie",
+
+	"Register": "Zameldować się",
+	"Login": "Wejście",
+
+	"Projects and Habs": "Projekty i Huby",
+	"Search on Site": "Szukaj strony",
+	"My Subscribes": "Moje subskrypcje",
+	"My Favorites": "Moje Ulubione",
+	"Add Article": "Dodaj artykuł",
+	"My Profile": "Mój profil",
+	"Feedback": "Sprzężenie Zwrotne",
+	"Logout": "Wychodzić",
+	
+	"I agree with the rules of the resource": "Zgadzam się z zasadami zasobu",
+	"confirmation password": "potwierdzenie hasła",
+	"firstname": "nazwa",
+	"lastname": "nazwisko",
+	"username": "nazwa użytkownika",
+	"password": "hasło",
+	"or": "lub",
+
+	"Warning! You have not activated your account via email. If you want to use all the features of the service - you need to activate your account via the link in the email sent to your email. If after 24 hours you do not activate your account - it will be removed.": "Ostrzeżenie! Nie aktywacji konta poprzez e-mail. Jeśli chcesz korzystać ze wszystkich funkcji serwisu - musisz aktywować swoje konto na link w wiadomości e-mail wysłany do Ciebie e-mail. Jeśli po 24 godzinach nie aktywujesz konta - zostanie on usunięty.",
+	"latest post": "ostatni post",
+	"activities": "działania",
+	"not specified": "nieokreślone",
+	"all posts": "wszystkie posty",
+	"about me": "o mnie",
+	"read": "czytać",
+	"share": "dzielić",
+
+	"social network": "sieci społeczne",
+	"comments": "sieci społeczne",
+	"karma": "karma",
+	"posts": "postów",
+
+	"POPULAR": "POPULARNE",
+	"PROJECTS": "PROJEKTY",
+	"NEW": "NOWOŚĆ",
+
+	"Subscribe": "Zapisać się",
+
+	"Comments": "Komentarze",
+	"%s comments": {
+		"one": "jeden komentarz",
+		"other": "%s komentarzy"
+	},
+	
+	"Read Full": "Czytaj więcej",
+	"Add comment": "Dodaj komentarz",
+	"Profile %s": "Profil %s",
+
+	"Enter the title of your article. Length up to 120 characters.": "Wprowadź tytuł swojego artykułu. Długość do 120 znaków.",
+	"Enter a link to an image header of the article. Acceptable formats: JPG, PNG.": "Podaj link do nagłówka obrazu artykułu. Dopuszczalne formaty: JPG, PNG.",
+	"Enter your post. Markup language - Markdown. Learn other information and tutorials in FAQ.": "Wpisz swój post. Tekst Markup Language - Markdown. Znajdź inne informacje i samouczków w FAQ.",
+
+	"This is a draft?": "To jest projekt?",
+	"Publish": "Publikować",
+	"Preview": "Zapowiedź",
+
+	"Language": "Język",
+	"English": "Angielski",
+	"Russian": "Rosyjski",
+	"Polish": "Polski",
+
+	"Hab": "Huby",
+	"Author": "Autor",
+
+	"Popular Today": "Popularne Dziś",
+	"page": "strona",
+
+	"Subscribers": "Abonenci",
+	"Posts by %s": "Wpisy w imieniu %s",
+	"RSS Feed": "RSS Feed",
+	"Exit": "Wyjść",
+
+	"You are not logged in. To use the more advanced functionality subscriptions login or register. To receive the newsletter without registration, enter your email.": "Nie jesteś zalogowany. Stosować bardziej zaawansowane funkcjonalności idź się zalogować lub zarejestrować. Aby otrzymywać newsletter, bez rejestracji, wpisz swój adres e-mail.",
+
+	"Are you sure you want to subscribe to the publication by this author?": "Czy na pewno chcesz zapisać się do publikacji tego autora?",
+
+	"Subscribe to author": "Subskrybuj autorowi",
+	"Your email": "Twój e-mail",
+	"You are an authorized user, select an interval mailings.": "Jesteś uprawniony użytkownik, wybierz wysyłek przedziale.",
+
+	"Settings %s": "Ustawienia %s",
+	"Settings": "Ustawienia",
+
+	"Avatar": "Awatara",
+	"Change avatar": "Zmień avatar",
+	"Select file": "Wybierz plik",
+	
+	"Upload heading profile image": "Prześlij zdjęcie w profilu pozycji",
+	"Not accepted file types.": "Nie Akceptowane formaty plików.",
+	"Change heading profile": "Zmienić nagłówek profilu",
+	"File size is too big.": "Rozmiar pliku jest zbyt duży.",
+	"Retype new password":"Powtórz nowe hasło",
+	"Enter new password": "Wpisz nowe hasło",
+	"Change password": "Zmień hasło",
+	"Update password": "Aktualizacja hasła",
+	"Personal": "Osobisty",
+	"Upload": "Wysłać",
+	"Update": "Odśwież",
+
+	"RSS Feed «New» in the World Digest": "Kanał RSS «Nowy» w World Digest",
+	"Personal RSS with posts from %s %s": "Personal RSS with posts from %s %się",
+	"Newest posts. World Digests": "Najnowsze posty. World Digests",
+	"Interesting for your habs.": "Ciekawe do zainteresowań.",
+	"RSS feed by user %s": "Kanal RSS od użytkownika %s",
+	"Personal RSS with posts by %s %s": "Personal RSS with posts by %s %s",
+	"To read in another language.": "Czytać w innym języku.",
+	
+	"Enter your query here": "Wpisz zapytanie tutaj",
+	"Error! Please refresh this page, and try again": "Błąd! Prosimy odświeżyć tę stronę i spróbuj jeszcze raz",
+	"success": "sukces",
+	"Posts in hab": "W habe",
+	"Have any server error. Check the connection to the Internet and try again.": "Wystąpił serwerowa błąd. Sprawdź соеденение z siecią internet i spróbuj jeszcze raz.",
+	"Authorization failed, please check the data entered, or register.": "Uwierzytelnienie nie powiodło się, sprawdź wprowadzone dane lub zarejestruj.",
+	"You have successfully logged into the system. Redirect...": "Można z powodzeniem zalogowany. Przekierowanie...",
+
+	"No more entries" : "Więcej wpisów nie",
+	"Next page": "Następna strona",
+	"Edit post “%s” by %s %s": "Edytuj post “%s” od %s %s",
+	"My subscriptions": "Moje subskrypcje",
+	"unsubscribe": "wypisz się",
+	"Subscription user %s": "Subskrypcja użytkownika %s",
+	"%s subscriptions": "%s subskrypcji",
+	"Edit Article": "Edycja Artykułu",
+	"Success. Now you will be redirected to the page of your post.": "Sukces. Teraz zostaniesz przekierowany na stronę swojego posta.",
+	"Error! Please try again.": "Błąd! Proszę spróbować ponownie.",
+	"Leave comment": "Zostaw komentarz",
+	"For the record, no comments.": "Do zapisu na razie brak komentarzy.",
+	"Enter your comment here. You can use Markdown": "Wpisz swój komentarz tutaj. Możesz używać Markdown",
+	"submit": "wyślij",
+	"Subscribe to this hab": "Subskrybuj ten hab",
+	"Are you sure you want to subscribe to the publication by this hab?": "Czy jesteś pewien, że chcesz zapisać się na publikacje na ten hab?",
+	"You are an authorized user.": "Jesteś zalogowanym użytkownikiem.",
+	"Congratulations! You request a subscription. To your email sent instructions to activate your subscription.": "Gratulacje! Wniosek na subskrypcję. Na twój adres e-mail wysłane instrukcje dotyczące aktywacji subskrypcji.",
+	"Error! Subscribe is exists.": "Błąd! Subskrybuj istnieje.",
+	"Edit": "Edytuj",
+	"activities me": "moja działalność",
+	"Enter the tag entries with a comma": "Wpisz znacznik zapisu z przecinkiem",
+
+	"Site": "Witryna",
+	"About us": "O nas",
+	"Authors": "Autorzy",
+	"Partners": "Partnerzy",
+	"Contribute": "Pomoc",
+	"Other": "Inne",
+	"Help translate": "Pomóż mi przetłumaczyć",
+	"Support": "Pomoc techniczna",
+	"FAQ": "FAQ",
+	"Social": "Ogólne",
+	"All right reserved.": "Wszystkie prawa zastrzeżone.",
+	"Share": "Podzielić",
+	"Tags": "Tagi",
+
+	"Please activate your subscribe on Digests.me": "Prosimy aktywować subskrypcji funkcji Digests.me",
+	"Please activate your subscribe on Digests.me. For activate - click to link «Activate».": "Prosimy aktywować subskrypcji funkcji skrótów.mnie. Aby aktywować się - kliknij przycisk \"aktywuj\".",
+
+	"Please update this page for view your comment.": "Prosimy odświeżyć tę stronę, aby zobaczyć komentarze.",
+
+	"Your subscribe has been activate.": "Twoja Subskrypcja została aktywowana.",
+	"Activation success": "Aktywacja sukcesu",
+	"<h1>The daily flow</h1>\n<h2>of your interests</h2>": "<h1>Codzienny przepływ</h1>\n<h2>twoich interesów</h2>",
+
+	"Digests.me is an international independent collective blog. The aim of the project is to create a convenient platform for the expression of their thoughts, and to share experiences in various fields.<br>Digests.me - this is a project which can be interesting to a large number of persons without limitations as to the language barrier or lack of areas of creativity and activity.<br>On our project, you can keep your personal blog or a collection of thematic information (hub) - which together with other bloggers and readers is sorted and a variety of tape information which is accessible to all.<br>At the moment the site is fully or partially translated into 3 languages: Russian, Polish, English. This is only the beginning. But even now you can get the most diverse and interesting information which is provided only by us.<br>On the website there are a few basic concepts:<br><br>Hub - a set of information branches or separate direction than in either. According to the idea there are several types of branching - global and local.<br>* Local: the branch from the mainstream, for example Impressionism is the local direction from the main branch of the Art.<br>* Global: the main large for the invariant direction or complex monolithic information chain. For example, you can call the global hub Programming - which in turn can be divided into a number of separate local branches. Even global hubs are local soprovojdeniye other hubs.<br>* Project - the concept of the local hub distinctive feature of which is independent of the direction which can develop one group of people to explain their thoughts.<br><br>At the moment the site is in alpha mode. At this point, you can write your blog in hubs that are already built on the site. Until such work is unstable functions as an independent branch and the Association of local and global hubs. There is no possibility to use several global branches to select the direction of entry, but at the moment this problem is solved by using the tags.": "Funkcji skrótów.mnie to niezależna Międzynarodowa zbiorowego blogu. Celem projektu jest stworzenie wygodne miejsce do wyrażania swoich myśli, podzielić się doświadczeniem w różnych dziedzinach.<br>strawienia.mi to projekt, które mogą być interesujące dla dużej liczby osób bez ograniczeń bariera językowa czy brak dziedzinach twórczości i działalności.<br>na naszym projekcie można prowadzić swój blog lub zbiór tematycznych informacji (hub), który wraz z innymi blogerami i czytelników jest sortowana i różnorodne taśmy, informacje, która jest dostępna dla wszystkich.<br>W tej chwili strona jest w pełni lub częściowo przetłumaczony na 3 język: rosyjski, polski, angielski. To dopiero początek. Ale nawet teraz można dostać różnorodne i ciekawe informacje, które są tylko i wyłącznie u nas.<br>na stronie jest kilka podstawowych pojęć:<br><br>Hub - zestaw informacyjnych gałęzi lub odrębnego kierunku, niż gdziekolwiek. W teorii jest kilka rodzajów faktur - globalne i lokalne.<br>* lokalny: gałąź od głównego kierunku, na przykład, impresjonizm to miejscowi kierunku od głównej gałęzi sztuki.<br>* globalne główny ogromny dla инвариантного kierunku lub złożonych monolitycznych informacyjnego łańcucha. Na przykład, można nazwać światowym centrum programowania, co z kolei może być podzielony na szereg odrębnych lokalnych oddziałów. Nawet globalne węzły lokalne soprovojdeniye innych ośrodków.<br>* projekt - koncepcja lokalnego haba cechą której nie zależy od kierunku, który może się rozwinąć jedna grupa ludzi, aby wyjaśnić swoje myśli.<br><br>W tej chwili strona jest w Alfa trybie. Na tym etapie możesz pisać swój blog w węzły, które już zostały wybudowane na terenie hotelu. Aż taka praca нестабильна funkcji jako samodzielnej branży i Stowarzyszenia lokalnych i światowych ośrodków. Nie ma możliwości skorzystać z kilku globalnych branż, aby wybrać kierunek nagrywania, ale w tej chwili ten problem rozwiązać za pomocą znaczników."
+}

@@ -1,0 +1,77 @@
+<div class="ui basic segment">
+	<div class="row _habs">
+	<% _.each(habs, function (hab) { %>
+		
+		<% "Define variables" %>
+		<% var description, name; %>
+		<% "Set hab name from i18n" %>
+		<% if (_.find(hab.name, {"locale": req.getLocale()})) { %>
+			<% name = (_.find(hab.name, {"locale": req.getLocale()})).name; %>
+		<% } else {name = hab.translitName}; %>
+	
+		<% "Set hab description from i18n" %>
+		<% if (_.find(hab.description, {"locale": req.getLocale()})) { %>
+			<% description = (_.find(hab.description, {"locale": req.getLocale()})).desc; %>
+		<% } else {description = (_.find(hab.description, {"locale": "en"})).desc;}; %>
+		
+		<div class="hab_ post col-md-3 col-sm-6 col-xs-12">
+			<div class="ui segment material text-center">
+				<div class="title">
+					<a href="/hab/<%= hab.translitName %>"><img src="<%= hab.headingImg%>" alt=""></a>
+					<h4 class="ui header without-thumb">
+						<a href="/hab/<%= hab.translitName %>"><%= name %></a>
+						<div class="sub header"><%= hab.numberOfSubscribers %> <%= __("Subscribers") %></div>
+					</h4>
+				</div>
+				<div class="content">
+					<p><%= xss(description, {whiteList: [], stripIgnoreTag: true, stripIgnoreTagBody: ['script']}) %></p>
+				</div>
+				<div class="buttons">
+					<a href="/rss/hab/<%= hab.translitName %>/<%= req.getLocale() %>.xml" class="link waves-effect waves-button"><i class="ifc-rss"></i> <%= __("RSS Feed") %></a>
+					<a href="/hab/<%= hab.translitName %>" class="link waves-effect waves-button"><i class="ifc-bookmark"></i> <%= __("read") %></a>
+				</div>
+			</div>
+		</div>
+	<% }) %>
+	</div>
+</div>
+<%- partial("../partials/footer.ejs") %>
+
+<script>
+$(document).ready(function () {
+	$(".row._habs").masonry({
+	  itemSelector: ".post.hab_",
+	  columnWidth: ".post.hab_"
+	});
+});
+</script>
+
+<script>
+$(document).ready(function () {
+	// $(".post.hab_ img").addClass("not-loaded");
+	
+	$(".row._habs").masonry({
+	  itemSelector: ".post.hab_",
+	  columnWidth: ".post.hab_"
+	});
+
+	$(".post.hab_ img.not-loaded").lazyload({
+		effect: "fadeIn",
+		load: function () {
+			$(this).removeClass("not-loaded");
+			
+			$(".row.posts_in_hab")
+				.masonry("reloadItems")
+				.masonry()
+			;
+		}
+	});
+
+
+	$.getScript("http://cdn.jsdelivr.net/jquery.lazyload/1.8.4/jquery.lazyload.js", function () {
+		$(".row._habs").imagesLoaded(function () {
+			$(".row._habs").masonry("reloadItems").masonry()
+		});
+	});
+});
+</script>

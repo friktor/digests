@@ -1,0 +1,116 @@
+@import "utils";
+
+.fontBasic (@size: auto) {
+	text-transform: uppercase;
+	color: rgba(0,0,0,0.87);
+	text-align: center;
+	font-size: @size;
+	font-weight: 400;
+}
+
+.settings.profile {
+	padding-bottom: 100px !important;
+	.ui.horizontal.divider {
+		color: rgba(0,0,0,0.87);
+		font-weight: 400;
+	}
+	
+	.ui.red.inverted.segment {
+		background: #FF4444 !important;
+		margin-top: 10px;
+		border-radius: 0;
+	}
+
+	.ui.green.inverted.segment {
+		background: #A8D324 !important;
+		margin-top: 10px;
+		border-radius: 0;
+	}
+	
+	.ui.segment.material {
+		
+		.padding(1rem, 2rem, 2rem, 2rem);
+		margin-top: 0;
+
+		h2 {
+			.fontBasic(1.2rem);
+		}
+
+		.avatar {
+			padding: 0 !important;
+			h4 {.fontBasic(1rem);}
+
+			.ui.animated.button {
+				background: #33B5E5;
+				margin-top: 15px;
+				border-radius: 0;
+				font-weight: 400;
+				color: #FFF;
+				&:hover {
+					.BoxShadowHelper(1);
+					opacity: 0.9;
+				}
+			}
+
+			.ui.upload.button {
+				font-weight: 400;
+				border-radius: 0;
+				width: 184px;
+				&:hover {
+					.BoxShadowHelper(1);
+					opacity: 0.9;
+				}
+			}
+		}
+
+		.col-md-10.info {
+			padding-top: 1rem;
+
+			.ui.input {
+				margin-top: 10px;
+				input {
+					border-radius: 0;
+				}
+			}
+
+			textarea {
+				margin-top: 15px;
+				border-radius: 0;
+			}
+
+			.ui.button {
+
+				font-weight: 400;
+				border-radius: 0;
+				&:hover {
+					.BoxShadowHelper(1);
+					opacity: 0.9;
+				}
+			}
+
+			.ui.green.animated.button {
+				background: #99CC00 !important;
+			}
+		}
+	}
+
+}
+
+@media screen and (max-width: 769px) {
+	.settings.profile {
+		.avatar {
+			.row {
+				margin-bottom: 10px;
+				margin-top: 10px;
+
+				.fileinput-button {
+					z-index: 400;
+				}
+
+				.ui.upload.button {
+					margin-top: 15px;
+				}
+			}
+		}
+	}
+}
