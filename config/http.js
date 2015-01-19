@@ -27,14 +27,7 @@ module.exports.http = {
   ****************************************************************************/
 
   // Locals to EJS
-  locals: {
-    translit: require('transliteration'),
-    hljs: require("highlight.js"),
-    trimmedSpace: trimmedSpace,
-    moment: require("moment"),
-    remarkable: Remarkable,
-    xss: require("xss"),
-  },
+  locals: require("./Helpers/index.js"),
 
   middleware: {
 
@@ -49,7 +42,7 @@ module.exports.http = {
       'startRequestTimer',
       'cookieParser',
       'session',
-      'myRequestLogger',
+      'custom',
       'bodyParser',
       'handleBodyParserError',
       'compress',
@@ -69,15 +62,13 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-    myRequestLogger: function (req, res, next) {
-        req.session.description = "";
-        req.session.keywords = "";
-        return next();
+    custom: function (req, res, next) {
+      return next();
     },
 
     poweredBy: function poweredBy(req, res, next) {
-	res.header("X-Powered-By", "Incorrigible Alcoholics Group. With the direct participation of Anton Shramko.");
-	next();
+      res.header("X-Powered-By", "Incorrigible Alcoholics Group. With the direct participation of Anton Shramko.");
+      next();
     },
 
 

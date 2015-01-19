@@ -1,4 +1,5 @@
 process.chdir(__dirname);
+var config;
 
 (function() {
   var e, e0, e1, rc, sails;
@@ -16,23 +17,21 @@ process.chdir(__dirname);
     console.error("but if it doesn't, the app will run with the global sails instead!");
     return;
   }
-  rc = void 0;
-  try {
-    rc = require("rc");
-  } catch (_error) {
-    e0 = _error;
-    try {
-      rc = require("sails/node_modules/rc");
-    } catch (_error) {
-      e1 = _error;
-      console.error("Could not find dependency: `rc`.");
-      console.error("Your `.sailsrc` file(s) will be ignored.");
-      console.error("To resolve this, run:");
-      console.error("npm install rc --save");
-      rc = function() {
-        return {};
-      };
-    }
-  }
-  sails.lift(rc("sails"));
+
+
+  require("fs").exists(__dirname+"/.sailsrc", function (exists) {
+    if (!exists) return sails.lift();
+
+    require("fs").readFile(__dirname+"/.sailsrc", "utf-8", function (error, config) {
+      if (error) {console.error("Error while reading .sailsrc config");}
+      
+      try {
+        var config = JSON.parse(config);
+      } catch (_e) {
+        console.warn("Error parse .sailsrc file. File isnt valid json.");
+      }
+
+      sails.lift(config);
+    });
+  })
 })();
