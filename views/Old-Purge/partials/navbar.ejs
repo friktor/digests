@@ -1,0 +1,40 @@
+<!--noindex-->
+<!--googleoff: all-->
+
+<div class="ui secondary pointing menu heading">
+  <a id="sidebar" class="item" style="opacity: 0.57; color: #000; font-size: 1.3rem;">
+    <img src="/images/icons/bars.svg" alt="">
+  </a>
+  <a href="/" class="item text-uppercase" style="color: #47BCE7;">
+    <%= sails.config.application.name %>
+  </a>
+  <a class="item hidden-xs" href="/latest">
+    <%= trimmedSpace(__("NEW")) %>
+  </a>
+  <a href="/popular" class="item hidden-xs">
+    <%= trimmedSpace(__("POPULAR")) %>
+  </a>
+  <a href="/habs" class="item hidden-xs">
+    <%= trimmedSpace(__("Projects and Habs")) %>
+  </a>
+  <div class="right menu">
+    <div class="item hidden-xs">
+      <div class="search ui input action">
+        <input placeholder="<%= __("Search") %>..." type="text">
+        <div class="ui button search icon"><i class="icon ifc-search"></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $(".search.ui.input.action .ui.button").click(function () {
+      window.history.pushState({}, $("title").val(), window.location.toString());
+      window.location.replace("/search?q="+$(".search.ui.input.action input").val());
+    })
+  })
+</script>
+
+<!-- googleon: all-->
+<!--/noindex-->

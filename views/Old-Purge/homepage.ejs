@@ -1,0 +1,129 @@
+<link rel="stylesheet" href="/styles/homepage.css">
+
+<div class="heading homepage">
+	<div class="ui basic segment">
+		<div class="row" style="padding-top: 7rem;">
+			<div class="col-md-6">
+				<div class="box" style="background: rgba(0,0,0,0.35);">
+					<%- __("<h1>The daily flow</h1>\n<h2>of your interests</h2>") %>
+					<a href="/setlocale/en">
+						<i class="united kingdom flag"></i>
+					</a>
+					<a href="/setlocale/pl">
+						<i class="poland flag"></i>
+					</a>
+					<a href="/setlocale/ru">
+						<i class="russia flag"></i>
+					</a>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-4">
+				<% if (!session.auth) {%>
+				<div class="ui form login">
+					
+					<h4 class="text-center">
+						<%= __("Login") %>
+					</h4>
+
+					<div class="ui input field left icon">
+						<i class="ifc-user_male3 icon"></i>
+						<input type="text" name="username" placeholder="<%= __("username") %>">
+					</div>
+
+					<div class="ui input field left icon">
+						<i class="ifc-password icon"></i>
+						<input type="password" name="password" placeholder="<%= __("password") %>">
+					</div>
+
+					<div id="message"></div>
+					<div class="ui button basic submit">
+						<%= __("Login") %>
+					</div>
+					
+				</div>
+				<%} else { %>
+				<div class="ui segment userInfo">
+					<a href="/profile/<%= session.user.username %>" class="ui image avatar">
+						<img src="<% if (session.user.avatarImg) {%><%= session.user.avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
+					</a>
+					<a href="/profile/<%= session.user.username %>"><%= session.user.firstname %> <%= session.user.lastname %></a>
+					<div class="actions">
+						<a href="/profile/<%= session.user.username %>/settings"><i class="icon ifc-settings"></i></a>
+						<a href="/profile/<%= session.user.username %>"><i class="icon ifc-user_male4"></i></a>						
+					</div>
+				</div>
+				<div class="menus">
+					<a href="/profile/<%= session.user.username %>/addpost" class="item waves-effect">
+						<i class="icon ifc-edit"></i>
+						<%= __("Add Article") %>
+					</a>
+					<a href="/habs" class="item waves-effect">
+						<i class="ifc-flow_chart icon"></i>
+						<%= __("Projects and Habs") %>
+					</a>
+					<a href="/search" class="item waves-effect">
+						<i class="icon ifc-search"></i>
+						<%= __("Search on Site") %>
+					</a>
+					<a href="/logout" class="item waves-effect">
+						<i class="icon ifc-exit"></i>
+						<%= __("Logout") %>
+					</a>
+				</div>
+				<% };%>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/js/plugin/blur.js"></script>
+<script defer>
+	$(document).ready(function () {
+		$("#sidebar").empty().append("<img src=\"/images/icons/bars-white.svg\">").css({"opacity": "1"});
+	});
+</script>
+
+<% if (!session.auth) {%>
+<script>
+	var i18n = {
+		requiredField: "<%= __('this required field') %>",
+		username: "<%= __('username') %>",
+		password: "<%= __('password') %>",
+		login: "<%= __('Login') %>",
+
+		serverError: "<%= __("Have any server error. Check the connection to the Internet and try again.") %>",
+		authFailed: "<%= __("Authorization failed, please check the data entered, or register.") %>",
+		authSuccess: "<%= __("You have successfully logged into the system. Redirect...") %>"
+	};
+</script>
+
+<script src="/js/auth/login.js"></script>
+<%}; %>
+
+				<!-- Yandex.Metrika counter -->
+				<script type="text/javascript">
+				(function (d, w, c) {
+				    (w[c] = w[c] || []).push(function() {
+				        try {
+				            w.yaCounter27808182 = new Ya.Metrika({id:27808182,
+				                    webvisor:true,
+				                    trackLinks:true,
+				                    accurateTrackBounce:true});
+				        } catch(e) { }
+				    });
+				
+				    var n = d.getElementsByTagName("script")[0],
+				        s = d.createElement("script"),
+				        f = function () { n.parentNode.insertBefore(s, n); };
+				    s.type = "text/javascript";
+				    s.async = true;
+				    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+				
+				    if (w.opera == "[object Opera]") {
+				        d.addEventListener("DOMContentLoaded", f, false);
+				    } else { f(); }
+				})(document, window, "yandex_metrika_callbacks");
+				</script>
+				<noscript><div><img src="//mc.yandex.ru/watch/27808182" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+				<!-- /Yandex.Metrika counter -->

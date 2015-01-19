@@ -1,0 +1,134 @@
+@import "utils";
+.text-center {text-align: center !important;}
+
+.paper.box {
+	.material();
+}
+
+.login, .register {
+	.paper.box {
+		padding-right: 25px !important;
+		padding-left: 25px !important;
+	}
+
+	h2 {
+		text-transform: uppercase;
+		font-family: "Roboto";
+		text-align: center;
+		font-weight: 400;
+		opacity: 0.87;
+		color: #000;
+	}
+
+	.ui.form {
+		.ui.input {
+			.margin(10px,0,5px,0);
+
+			input {
+				border: 1px solid #E8E8E8;
+				transition: all .1s ease-in-out;
+				color: rgba(0,0,0,0.87);
+				border-radius: 0;
+				box-shadow: none;
+
+				&::-webkit-placeholder {color: rgba(0,0,0,0.66); text-transform: uppercase;}
+				&::-moz-placeholder {color: rgba(0,0,0,0.66); text-transform: uppercase;}
+				&:-moz-placeholder {color: rgba(0,0,0,0.66); text-transform: uppercase;}
+
+				&:focus {
+					border-bottom: 1px solid #99CC00;
+				}
+			}
+		}
+		.ui.input.error {
+			input {
+				&::-webkit-placeholder {color: #D54F38; opacity: 0.87; text-transform: uppercase;}
+				&::-moz-placeholder {color: #D54F38; opacity: 0.87; text-transform: uppercase;}
+				&:-moz-placeholder {color: #D54F38; opacity: 0.87; text-transform: uppercase;}
+			}
+			input:focus {
+				border-bottom: 1px solid #DC6868;
+			}
+		}
+	}
+
+	.ui.divider {
+		color: rgba(0, 0, 0, 0.66);
+		font-family: "Roboto";
+		margin-top: 25px;
+		font-weight: 400;
+	}
+
+	.ui.button.submit {
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26) !important;
+		background: #0094C6 !important;
+		text-transform: uppercase !important;
+		font-family: "Roboto" !important;
+		border-radius: 0 !important;
+		color: #FFF !important;
+		font-weight: 400;
+
+		margin-top: 20px;
+	}
+	
+	.register-btn {
+		margin-top: 35px;
+
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+		text-transform: uppercase;
+		font-family: "Roboto";
+		background: #D54F38;
+		border-radius: 0;
+		color: #FFF;
+	}
+
+	#message {
+		.ui.blue.inverted.segment {
+			background: #33B5E5 !important;
+			border-radius: 0;
+		}
+		.ui.red.inverted.segment {
+			background: #FE4444 !important;
+			border-radius: 0;
+		}
+	}
+}
+
+
+.register {
+	padding-bottom: 50px;
+	text-align: center;
+	
+	.register-button {
+		margin-top: 35px;
+
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+		text-transform: uppercase;
+		font-family: "Roboto";
+		background: #D54F38;
+		border-radius: 0;
+		font-weight: 400;
+		color: #FFF;
+		&:hover {
+			background: #D54F38;
+			border-radius: 0;
+			color: #fff;
+		}
+	}
+
+	.ui.checkbox.field {
+		margin-top: 25px;
+
+		label {
+			color: rgba(0, 0, 0, 0.57);
+			font-family: "Roboto";
+			font-size: 0.97rem;
+			font-weight: 400;
+		}
+	}
+	.ui.checkbox.error {
+		label {
+			color: #D54F38;
+		}
+	}
+}

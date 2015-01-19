@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+
+
+       444444444       000000000      333333333333333
+      4::::::::4     00:::::::::00   3:::::::::::::::33
+     4:::::::::4   00:::::::::::::00 3::::::33333::::::3
+    4::::44::::4  0:::::::000:::::::03333333     3:::::3
+   4::::4 4::::4  0::::::0   0::::::0            3:::::3
+  4::::4  4::::4  0:::::0     0:::::0            3:::::3
+ 4::::4   4::::4  0:::::0     0:::::0    33333333:::::3
+4::::444444::::4440:::::0 000 0:::::0    3:::::::::::3
+4::::::::::::::::40:::::0 000 0:::::0    33333333:::::3
+4444444444:::::4440:::::0     0:::::0            3:::::3
+          4::::4  0:::::0     0:::::0            3:::::3
+          4::::4  0::::::0   0::::::0            3:::::3
+          4::::4  0:::::::000:::::::03333333     3:::::3
+        44::::::44 00:::::::::::::00 3::::::33333::::::3
+        4::::::::4   00:::::::::00   3:::::::::::::::33
+        4444444444     000000000      333333333333333
+
+
+
+  This is the default "403: Forbidden" page.
+  User agents that don't "Accept" HTML will see a JSON version instead.
+  You can customize the control logic for your needs in `config/403.js`
+
+  You can trigger this response from one of your controllers or policies with:
+  `return res.forbidden( msg );`
+  (where `msg` is an optional error message to include in the response)
+
+
+
+
+-->
+<html>
+  <head>
+    <title><%= __("Forbidden") %></title>
+  </head>
+  <body>
+    <div class="error-page">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="box">
+          <h2 class="title">403</h2>
+          <h4><%= __("Access denied") %></h4>
+          <% if (typeof error !== 'undefined') { %>
+            <p class="message"><%= error %></p>
+          <% } else { %>
+            <p class="message"><%= __("You don't have permission to see the page you're trying to reach.") %></p>
+          <% } %>
+          <div class="btn">
+            <a href="/" class="ui basic button icon waves-effect waves-circle">
+              <i class="icon ifc-home"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </body>
+</html>

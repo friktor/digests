@@ -1,0 +1,150 @@
+<%var markdown=new remarkable({langPrefix:"language-",typographer:false,xhtmlOut:false,linkify:true,breaks:true,html:false,quotes:'“”‘’',highlight:function(str,lang){var e;if(lang&&hljs.getLanguage(lang)){try{return hljs.highlight(lang,str).value;}catch(_error){e=_error;console.log(e);}}try{return hljs.highlightAuto(str).value;}catch(_error){e=_error;console.log(e);}return"";}})%>
+
+<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+
+<!-- Subscribe Action Modal -->
+<div class="ui modal subscribe">
+  <i style="color: rgba(0,0,0,0.87);" class="close icon"></i>
+  <div class="header">
+    <%= __("Subscribe to this hab") %>
+  </div>
+  <div class="content">
+		<div class="ui header"><i class="ifc-message icon massive"></i></div>
+    <div class="description">
+      <p><%= __("Are you sure you want to subscribe to the publication by this hab?") %></p>
+      <p>
+      	<% if (session.auth && session.auth == true) {%>
+					<%= __("You are an authorized user.") %>
+      	<%} else {%>
+					<%= __("You are not logged in. To use the more advanced functionality subscriptions login or register. To receive the newsletter without registration, enter your email.") %>
+      	<%};%>
+      </p><br>
+  		<!-- Fields -->
+				<% if (session.auth) {%>
+				<input type="hidden" name="user" value="<%= session.user.id %>">
+				<input type="hidden" name="email" value="<%= session.user.email %>">
+				<%}; %>
+				<input type="hidden" name="from" value="Hab">
+				<input type="hidden" name="by" value="<%= hab.id %>">
+  		<!-- /Fields -->
+      <% if (!session.auth || session.auth !== true) {%>
+				<div class="group">      
+					<input type="text" name="email" required>
+					<span class="highlight"></span>
+					<span class="bar"></span>
+					<label><%= __("Your email") %></label>
+				</div>
+      <%};%>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui button negative">
+      <%= __("Exit") %>
+    </div>
+    <div class="ui button positive">
+			<%= __("Subscribe") %>
+    </div>
+  </div>
+</div>
+
+
+<div class="ui basic segment hab-info">
+	<div class="row posts_in_hab">
+		
+		<% "### Define variables ###" %>
+		<% var description; %>
+
+		<% "### Set hab description from i18n ###" %>
+		<% if (_.find(hab.description, {"locale": req.getLocale()})) { %>
+			<% description = (_.find(hab.description, {"locale": req.getLocale()})).desc; %>
+		<% } else {description = (_.find(hab.description, {"locale": "en"})).desc;}; %>
+
+		<div class="hab_ post col-md-3 col-sm-6 col-xs-12">
+			<div class="ui segment material text-center">
+				<div class="title">
+					<a href="/hab/<%= hab.translitName %>"><img src="<%= hab.headingImg%>" alt=""></a>
+					<h4 class="ui header without-thumb">
+						<a href="/hab/<%= hab.translitName %>"><%= name %></a>
+						<div class="sub header"><%= countSubscribers %> <%= __("Subscribers") %>. <%= countPostsInHab %> <%= __("Posts in hab") %></div>
+					</h4>
+				</div>
+				<div class="content">
+					<p><%= xss(description, {whiteList: [], stripIgnoreTag: true, stripIgnoreTagBody: ['script']}) %></p>
+				</div>
+				<div class="buttons">
+					<a href="/rss/hab/<%= hab.translitName %>/<%= req.getLocale() %>.xml" class="link waves-effect waves-button"><i class="ifc-rss"></i> <%= __("RSS Feed") %></a>
+					<a id="modal_subscribe" href="#" class="link waves-effect waves-button"><i class="ifc-read_message"></i> <%= __("Subscribe") %></a>
+				</div>
+			</div>
+		</div>
+
+		<% "### Each posts ###" %>
+		<% _.each(posts, function (post) { %>
+			<div class="post col-md-3 col-sm-6 col-xs-12">
+				<div class="ui segment material">
+					<div class="title">
+						<% if (post.headerImg) {%> <a href="/details/<%= post.id %>"><img src="<%= post.headerImg%>" alt=""></a> <%}%>
+						<h4 class="ui header <% if (!post.thumb && (_.size(post.thumb)==0)) {%>without-thumb<%}%>">
+							<a href="/details/<%= post.id %>"><%= post.title %></a>
+							<div class="sub header"></div>
+						</h4>
+					</div>
+					<div class="content">
+						<% var content = markdown.render(post.content); %>
+						<p><%= xss(content.substr(0, 250)+"...", {whiteList: [], stripIgnoreTag: true, stripIgnoreTagBody: ['script']}) %></p>
+					</div>
+					<div class="ui divider"></div>
+					<div class="buttons">
+						<div class="yashare-auto-init" data-yashareL10n="<%= req.getLocale() %>" data-yashareTitle="<%= post.title %>" data-yashareType="link" data-yashareLink="<%= (sails.config.app.url+"/details/"+post.id) %>" data-yashareQuickServices="" data-yashareImage="<%= post.headerImg %>" data-yashareDescription="<%= content.substr(0, 250)+"..." %>"></div>
+						<a href="/details/<%= post.id %>" class="link waves-effect waves-button">ЧИТАТЬ</a>
+					</div>
+				</div>
+			</div>
+		<% }); %>
+
+		<div class="hab_ post col-md-3 col-sm-6 col-xs-12">
+			<a style="color: rgba(0,0,0,0.87);" href="/hab/<%= hab.translitName %>/<%= (req.param("page", 1)+1) %>" class="ui segment material text-center waves-effect waves-float waves-light">
+				<h1><i class="ifc-forward"></i></h1>
+				<h4 style="font-weight: 400;"><%= __("Next page") %></h4>
+			</a>
+		</div>
+	</div>
+</div>
+<%- partial("../partials/footer.ejs") %>
+<script>
+	i18n = {
+		success: "<%= __("success") %>",
+		error: "<%= __("Error! Please refresh this page, and try again") %>"
+	};
+</script>
+<script src="/js/event/subscribeHab.js"></script>
+<script>
+$(document).ready(function () {
+	$(".row.posts_in_hab").masonry({
+	  itemSelector: ".post",
+	  columnWidth: ".post"
+	});
+
+	// $(".post img").addClass("not-loaded");
+
+	$(".post img.not-loaded").lazyload({
+		effect: "fadeIn",
+		load: function () {
+			$(this).removeClass("not-loaded");
+			
+			$(".row.posts_in_hab")
+				.masonry("reloadItems")
+				.masonry()
+			;
+		}
+	});
+
+	$(".row.posts_in_hab").masonry("reloadItems").masonry()
+
+	$.getScript("http://cdn.jsdelivr.net/jquery.lazyload/1.8.4/jquery.lazyload.js", function () {
+		$(".row.posts_in_hab").imagesLoaded(function () {
+			$(".row.posts_in_hab").masonry("reloadItems").masonry();
+		});
+	});
+});
+</script>

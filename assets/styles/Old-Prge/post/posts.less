@@ -1,0 +1,140 @@
+@import "utils";
+
+.hab_.post {
+	.buttons {
+		a {text-transform: uppercase;}
+	}
+}
+
+.locales {
+	margin-bottom: 15px;
+	margin-top: 15px;
+	
+	._i {
+		a {
+			color: #0099CC;
+		}
+	}
+}
+
+.ui.segment.material {
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	border-radius: 0;
+	background: #FFF;
+	display: block;
+
+	margin-top: 2.5rem;
+
+	.padding(0,0,10px,0);
+
+	.title	{
+		display: block;
+		img {
+			width: 100%;
+			height: auto;
+		}
+		h4.without-thumb {
+			position: inherit !important;
+			display: block !important;
+
+			margin-top: auto !important;
+			padding-left: auto !important;
+			.padding(1.4rem, 15px, 1rem, 15px);
+
+			a {
+				color: rgba(0,0,0, 0.87) !important;
+				text-shadow: none !important;
+			}
+		}
+		h4.ui.header {
+			margin-top: -3rem;
+			padding-left: 15px;
+			position: absolute;
+			display: block;
+			width: 100%;
+			a {
+				text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+				font-family: "Roboto";
+				font-size: 1.3rem;
+				font-weight: 400;
+				outline: none;
+				color: #FFF;
+
+				&::selection {
+					color: #FFF;
+				}
+				&::-moz-selection {
+					color: #FFF;
+				}
+			}
+		}
+	}
+
+	.content {
+		.padding(10px, 10px, 5px, 10px);
+
+		p {
+			color: #000000;
+			opacity: 0.57;
+		}
+	}
+
+	.buttons {
+		.padding(0, 10px, 0, 10px);
+
+		.link {
+			text-transform: uppercase;
+			// margin-right: 15px;
+			font-size: 0.9rem;
+			font-weight: 500;
+			color: #3EA18D;
+			outline: none;
+		}
+
+		.yashare-auto-init {
+			display: inline-block !important;
+			.b-share {
+				margin: auto !important;
+				padding: 0 !important;
+				height: auto;
+			}
+			.b-share__handle {
+				.padding(0, 5px, 0, 5px);
+				text-decoration: none;
+				height: auto;
+				.b-share__text {
+					text-transform: uppercase !important;
+					font-family: "Roboto" !important;
+					font-size: 0.9rem !important;
+					font-weight: 500 !important;
+					color: #3EA18D !important;
+				}
+			}
+		}
+
+		.ui.dropdown .menu {
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+			border-radius: 0;
+			border: 0;
+		}
+	}
+}
+
+.ajax-loading {
+	text-align: center;
+	margin-top: 50px;
+
+	.ui.inverted.blue.segment {
+		background: #33B5E5 !important;
+		border-radius: 0;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.ui.segment.material {
+		margin-top: 15px;
+	}
+	.hidden-xs {
+		display: none !important;
+	}
+}

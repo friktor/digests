@@ -1,0 +1,85 @@
+<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+<!-- Stalker jQuery -->
+<script src="/bower_components/stalker/jquery.stalker.js"></script>
+<script src="/js/event/infinity-scroll-api.js"></script>
+<!-- End script -->
+
+<script>
+<% var locale; if (req.param("locale")) { locale = ('"'+req.param("locale")+'"'); } else {locale = "null"}; %>
+var locale = <%- locale %>;
+var page = <%= page %>;
+
+var i18n = {
+	title: "<%= __("Newest Posts") %>",
+	page: "<%= __("page") %>",
+	read: "<%= __("read") %>",
+	share: "<%= __("share") %>",
+	notFound: "<%= __("No more entries") %>"
+};
+</script>
+
+<%var markdown=new remarkable({langPrefix:"language-",typographer:false,xhtmlOut:false,linkify:true,breaks:true,html:false,quotes:'“”‘’',highlight:function(str,lang){var e;if(lang&&hljs.getLanguage(lang)){try{return hljs.highlight(lang,str).value;}catch(_error){e=_error;console.log(e);}}try{return hljs.highlightAuto(str).value;}catch(_error){e=_error;console.log(e);}return"";}})%>
+
+
+<div class="ui segment basic" data-segment="content">
+
+	<div class="locales text-center">
+		<%= __("To read in another language.") %> 
+		<div class="_i">
+			<a href="/latest?locale=ru"><%= __("Russian") %></a>,
+			<a href="/latest?locale=en"><%= __("English") %></a>,
+			<a href="/latest?locale=pl"><%= __("Polish") %></a>
+		</div>
+	</div>
+
+	<div class="row posts_" id="container">
+		<% _.each(posts, function (post) { %>
+			<div class="post col-md-3 col-sm-6 col-xs-12">
+				<div class="ui segment material">
+					<div class="title">
+						<% if (post.headerImg) {%> <a href="/details/<%= post.id %>"><img src="<%= post.headerImg%>" alt=""></a> <%}%>
+						<h4 class="ui header <% if (!post.thumb && (_.size(post.thumb)==0)) {%>without-thumb<%}%>">
+							<a href="/details/<%= post.id %>"><%= post.title %></a>
+						</h4>
+					</div>
+					<div class="content">
+						<% var content = markdown.render(post.content); %>
+						<p><%= xss(content.substr(0, 250)+"...", {whiteList: [], stripIgnoreTag: true, stripIgnoreTagBody: ['script']}) %></p>
+					</div>
+					<div class="ui divider"></div>
+					<div class="buttons">
+						<div class="yashare-auto-init" data-yashareL10n="<%= req.getLocale() %>" data-yashareTitle="<%= post.title %>" data-yashareType="link" data-yashareLink="<%= (sails.config.app.url+"/details/"+post.id) %>" data-yashareQuickServices="" data-yashareImage="<%= post.headerImg %>" data-yashareDescription="<%= content.substr(0, 250)+"..." %>"></div>
+						<a href="/details/<%= post.id %>" class="link waves-effect waves-button"><i class="ifc-bookmark"></i>	<%= __("read") %></a>
+					</div>
+				</div>
+			</div>
+		<% }); %>
+	</div>
+	<div class="ajax-loading" style="padding-bottom: 50px;">
+		<div class="alert message"></div>
+	<button data-url="/latest" class="waves-button waves-float waves-effect load posts">
+		<i class="ifc-plus"></i>
+	</button>
+	</div>
+</div>
+
+<%- partial("../partials/footer.ejs") %>
+
+<script defer>
+	$(document).ready(function () {
+		setTimeout(function () {
+			$(".b-share__text").each(function(c, elem) {
+			  $(this).prepend("<i class=\"ifc-speech_bubble\"></i> ");
+			});
+		}, 50);
+	})
+</script>
+
+<style>
+		.load.posts {
+				background: #009788; 
+				border-radius: 50%;
+				color: #FFF; 
+				font-size: 25px; 
+		}
+</style>
