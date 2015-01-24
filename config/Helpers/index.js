@@ -8,7 +8,7 @@ module.exports = {
 	},
 
 	script: function(src, type) {
-		return "<script src=\""+src+"\" "+type+"></script>"
+		return "<script src=\""+src+"\" "+(typeof type === "string" ? type : "")+"></script>"
 	},
 
 	style: function (href) {

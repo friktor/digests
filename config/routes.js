@@ -32,21 +32,20 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+
+  // Basic Site Pages
+
   "/": "SiteController.homepage",
 
   "/about": "SiteController.about",
 
-  "/login": {
-    controller: "auth", action: "login"
-  },
+  // Authentitications Pages.
 
-  "/register": {
-    controller: "auth", action: "register"
-  },
+  "/login": "AuthController.login",
 
-  "/logout": {
-    controller: "auth", action: "logout"
-  },
+  "/register": "AuthController.register",
+
+  "/logout": "AuthController.logout",
 
   // i18n set locale
   "get /setlocale/:locale": {
@@ -55,7 +54,7 @@ module.exports.routes = {
 
   // Posts
     "get /latest/:page": {
-      controller: "post", action: "list"
+      controller: "post", action: "latest"
     },
 
     "get /popular/:page": {
@@ -67,7 +66,7 @@ module.exports.routes = {
     },
 
     "get /latest": {
-      controller: "post", action: "list"
+      controller: "post", action: "latest"
     },
 
     "get /details/:id": {
@@ -75,11 +74,11 @@ module.exports.routes = {
     },
 
     "get /byauthor/:username/:page": {
-      controller: "post", action: "by_author"
+      controller: "post", action: "byauthor"
     },
 
     "get /byauthor/:username": {
-      controller: "post", action: "by_author"
+      controller: "post", action: "byauthor"
     },
 
   // Hubs
@@ -163,8 +162,8 @@ module.exports.routes = {
       controller: "profile", action: "edit"
     },
 
-    "/profile/:username/subscribes": {
-      controller: "profile", action: "subscribes"
+    "/profile/:username/subscription": {
+      controller: "profile", action: "subscription"
     },
 
   // API
@@ -178,6 +177,8 @@ module.exports.routes = {
     "post /utils/auth/login": {
       controller: "auth", action: "auth"
     },
+
+    "get /utils/auth/isloggedin": "AuthController.isLoggedIn",
   
     // Habs
     "/utils/hab/create": {
@@ -229,15 +230,4 @@ module.exports.routes = {
     "post /utils/comment/create": {
       controller: "comment", action: "create"
     },
-
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  *  If a request to a URL doesn't match any of the custom routes above, it  *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
-
 };

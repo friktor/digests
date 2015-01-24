@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="main">
   <head>
     <title>
       <% if (typeof title !== "undefined") {%>
@@ -15,19 +15,32 @@
 
     <%- style("/styles/importer.css") %>
     
+    <%- script("/libs/angular/angular.js") %>
+    
+    <%- script("/libs/angular-translate/angular-translate.js") %>
+    <%- script("/libs/angular-translate-loader-static-files/angular-translate-loader-static-files.js") %>
+
+    <%- script("/js/dependencies/jquery.min.js") %>
+    <%- script("/stagging/semantic/modules/transition.min.js") %>
+    <%- script("/stagging/semantic/modules/sidebar.min.js") %>
+
+    <%- script("/js/app/appLogin.js") %>
+    <%- script("/js/app/app.js") %>
+
+    <script>window.i18nLocale = "<%= req.getLocale() %>";</script>
   </head>
 
   <body>
     <% "body content" %>
-    <%- body %>
-
-    <% "Javascript" %>
-    <%- script("/bower_components/handlebars/handlebars.min.js", "defer") %>
-    <%- script("/bower_components/jquery/dist/jquery.min.js", "defer") %>
-    <%- script("/bower_components/ember/ember.min.js", "defer") %>
-    <%- script("/bower_components/ember-data/ember-data.min.js", "defer") %>
-    <% "End Javascript" %>
-
-    <%- script("/js/dependencies/sails.io.js", "async") %>
+    <%- partial("partials/sidebar.left.ejs") %>
+    <% if (!session.auth) {%>
+    <%- partial("partials/sidebar.top.login.ejs")  %>
+    <%}%>
+    <div class="pusher">
+      <%- body %>
+    </div>
+    <%- script("/js/dependencies/socket.io.min.js") %>
+    <%- script("/js/dependencies/sails.io.js") %>
+    <%- script("/js/initializationUi.js") %>
   </body>
 </html>

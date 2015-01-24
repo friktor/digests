@@ -5,7 +5,11 @@ async = require "async"
 _ = require "lodash"
 xss = require "xss"
 
+# Common utils functions
 common = require "./common.coffee"
+
+# Error class for handle promise
+notExists = require "../errors/notExists.coffee"
 
 ####
 #@action: details view post
@@ -27,7 +31,7 @@ module.exports = (req, res, next) ->
 		])
 
 		.then((post) ->
-			if !post then res.notFound() else
+			if !post then throw new notExists() else
 				
 				# Showed increment
 				post.showed = 0 if !post.showed
@@ -43,7 +47,7 @@ module.exports = (req, res, next) ->
 				Author = User.findOne(post.author).populate("avatarImg").then (user) -> user.toJSON()
 				
 				# @List Habs for this post
-				Habs = ->
+				promisedGetHabs = ->
 					new Promise (resolve, reject) ->
 						# Find And Push Habs.
 						iteratorHab = (habId, cb) ->
@@ -63,15 +67,22 @@ module.exports = (req, res, next) ->
 							return
 						return 
 
+				Habs = promisedGetHabs().then (habs) -> habs
+
 				[post, Author, Habs]
 		)
 
 		.spread((post, author, habs) ->
-			res.view
+			# response rendered html
+			res.json
 				title  : post.title + " ⚫ Digests.me"
 				author : author
 				post   : post
 				habs   : habs
+		)
+
+		.caught(notExists, (e) ->
+			res.notFound()
 		)
 
 		.caught((error) ->

@@ -4,6 +4,8 @@ moment = require "moment"
 async = require "async"
 _ = require "lodash"
 
+# Error class for handle promise
+notExists = require "../errors/notExists.coffee"
 
 #@action: list latest populars posts
 #@description: list all posts with json response for ajax
@@ -46,10 +48,9 @@ module.exports = (req, res) ->
 
 	# Promise success
 	.then((posts) ->
-		# sails.log posts.length;
-
+		
 		# If not posts - send 404 error
-		if !posts[0] then res.notFound() else
+		if !posts[0] then throw new notExists() else
 
 			# Async rendered content. And cut content to sinopsis
 			async.map posts, common.renderPost, (error, renderedPosts) ->
@@ -66,8 +67,10 @@ module.exports = (req, res) ->
 				return
 	)
 
+	.caught(notExists, (e) ->
+		res.notFound()
+	)
+
 	.caught (error) ->
 		sails.log.error error
 		res.json error.toJSON()
-
-	
