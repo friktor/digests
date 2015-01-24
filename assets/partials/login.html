@@ -1,0 +1,32 @@
+<form name="LoginForm" class="ui form login" ng-submit="LoginForm.$valid && LoginCtrl.Auth(LoginCtrl.formData)" novalidate>
+	<h4 class="ui header">
+		<!-- Login -->
+		{{ 'Login' | translate}}
+		<div class="sub header">
+			<!-- Auth on Digests.me -->
+			{{ LoginCtrl.__.subHeader}}
+		</div>
+	</h4>
+
+	<div class="ui divider"></div>
+
+	<div class="ui input left icon field">
+		<input ng-model="LoginCtrl.formData.username" name="username" type="text" placeholder="{{ LoginCtrl.__.username }}" required>
+		<i class="fa fa-user icon"></i>
+	</div>
+	
+	<div class="ui input left icon field">
+		<input ng-model="LoginCtrl.formData.password" name="password" type="password" placeholder="{{ LoginCtrl.__.password }}" required minlength="7">
+		<i class="fa fa-lock icon"></i>
+	</div>
+
+	<div ng-show="LoginCtrl.error" class="ui inverted red segment" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+		{{LoginCtrl.error}}
+	</div>
+
+	<div ng-show="LoginCtrl.success" class="ui inverted green segment" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+		{{LoginCtrl.success}}
+	</div>
+	
+	<input type="submit" class="ui button green submit" value="{{ 'Login' | translate}}">
+</form>
