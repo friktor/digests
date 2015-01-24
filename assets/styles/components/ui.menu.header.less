@@ -1,0 +1,76 @@
+header {
+	
+	a.brand {
+		.padding(24px, 0.8rem, 22px, 0.8rem);
+		display: inline-block;
+		position: absolute;
+		font-size: 14px;
+		line-height: 1;
+		color: #666;
+
+		margin-left: -50px;
+		left: 50%;
+	}
+	
+	.ui.secondary.menu.header {
+		.padding(0,1.59rem,0,1.59rem);
+		.material-shadow();
+		background: #FFF;
+		margin-top: 0;
+		height: 60px;
+	
+	
+		a.item {
+			.padding(24px, 0.8rem, 22px, 0.8rem);
+			text-transform: uppercase;
+			border-radius: 0;
+			font-weight: 400;
+			font-size: 14px;
+			margin: 0;
+			
+			&.user_ {
+				text-transform: none;
+				span {
+					text-transform: capitalize;
+					display: inline-block;
+					font-size: 14px;
+					color: #3F51B5;
+				}
+			}
+		}
+	
+		.right.menu {
+			.item.avatar {
+				.padding(13px, 0.1rem, 12px, 0.1rem);
+			}
+			div.item {
+				.padding(15px, 0.47rem, 15px, 0.47rem);
+	
+				.ui.basic.button {
+					font-size: 14px;
+					height: 30px;
+					margin: 0;
+					&.settings {
+						padding-right: 10px; padding-left: 10px;
+					}
+					&.addpost {
+						padding-right: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 769px) {
+	header {
+		.ui.secondary.menu.header {
+			.item.sidebar {
+				display: inline-block !important;
+			}
+			a.item {
+				display: none;
+			}
+		}
+	}
+}
