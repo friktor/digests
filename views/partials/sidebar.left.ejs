@@ -1,0 +1,86 @@
+<div id="mainLeftSidebar" class="ui left vertical sidebar wide segment">
+  
+  <% if (!session.auth == true) {%>
+    <div class="ui heading unauth">
+      <div class="ui vertical buttons">
+        <a href="/login" class="ui button green">
+          <%= __("Login") %>
+        </a>
+        <a href="/register" class="ui button blue">
+          <%= __("Register") %>
+        </a>
+      </div>
+    </div>
+  <% } else if (session.auth && session.user) { %>
+    <div class="ui heading auth" style="background: url(<% if (session.user.headingImg) {%><%= session.user.headingImg.link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;">
+      <div class="ui avatar">
+        <img src="<% if (session.user.avatarImg) {%><%= session.user.avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="" class="ui image circular">
+      </div>
+      <div class="ui panel profile">
+        <img src="<% if (session.user.headingImg) {%><%= session.user.headingImg.link %><%} else {%>/images/profile.jpg<%};%>" alt="">
+        <div class="darker">
+          <span><%= session.user.firstname %> <%= session.user.lastname %></span>
+          <a href="/profile/<%= session.user.username %>"><i class="fa fa-user"></i></a>
+          <a href="/profile/<%= session.user.username %>/settings"><i class="fa fa-gear"></i></a>
+        </div>
+      </div>
+    </div>
+  <% } %>
+  
+      
+  <div class="ui list ">
+    <% if (session.auth && session.user) {%>
+    <a href="/profile/<%= session.user.username %>/addpost" class="item">
+      <i class="fa fa-plus"></i> <%= __("Add new post") %>
+    </a>
+
+    <a href="/profile/<%= session.user.username %>" class="item">
+      <i class="fa fa-user"></i> <%= __("My profile") %>
+    </a>
+
+    <a href="/profile/<%= session.user.username %>/subscribes" class="item">
+      <i class="fa fa-bookmark"></i> <%= __("My subscriptions") %>
+    </a>
+    <%};%>
+    
+    <a href="/authors" class="item">
+     <i class="fa fa-users"></i> <%= __("popular authors") %>
+    </a>
+    
+    <a href="/popular" class="item">
+     <i class="fa fa-newspaper-o"></i> <%= __("popular posts") %>
+    </a>
+    
+    <a href="/latest" class="item">
+     <i class="fa fa-newspaper-o"></i> <%= __("latest posts") %>
+    </a>
+    
+    <a href="/projects" class="item">
+     <i class="fa fa-flask"></i> <%= __("projects") %>
+    </a>
+    
+    <a href="/habs" class="item">
+     <i class="fa fa-lightbulb-o"></i> <%= __("habs") %>
+    </a>
+    
+    <a href="/faq" class="item">
+      <i class="fa fa-life-bouy"></i> FAQ
+    </a>
+    
+    <a href="mailto:info@digests.me" class="item">
+      <i class="fa fa-at"></i> <%= __("feedback") %>
+    </a>
+    
+    <a href="/about" class="item">
+     <i class="fa fa-map-marker"></i> <%= __("about us") %>
+    </a>
+
+    <% if (session.auth && session.user) {%>
+    <a href="/logout" class="item">
+      <i class="fa fa-power-off"></i>
+      <%= __("Logout") %>
+    </a>
+    <% } %>
+  </div>
+  
+</div>
