@@ -20,10 +20,11 @@ module.exports = (req, res) ->
 	else common.getLocaleGlobal(req.cookies.locale, req.headers["accept-language"])
 
 	# Page (req.param) for slice
-	page = req.param "page", 1
+	page = parseInt(req.param("page", 1))
+	page = if isNaN(page) then 1 else page
 
 	# Where data
-	where = createdAt: ">": moment().subtract(14, "d").toDate()
+	where = createdAt: ">": moment().subtract(21, "d").toDate()
 
 	# Sort by Language / View all
 	where.locale = if req.param("locale") and req.param("locale") is "all"
@@ -32,7 +33,7 @@ module.exports = (req, res) ->
 		locale
 
 	# Main Action
-	Post.find()
+	Post.find().populate("headerImg")
 
 	# Set "where" param
 	.where(where)

@@ -45,9 +45,9 @@ module.exports.policies = {
     updatePassword: ["allowUpdateUser"],
   },
 
-  UploadController: {
-    "*": ["accessPersonalForUser"]
-  },
+  // UploadController: {
+  //   "*": ["accessPersonalForUser"]
+  // },
 
   PostController: {
     create: ["activatedUser", "allowAddPost"],

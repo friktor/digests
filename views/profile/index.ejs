@@ -1,0 +1,79 @@
+<script async>window.username = "<%= req.param("username") %>";</script>
+
+<%- script("/js/app/appProfile.js") %>
+
+<div class="page profile" ng-controller="ProfileCtrl">
+	<%- partial("../partials/menu.ejs") %>
+
+	<!-- Header Profile -->
+	<div class="profile header" 
+		style="background: url(<% if (user.headingImg) {%><%= user.headingImg.link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;"
+	>
+		<div class="avatar text center">
+			<img class="ui image circular" src="<% if (user.avatarImg) {%><%= user.avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
+			<h4 class="ui header"><%= user.firstname %> <%= user.lastname %></h4>
+		</div>
+	</div>
+
+	<!-- Content -->
+	<div class="ui basic segment">
+		<div class="row">
+			
+			<div class="col-md-3">
+				<!-- Actions in this profile -->
+				<div class="ui actions">
+					<md-button class="md-fab indigo">
+      			<md-tooltip>
+      			  <%= __("To subscribe to this user") %>
+      			</md-tooltip>
+						<i class="fa fa-envelope"></i>
+					</md-button>
+					<md-button ng-click="redirectAllPosts()" class="md-fab blue">
+      			<md-tooltip>
+      			  <%= __("All posts from this user") %>
+      			</md-tooltip>
+						<i class="fa fa-newspaper-o"></i>
+					</md-button>
+				</div>
+				<!-- End Actions -->
+			</div>
+
+			<div class="col-md-9">
+				<!-- About & Activities -->
+				<div class="ui segment content">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="ui header text center">
+								<%= __("About me") %>
+								<div class="ui horizontal divider">
+									<i class="fa fa-child"></i>
+								</div>
+							</div>
+							<p class="content">
+								<%= user.aboutMe %>
+							</p>
+						</div>
+						<div class="col-md-6">
+							<div class="ui header text center">
+								<%= __("Activities me") %>
+								<div class="ui horizontal divider">
+									<i class="fa fa-cogs"></i>
+								</div>
+							</div>
+							<p class="content">
+								<%= user.activitiesMe %>
+							</p>
+						</div>
+					</div>
+				</div>
+				<!-- End About & Activities -->
+
+				<!-- Directive Post By User -->
+				<posts-by-user></posts-by-user>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<%- partial("../partials/footer.ejs") %>

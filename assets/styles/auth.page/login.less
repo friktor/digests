@@ -1,9 +1,10 @@
-.ui.form.login {
+.login.form {
 	.padding(1rem, 1.5rem, 1rem, 1.5rem);
 	border-radius: 1px;
 	background: #FFF;
 
 	.ui.header {
+		text-align: center !important;
 		color: rgba(0, 0, 0, 0.87);	
 		font-size: 1.25rem;
 		font-weight: 500;
@@ -13,23 +14,28 @@
 		}
 	}
 
-	.ui.input {
-		margin-top: 8px;
-		input {
-			border-radius: 1px;
-			&.ng-valid.ng-dirty {
-				border: 1px solid #8BC34A;
-			}
-		}
+	md-input-container label, md-input-container .md-placeholder {
+	    order: 1;
+	    pointer-events: none;
+	    padding-left: 2px;
+	    z-index: 1;
+	    transform: translate3d(0px, 24px, 0px) scale(1) !important;
+	    transform-origin: left top 0px;
+	    transition: transform 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
 	}
 
-	.animate-enter {
-		animation: 0.5s scaleIn ease;
+  md-input-container.md-input-focused label, md-input-container.md-input-has-value label {
+    -webkit-transform: translate3d(0, 4px, 0) scale(0.75) !important;
+            transform: translate3d(0, 4px, 0) scale(0.75) !important; }
+
+	md-input-container.md-default-theme label, md-input-container.md-default-theme .md-placeholder {
+	    color: rgba(0, 0, 0, 0.76);
 	}
 
-	.animate-leave {
-		animation: 0.5s scaleOut ease;
+	md-input-container.md-default-theme .md-input {
+		border-color: rgba(0, 0, 0, 0.8);
 	}
+
 
 	.ui.inverted.segment {
 		border-radius: 0;
@@ -41,23 +47,6 @@
 		}
 	}
 
-	.ui.button.submit {
-		background: #8BC34A;
-		border-radius: 1px;
-		.material-shadow();
-		font-weight: 400;
-
-		margin-top: 12px;
-
-		&:hover {
-			background: desaturate(#8BC34A, 5%);
-		}
-
-		&:active {
-			background: desaturate(#8BC34A, 8%);
-			box-shadow: none;
-		}
-	}
 }
 
 

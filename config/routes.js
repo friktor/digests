@@ -168,11 +168,6 @@ module.exports.routes = {
 
   // API
 
-    // Upload
-    "post /utils/upload": {
-      controller: "upload", action: "index"
-    },
-
     // Auth
     "post /utils/auth/login": {
       controller: "auth", action: "auth"

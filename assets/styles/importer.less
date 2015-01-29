@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic&subset=latin,cyrillic);
 @import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
 
+@import "../libs/angular-material/angular-material.css";
 @import "../stagging/semantic/min/semantic.min.css";
 @import "components/grid";
 @import "common";
@@ -9,7 +10,18 @@
 body, .pusher {background: #e8e8e8;}
 .icon {font-family: "FontAwesome" !important;}
 
+*::-moz-selection {
+    background-color: #CCE2FF;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+@import "components/material.design.less";
 @import "components/ui.menu.header.less";
 @import "components/ui.sidebar.left.less";
+@import "components/ui.footer.less";
 @import "components/post";
 @import "auth.page/login";
+
+@import "page/settings";
+@import "page/profile";
+@import "page/details";

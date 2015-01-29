@@ -1,32 +1,34 @@
-<form name="LoginForm" class="ui form login" ng-submit="LoginForm.$valid && LoginCtrl.Auth(LoginCtrl.formData)" novalidate>
+<form name="LoginForm" class="login form" novalidate>
 	<h4 class="ui header">
 		<!-- Login -->
 		{{ 'Login' | translate}}
 		<div class="sub header">
 			<!-- Auth on Digests.me -->
-			{{ LoginCtrl.__.subHeader}}
+			{{ 'Auth on Digests.me' | translate}}
 		</div>
-	</h4>
+	</h4><br>
 
-	<div class="ui divider"></div>
+	<md-input-container>
+		<label><i class="fa fa-user"></i> {{ 'username' | translate | capitalize:'all' }}</label>
+		<input ng-model="LoginCtrl.formData.username" type="text" name="username">
+	</md-input-container>
 
-	<div class="ui input left icon field">
-		<input ng-model="LoginCtrl.formData.username" name="username" type="text" placeholder="{{ LoginCtrl.__.username }}" required>
-		<i class="fa fa-user icon"></i>
-	</div>
-	
-	<div class="ui input left icon field">
-		<input ng-model="LoginCtrl.formData.password" name="password" type="password" placeholder="{{ LoginCtrl.__.password }}" required minlength="7">
-		<i class="fa fa-lock icon"></i>
-	</div>
+	<md-input-container>
+		<label><i class="icon lock"></i> {{ 'password' | translate | capitalize:'all' }}</label>
+		<input ng-model="LoginCtrl.formData.password" type="password" name="password">
+	</md-input-container>
 
-	<div ng-show="LoginCtrl.error" class="ui inverted red segment" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+	<div ng-show="LoginCtrl.error" class="ui inverted red segment">
 		{{LoginCtrl.error}}
 	</div>
 
-	<div ng-show="LoginCtrl.success" class="ui inverted green segment" ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+	<div ng-show="LoginCtrl.success" class="ui inverted green segment">
 		{{LoginCtrl.success}}
 	</div>
-	
-	<input type="submit" class="ui button green submit" value="{{ 'Login' | translate}}">
+
+	<div class="text center">
+		<md-button ng-click="LoginForm.$valid && LoginCtrl.Auth(LoginCtrl.formData)" md-theme="cyan">
+			{{ 'Login' | translate }}
+		</md-button>
+	</div>
 </form>

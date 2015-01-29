@@ -19,7 +19,10 @@ module.exports = (req, res) ->
 		if type(user) is "undefined"
 			throw new notExists "User does not exists"
 		else
-			res.view
-				title: req.__("Settings %s", user.username)+" ● Digests.me"
-				user: user
+			if req.param("user-data") is "true"
+				res.json user
+			else
+				res.view
+					title: req.__("Settings %s", user.username)+" ● Digests.me"
+					user: user
 	)

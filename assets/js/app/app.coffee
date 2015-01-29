@@ -1,8 +1,5 @@
 (->
-	App = angular.module "main", [
-		"pascalprecht.translate"
-		"login"
-	]
+	App = angular.module "main", window.usingModule
 
 	App.config ["$translateProvider", ($translateProvider) ->
 		

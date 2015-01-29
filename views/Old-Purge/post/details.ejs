@@ -66,7 +66,7 @@
 						<div class="yashare-auto-init" data-yashareQuickServices="vkontakte,facebook,twitter" data-yashareTheme="counter" data-yashareL10n="<%= req.getLocale() %>" data-yashareTitle="<%= post.title %>" data-yashareLink="<%= (sails.config.app.url+"/details/"+post.id) %>"  data-yashareImage="<%= post.headerImg %>" data-yashareDescription="<%= post.content.substr(0, 250)+"..." %>"></div>			
 					</div>
 					<div class="col-md-6 col-sm-6">
-						<span class="text_"><%= __("Tags") %> :</span> <% _.each(tags, function (tag, index) { %>
+						<span class="text_"><%= __("Tags") %> :</span> <% _.each(tags.split(/\s*,\s*/), function (tag, index) { %>
 							<a href="#"><%= tag %></a>
 							<% if (_.size(tags) !== (index+1)) {%>,<%}%>
 						<% }) %>

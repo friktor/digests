@@ -1,3 +1,17 @@
 {
-	"Login": "Login"
+	"Login": "Login",
+	"All Settings": "All Settings",
+	"personal": "personal",
+	"settings": "settings",
+	"the settings page of the user": "the settings page of the user",
+	"Change Password": "Change Password",
+	"Upload Avatar": "Upload Avatar",
+	"Upload Header": "Upload Header",
+	"firstname": "firstname",
+	"lastname": "lastname",
+	"username": "username",
+	"password": "password",
+	"update": "update",
+	"activities me": "activities me",
+	"about me": "about me"
 }

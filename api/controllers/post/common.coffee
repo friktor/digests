@@ -1,4 +1,5 @@
 acceptLanguage = require "accept-language"
+Promise = require "bluebird"
 Remarkable = require "remarkable"
 hljs = require "highlight.js"
 _ = require "lodash"
@@ -52,3 +53,22 @@ module.exports =
 
 		cb null, post
 		return
+
+
+
+	# Find and rendered posts by this user.
+	FindAndRenderPostsByThisUser : (authorId, page) ->
+		$scope = @
+
+		new Promise (resolve, reject) ->
+			Post.find()
+			.paginate({page: page, limit: 15})
+			.where(author: authorId)
+			.sort("createdAt desc")
+			.exec (error, posts) ->
+				if error then reject(error) else
+					async.map posts, $scope.renderPost, (errAsync, result) ->
+						if errAsync then reject(errAsync) else resolve(result)
+						return
+				return
+			return

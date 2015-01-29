@@ -9,25 +9,35 @@
       <%};%>
     </title>
 
+    <script>window.i18nLocale = "<%= req.getLocale() %>";</script>
+    <script>window.usingModule = [
+      "angular-capitalize-filter",
+      "pascalprecht.translate",
+      "ngMaterial",
+      <% if (!session.auth) {%>
+      "login"
+      <%}%>
+    ];</script>
+
     <%- meta("viewport", "width=device-width, initial-scale=1, maximum-scale=1") %>
     <%- meta("description", sails.config.app.description) %>
     <%- meta("keywords", sails.config.app.keywords) %>
 
     <%- style("/styles/importer.css") %>
-    
-    <%- script("/libs/angular/angular.js") %>
-    
-    <%- script("/libs/angular-translate/angular-translate.js") %>
-    <%- script("/libs/angular-translate-loader-static-files/angular-translate-loader-static-files.js") %>
-
     <%- script("/js/dependencies/jquery.min.js") %>
     <%- script("/stagging/semantic/modules/transition.min.js") %>
     <%- script("/stagging/semantic/modules/sidebar.min.js") %>
+    
+    <%- script("/libs/angular/angular.js") %>
 
-    <%- script("/js/app/appLogin.js") %>
+    <%- partial("partials/angular-capitalize.ejs") %>
+    <%- partial("partials/angular-translate.ejs") %>
+    <%- partial("partials/angular-material.ejs") %>
+
+
+    <% if (!session.auth) {%><%- script("/js/app/appLogin.js") %><%}%>
     <%- script("/js/app/app.js") %>
 
-    <script>window.i18nLocale = "<%= req.getLocale() %>";</script>
   </head>
 
   <body>

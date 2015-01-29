@@ -1,3 +1,17 @@
 {
-	"Login": "Войти"
+	"Login": "Войти",
+	"All Settings": "Все настройки",
+	"personal": "личное",
+	"settings": "настройки",
+	"the settings page of the user": "страница настроек пользователя",
+	"Change Password": "Сменить Пароль",
+	"Upload Avatar": "Загрузить Аватар",
+	"Upload Header": "Загрузить Шапку",
+	"firstname": "имя",
+	"lastname": "фамилия",
+	"username": "имя пользователя",
+	"password": "пароль",
+	"update": "обновить",
+	"activities me": "моя деятельность",
+	"about me": "обо мне"
 }

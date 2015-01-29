@@ -21,7 +21,8 @@ module.exports = (req, res, next) ->
 	else common.getLocaleGlobal(req.cookies.locale, req.headers["accept-language"])
 
 	# Page for sort
-	page = req.param "page", 1
+	page = parseInt(req.param("page", 1))
+	page = if isNaN(page) then 1 else page
 
 	# Sort by Language / View all
 	where = new Object()
@@ -30,7 +31,7 @@ module.exports = (req, res, next) ->
 	else
 		locale
 
-	Post.find()
+	Post.find().populate("headerImg")
 
 	# sort params
 	.sort("createdAt desc")

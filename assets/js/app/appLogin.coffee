@@ -1,5 +1,5 @@
 (->
-	App = angular.module "login", []
+	App = angular.module "login", window.usingModule
 
 	App.directive "loginForm", ["$http", "$timeout", "$log", ($http, $timeout, $log) ->
 
@@ -13,13 +13,6 @@
 			$self.formData =
 				username: ""
 				password: ""
-
-			# Set scope variables (i18n)
-			$self.__ =
-				subHeader: "Auth on Digests.me"
-				username: "username"
-				password: "password"
-				login: "Login"
 
 			@Auth = (form) ->
 				$http.get("/csrfToken").success (token) ->

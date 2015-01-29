@@ -1,47 +1,76 @@
+<%- script("/libs/masonry/dist/masonry.pkgd.js") %>
+
+<script>
+	window.usingModule.push("ngLazyload");
+
+	window.thisPage = <%= page %>;
+	window.postsPage = "/latest";
+</script>
+
+<%- script("/libs/ng-lazyload/nglazyload.js") %>
+<%- script("/js/app/appPosts.js", "defer") %>
 <%- partial("../partials/menu.ejs") %>
 
 <div class="posts list header">
-
+	
 </div>
 
-<div class="posts lists main">
+<div class="posts lists main" ng-controller="PostsCtrl">
 	<div class="ui basic segment">
 		<div class="row">
-			<% _.each(posts, function (post) { %>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-sm-12 columnPost">
-					
-					<div class="post">
-						
-						<!-- Post heading image -->
-						<% if (post.headerImg) {%> 
-							<a class="heading image" href="/details/<%= post.id %>">
-								<img class="lazy" src="<%= post.headerImg%>" alt="">
-							</a> 
-						<% }; %>
-						
-						<!-- Post title link -->
-						<div class="title">
-							<a href="/details/<%= post.numericId %>">
-								<%= post.title %>
-							</a>
-						</div>
-						
-						<!-- Post Sinopsis -->
-						<div class="sinopsis">
-							<%= post.content %>
-						</div>
-
-						<!-- Post button share&read -->
-						<div class="button group">
-							<a href="/details/<%= post.id %>" class="read">
-								<%= __("read") %>
-							</a>
-						</div>
-
+			<!-- Server rendered post in posts -->
+			<%- partial("../partials/posts.ejs") %>
+			<!-- End -->
+			
+			<!-- Client rendered post in posts -->
+			<div masonry-brick ng-repeat="post in posts" class="col-lg-3 col-md-3 col-sm-6 col-sm-12 masonry-brick">
+				<div class="post">		
+					<a ng-show="post.headerImg" class="heading image" href="/details/{{post.numericId}}">
+						<img post-img ng-src="{{ post.headerImg }}" alt="">
+					</a> 	
+					<!-- Post title link -->
+					<div class="title">
+						<a href="/details/{{post.numericId}}">
+							{{ post.title }}
+						</a>
+					</div>	
+					<!-- Post Sinopsis -->
+					<div class="sinopsis">
+						{{post.content}}
 					</div>
-
+					<!-- Post button share&read -->
+					<div class="button group">
+						<a href="/details/{{post.numericId}}" class="read">
+							{{"read" | translate}}
+						</a>
+					</div>
 				</div>
-			<% }); %>
+			</div>
+
 		</div>
+		
+
 	</div>
+
+	<div class="text center">
+		<div ng-show="notify" class="notify">
+			<div class="ui basic segment">
+				<div class="row">
+					<div class="col-md-4 col-sm-3 hidden-xs"></div>
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<div class="ui inverted red segment">
+							{{ notify | translate}}
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-3 hidden-xs"></div>
+				</div>
+			</div>
+		</div>
+		<md-button ng-click="loadPosts()" class="md-fab mdLoadPostsButton">
+			<i class="fa fa-plus"></i>
+		</md-button>
+	</div>
+
 </div>
+
+<%- partial("../partials/footer.ejs") %>

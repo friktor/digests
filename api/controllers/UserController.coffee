@@ -136,11 +136,10 @@ module.exports = {
 		.then((user) ->
 			if user
 				params = 
-					activitiesMe: req.param "activitiesme", user.activitiesMe
+					activitiesMe: req.param "activitiesMe", user.activitiesMe
 					firstname: req.param "firstname", user.firstname
 					lastname: req.param "lastname", user.lastname
-					aboutMe: req.param "aboutme", user.aboutMe
-					socialNetwork: _.merge user.socialNetwork, JSON.parse(req.param "socialnetwork", user.socialNetwork)
+					aboutMe: req.param "aboutMe", user.aboutMe
 				
 				[user, params]
 			else
@@ -155,7 +154,8 @@ module.exports = {
 			user = updatedUser[0]
 
 			res.json
-				complete: true
+				message: req.__ "Personal information updated!"
+				success: true
 				user: user
 		)
 

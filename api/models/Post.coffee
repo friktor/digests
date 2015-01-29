@@ -11,9 +11,9 @@ Post =
 
 	attributes: 
 
-		headerImg: 
-			type: "string"
-			required: false
+		headerImg:
+			collection: "file"
+			via: "postHeaderImage"
 		
 		title:
 			type: "string"
@@ -60,18 +60,16 @@ Post =
 Post.beforeCreate = ($Post, next) ->
 
 	# XSS protect title - to plain text
-	$protect_title = xss $Post.title, 
+	$Post.title = xss $Post.title, 
 		stripIgnoreTagBody: ["script"]
 		stripIgnoreTag: true
 		whiteList: []
-	
-	$Post.title = $protect_title;
 
 	$Post.numericId = moment().format("DD.MM.YY")+"-"+randomString(
 		special: false
 		letters: false
 		numeric: true
-		length: 10
+		length: 6
 	)
 
 	# If title is empty after XSS replace - throw new error

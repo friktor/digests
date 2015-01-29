@@ -1,6 +1,7 @@
 require "coffee-script/register"
 
 Promise = require "bluebird"
+moment = require "moment"
 async = require "async"
 _ = require "lodash"
 xss = require "xss"
@@ -23,7 +24,7 @@ module.exports = (req, res, next) ->
 
 	if !id then res.notFound() else
 
-		Post.findOne()
+		Post.findOne().populate("headerImg")
 
 		.where(or: [
 			{numericId: id}
@@ -37,6 +38,10 @@ module.exports = (req, res, next) ->
 				post.showed = 0 if !post.showed
 				post.showed += 1
 				post.save()
+
+				# Fomrating created date
+				moment.locale("ru")
+				post.createdAt = moment(post.createdAt).format("LL")
 
 				# Render and protect content
 				post.content = xss common.markdown.render(post.content),
@@ -52,10 +57,12 @@ module.exports = (req, res, next) ->
 						# Find And Push Habs.
 						iteratorHab = (habId, cb) ->
 							Hab.findOne(habId).then (hab) ->
+								nameHab = _.find hab.name, "locale": req.getLocale()
+
 								if hab
 									cb null, 
+										name: if nameHab then nameHab.name else hab.translitName
 										translitName: hab.translitName
-										name: hab.name
 										id: hab.id
 								else
 									cb()
@@ -74,7 +81,7 @@ module.exports = (req, res, next) ->
 
 		.spread((post, author, habs) ->
 			# response rendered html
-			res.json
+			res.view
 				title  : post.title + " ⚫ Digests.me"
 				author : author
 				post   : post
