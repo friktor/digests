@@ -1,0 +1,69 @@
+<div class="page details">
+	<%- partial("../partials/menu.ejs") %>
+	
+	<div class="ui basic segment">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="ui segment post">
+					<% var headerImg = _.find(post.headerImg, {"restrict": "full"}); %>
+					<% if (headerImg) {%>
+					<div class="post header image text center">
+						<img src="<%= headerImg.link %>" alt="">
+					</div>
+					<%};%>
+
+					<div class="post title">
+						<h3 class="ui header"><%= post.title %></h3>
+					</div>
+
+					<div class="post info text center">
+						<span class="views">
+							<i class="fa fa-eye"></i> <%= __("%s views", post.showed) %>
+						</span>
+						<span class="createdDate">
+							<i class="fa fa-calendar"></i> <%= __("added - %s", post.createdAt) %>
+						</span>
+						<span class="nofcomments">
+							<i class="fa fa-comment"></i> 5 comments
+						</span>
+					</div>
+
+					<div class="post habs text center">
+						<i class="fa fa-rocket"></i> <% _.each(habs, function (hab, index) { %>
+							<a href="/hab/<%= hab.translitName %>"><%= hab.name %></a><% if (index !== (habs.length-1)) {%>, <%}%>
+						<% }); %>
+					</div>
+
+					<main class="post content">
+						<%- post.content %>
+					</main>
+
+					<div class="post footer">
+						<div class="ui basic segment">
+							<div class="row">
+								<div class="col-md-6 text left">
+									<i class="fa fa-tags"></i> <% _.each(post.tags.split(/\s*,\s*/), function (tag, index) { %>
+										<a href="/search?q=<%= tag %>&#38;by=tag"><%= tag %></a><% if (index !== (habs.length-1)) {%>, <%}%>
+									<% }); %>
+								</div>
+								<div class="col-md-6 text right">
+									<a href="/profile/<%= author.username %>" class="ui avatar image">
+										<img src="<% if (author.avatarImg) {%><%= author.avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
+									</a>
+									<a href="/profile/<%= author.username %>">
+										<%= author.firstname %> <%= author.lastname %>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+
+</div>
+
+<%- partial("../partials/footer.ejs") %>

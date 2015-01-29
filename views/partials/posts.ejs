@@ -1,0 +1,37 @@
+<% _.each(posts, function (post) { %>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-sm-12 masonry-brick">
+		
+		<div class="post">
+
+			<% var previewImage = _.find(post.headerImg, {"restrict": "preview"}); /*sails.log(previewImage);*/ %>
+			
+			<!-- Post heading image -->
+			<% if (_.find(post.headerImg, {"restrict": "preview"})) {%> 
+				<a class="heading image" href="/details/<%= post.numericId %>">
+					<img post-img src="<%= (_.find(post.headerImg, {"restrict": "preview"})).link %>" alt="">
+				</a> 
+			<% }; %>
+			
+			<!-- Post title link -->
+			<div class="title">
+				<a href="/details/<%= post.numericId %>">
+					<%= post.title %>
+				</a>
+			</div>
+			
+			<!-- Post Sinopsis -->
+			<div class="sinopsis">
+				<%= post.content %>
+			</div>
+
+			<!-- Post button share&read -->
+			<div class="button group">
+				<a href="/details/<%= post.numericId %>" class="read">
+					<%= __("read") %>
+				</a>
+			</div>
+
+		</div>
+
+	</div>
+<% }); %>

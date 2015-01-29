@@ -1,0 +1,38 @@
+<script>window.username = "<%= session.user.username %>";</script>
+<%- script("/js/app/appSettings.js") %>
+
+<div ng-controller="SettingsCtrl as settings" class="page settings">
+	<%- partial("../partials/menu.ejs") %>
+	
+	<div class="ui segment header text center">
+		
+		<!-- Main UI header in settings page. -->
+		<h3 class="ui header">
+			{{ 'settings' | translate | uppercase }}
+			<div class="ui horizontal divider">
+				<i class="fa fa-gear icon"></i> 
+			</div>
+			<div class="sub header">
+				{{ 'the settings page of the user' | translate | capitalize:'first'}}
+			</div>
+		</h3>
+
+	</div>
+
+	<div class="ui basic segment">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<div class="ui segment content page">
+					<personal></personal>
+					<div class="ui divider"></div>
+					<upload-avatar></upload-avatar>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	</div>
+
+</div>
+
+<%- partial("../partials/footer.ejs") %>
