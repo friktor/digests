@@ -5,17 +5,17 @@
 	<div class="ui divider horizontal">
 		<i class="fa fa-newspaper-o"></i>
 	</div>
-	<a ng-href="/details/post/{{post.numericId}}">{{post.title}}</a>
+	<a ng-href="/details/{{post.numericId}}">{{post.title}}</a>
 	<p>{{post.content}}</p>
-	<md-button ng-href="/details/post/{{post.numericId}}" md-theme="cyan">
+	<md-button ng-href="/details/{{post.numericId}}" md-theme="cyan">
 		<i class="fa fa-book"></i> {{ 'read' | translate }}
 	</md-button>
 </div>
 
 <div ng-repeat-end ng-if="!$first" class="ui segment post">
-	<a ng-href="/details/post/{{post.numericId}}">{{post.title}}</a>
+	<a ng-href="/details/{{post.numericId}}">{{post.title}}</a>
 	<p>{{post.content}}</p>
-	<md-button ng-href="/details/post/{{post.numericId}}" md-theme="cyan">
+	<md-button ng-href="/details/{{post.numericId}}" md-theme="cyan">
 		<i class="fa fa-book"></i> {{ 'read' | translate }}
 	</md-button>
 </div>

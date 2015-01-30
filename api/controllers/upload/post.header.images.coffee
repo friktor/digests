@@ -4,7 +4,6 @@ require "coffee-script/register"
 fse = require "fs-extra"
 Download = require "download"
 Promise = require "bluebird"
-Caman = require("caman").Caman
 
 # Common and Utils
 utils = require "../../services/Utils.coffee"
@@ -57,7 +56,7 @@ module.exports = (req, res) ->
 			[post, downloadedImage]
 		# if uploadType is "upload"
 		else if uploadType is "upload"
-			uploadedImage = common.UploadImage(req.file("image"), post.numericId).then (fileSource) -> fileSource
+			uploadedImage = common.UploadImage(req.file("image"), "/post/"+post.numericId+"/headerImg/source").then (fileSource) -> fileSource
 			[post, uploadedImage]
 		# if another uploadType
 		else throw new Error "Not defined required params"

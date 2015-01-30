@@ -16,18 +16,57 @@ fs = require "fs"
 # Download, Bluebird, Caman Image
 Download = require "download"
 Promise = require "bluebird"
-ImageMagick = require "gm"
+gm = require("gm").subClass imageMagick: true
 
 randomString = require "random-string"
 readChunk = require "read-chunk"
 fileType = require "file-type"
 async = require "async"
 
+focusCrop = require("../../services/fc.coffee").crop
+
 # Errors
 badFileType = require "../errors/badFileType.coffee"
 
 
 module.exports = 
+
+
+	# @params: {filepath|stringFilepath, workDir|stringFilePath}
+	# @descriptions: function for resize profile header images. After complete - preview blured image & full image.
+
+	resizeUserHeadingImages : (filepath, workDir) ->
+
+		new Promise (resolve, reject) ->
+			existsFile = fs.existsSync filepath # exists this images
+			existsWorkDir = fs.existsSync workDir # exists work dir
+
+			if !existsWorkDir then fs.mkdirSync workDir # mkdir workDir if not exists
+			
+			if !existsFile then throw new Error "File not exists" else # if not file - throw error
+				# Get images size resolution
+				gm(filepath).size (error, imageSize) ->
+
+					# if error by getsize - hanndle reject error
+					if error then reject(error) else
+						resizeImagePreview = require "./resizeProfileHeading/resizeSidebarImage.coffee" #iterator create preview blured image
+						resizeFullImage = require "./resizeProfileHeading/resizeImageFull.coffee" # iterator resize full images
+
+						# async parallel event resized images
+						# partials functions with requided params
+						async.parallel [ 
+							_.partial(resizeImagePreview, imageSize, workDir, filepath)
+							_.partial(resizeFullImage, imageSize, workDir, filepath)
+						] , (error, $images) ->
+							# After event - remove source images
+							fse.removeSync filepath
+							# resolve event result
+							if error then reject(error) else resolve($images)
+							return
+					return
+			return
+
+
 
 	# @params: {sourceFile|filePath, workDir|filePath, optionsImg|array}
 	# @descriptions: function for resize images. After complete - preview images, full images.
@@ -43,11 +82,14 @@ module.exports =
 			if !exists then throw new Error "File not exists" else
 				
 				iteratorResize = (optImg, cb) ->
-					nameImage = "#{randomString(length: 10)}.#{optImg.restrict}.jpg" # image name.
+					format = if optImg.format then optImg.format else "jpg"
+					filetype = if format is "png" then "image/png" else "image/jpeg"
+					
+					nameImage = "#{randomString(length: 10)}.#{optImg.restrict}.#{format}" # image name.
 					saveAsTo = "#{workDir}/#{nameImage}" # save to with filename
 
 					# Resize image using image-magick with auto orientation.
-					ImageMagick(sourceFile).options(imageMagick: true)
+					gm(sourceFile)
 						.resize(optImg.width).autoOrient()
 						.write saveAsTo, (error) ->
 							cb error,
@@ -55,7 +97,7 @@ module.exports =
 								restrict: optImg.restrict #image restrict
 								filename: nameImage #image filename
 								filedisk: saveAsTo #image absolutepath
-								filetype: "image/jpeg" #image type
+								filetype: filetype #image type
 
 							return
 					return
@@ -68,12 +110,12 @@ module.exports =
 
 
 
-	# @params: {file|reqFileObject, postNumericId|dirname}
+	# @params: {file|reqFileObject, filepath|dirpath}
 	# @descriptions: promised function for upload new image with validate.
 
-	UploadImage: (file, postNumericId) ->
+	UploadImage: (file, filepath) ->
 		new Promise (resolve, reject) ->
-			saveDirSrc = sails.config.upload.dir+"/post/"+postNumericId+"/headerImg/source"
+			saveDirSrc = sails.config.upload.dir+filepath
 	
 			file.upload dirname: saveDirSrc, (error, uploaded) ->
 				if error then reject(error) else

@@ -51,7 +51,8 @@
       </div>
       <div class="item avatar">
         <a href="/profile/<%= session.user.username %>" class="ui image avatar">
-          <img src="<% if (session.user.avatarImg) {%><%= session.user.avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
+          <% var avatarImg = _.find(session.user.avatarImg, {"restrict": "preview"}); %>
+          <img src="<% if (session.user.avatarImg.length>0) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
         </a>
       </div>
       <a href="/profile/<%= session.user.username %>" class="item user_">

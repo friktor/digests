@@ -12,9 +12,10 @@
       </div>
     </div>
   <% } else if (session.auth && session.user) { %>
-    <div class="ui heading auth" style="background: url(<% if (session.user.headingImg) {%><%= session.user.headingImg.link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;">
+    <div class="ui heading auth" style="background: url(<% if (session.user.headingImg.length > 0) {%><%= (_.find(session.user.headingImg, {"restrict": "sidebar"})).link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;">
       <div class="ui avatar">
-        <img src="<% if (session.user.avatarImg) {%><%= session.user.avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="" class="ui image circular">
+        <% var avatarImg = _.find(session.user.avatarImg, {"restrict": "preview"}); %>
+        <img src="<% if (session.user.avatarImg.length > 0) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="" class="ui image circular">
       </div>
       <div class="ui panel profile">
         <img src="<% if (session.user.headingImg) {%><%= session.user.headingImg.link %><%} else {%>/images/profile.jpg<%};%>" alt="">

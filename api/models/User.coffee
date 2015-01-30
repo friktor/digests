@@ -88,10 +88,14 @@ User =
 ###
 
 #@ Изображение шапка профиля
-User.attributes.headingImg = model: "file"
+User.attributes.headingImg = 
+	via: "headingImg"
+	collection: "file"
 
 #@ Изображение аватар	
-User.attributes.avatarImg = model: "file"
+User.attributes.avatarImg = 
+	via: "avatarImg"
+	collection: "file"
 
 #@ Комментарии
 User.attributes.comments =

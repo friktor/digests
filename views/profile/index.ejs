@@ -7,10 +7,10 @@
 
 	<!-- Header Profile -->
 	<div class="profile header" 
-		style="background: url(<% if (user.headingImg) {%><%= user.headingImg.link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;"
-	>
+		style="background: url(<% if (user.headingImg.length > 0) {%><%= (_.find(session.user.headingImg, {"restrict": "full"})).link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;">
 		<div class="avatar text center">
-			<img class="ui image circular" src="<% if (user.avatarImg) {%><%= user.avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
+			<% var avatarImg = _.find(session.user.avatarImg, {"restrict": "full"}); %>
+			<img class="ui image circular" src="<% if (user.avatarImg.length>0) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
 			<h4 class="ui header"><%= user.firstname %> <%= user.lastname %></h4>
 		</div>
 	</div>

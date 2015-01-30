@@ -28,6 +28,7 @@ File =
 		postHeaderImage:
 			model: "post"
 
+
 ###
 Associations
 ###
