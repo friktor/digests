@@ -9,19 +9,46 @@
 
 #@dependencies: defaults {{none}}
 
+Promise = require "bluebird"
+async = require "async"
+
 module.exports = (req, res) ->
 	post = 
 		# Main param
-		headerImg: req.param "header_img" # header image 
 		author  : req.param "author"      # author (associations_id)
 		content : req.param "content"     # content main
+		markLang: req.param "markLang"
 		locale  : req.param "locale"      # language post
 		title   : req.param "title"       # title post
-		hab     : req.param "hab"         # hab array (via ,)
+		hab     : req.param "habs"        # hab array (via ,)
 		tags    : req.param "tags"        # tags
 		
 		# Locale object && parse Draft boolean
-		draft   : req.param "draft"
+		draft   : req.param "draft", false
+
+	# Habs JSON to string
+	(->
+		parseHabs = JSON.parse post.hab
+		habsId = []
+		parseHabs.forEach (hab, index) ->
+			habsId.push hab.id
+			return
+
+		post.hab = habsId.join(",")
+		return
+	)()
+
+	# Tags JSON to string
+	(->
+		parseTags = JSON.parse post.tags
+		tagsForming = []
+		parseTags.forEach (tag, index) ->
+			tagsForming.push tag.text
+			return
+
+		post.tags = tagsForming.join(",")
+		return
+	)()
 
 	Post.create(post)
 
@@ -35,12 +62,17 @@ module.exports = (req, res) ->
 			hab: post.hab
 			id: post.id
 
+		# sails.log.info post
+
 		# response with json data
-		res.json post
+		res.json
+			success: true
+			post: post
 	)
 
 	# Fail create/Handle error
 	.caught((error) ->
+		sails.log.error error
 		# response json-data error
-		res.json error.toJSON()
+		res.serverError()
 	)

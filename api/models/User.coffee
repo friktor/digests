@@ -73,7 +73,7 @@ User =
 		  delete $User.hashedPassword
 		  delete $User.socialNetwork
 		  delete $User.subscription
-		  delete $User.activation
+		  # delete $User.activation
 		  delete $User.privileges
 		  delete $User.password
 		  delete $User.online

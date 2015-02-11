@@ -118,6 +118,8 @@ module.exports =
 			saveDirSrc = sails.config.upload.dir+filepath
 	
 			file.upload dirname: saveDirSrc, (error, uploaded) ->
+				# sails.log uploaded
+
 				if error then reject(error) else
 					uploadImage = uploaded[0]
 

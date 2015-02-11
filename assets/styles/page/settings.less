@@ -1,15 +1,81 @@
+.drop.zone {
+	border: 1px dashed rgba(0, 0, 0, 0.2);
+	.padding(1.5rem, 1rem, 1.5rem, 1rem);
+	.margin(1rem, 2rem, 1rem, 2rem);
+	text-align: center;
+
+	p {
+		color: rgba(0, 0, 0, 0.3);
+		font-style: italic;
+		margin-bottom: 3px;
+		font-size: 12px;
+	}
+
+	&.dragover {
+		border: 1px dashed #3F51B5;
+
+		p {
+			color: #3F51B5;
+			opacity: 0.77;
+		}
+	}
+}
+
 .page.settings {
+	
+	header .ui.menu.header {
+		background: url("/images/backgrounds/settings.page.menu.header.bg.jpg") no-repeat !important;
+		background-size: 1600px auto;
+		margin-bottom: 40px;
+
+		text-align: left;
+		.brand {
+			color: #FFF;
+		}
+
+		a.item, div.item {
+			opacity: 1 !important;
+			color: #FFF !important;
+
+			.ui.button {
+				border: 1px solid rgba(255, 255, 255, 0.6);
+				text-shadow: 0 0 2px #000;
+				color: #FFF !important;
+				box-shadow: none;
+				&:hover, &:active {
+					background: transparent !important;
+				}
+			}
+		}
+	}
+
 	padding-bottom: 2rem;
 
+	md-input-container.md-default-theme label, md-input-container.md-default-theme .md-placeholder {
+		color: rgba(0, 0, 0, 0.75);
+	}
+
+	md-input-container.md-default-theme .md-input {
+		border-color: rgba(0, 0, 0, 0.4);
+	}
+
+	md-input-container.md-default-theme.md-input-invalid label {
+	    color: #F44336 !important;
+	}
+
+	md-input-container.md-default-theme.md-input-invalid .md-input {
+	    border-color: #F44336 !important;
+	}
+
 	.ui.segment.header {
-		.padding(40px, 2rem, 30px, 2rem);
+		.padding(0,0,30px,0);
 
 		background: url("/images/backgrounds/settings.page.header.bg.jpg") no-repeat;
-		background-size: cover;
+		background-size: 1600px auto;
 		border-radius: 0;
 		box-shadow: none;
 		margin-top: 0;
-		height: 230px;
+		height: 290px;
 		border: none;
 
 		.ui.header {
@@ -39,12 +105,14 @@
 
 		.ui.header {
 			text-align: center !important;
+			font-weight: 500 !important;
 		}
 
 		.submit-button {
-			background: #8BC34A !important;
+			background: #2196F3 !important;
+			border-radius: 1px;
 			padding: 10px 12px;
-			font-size: 14px;
+			font-size: 12px;
 			color: #FFF;
 		}
 

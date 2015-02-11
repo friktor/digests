@@ -1,0 +1,38 @@
+<div class="ui basic segment">
+	<div class="ui header text center">
+		{{ 'upload header' | translate | capitalize:'first'}}
+	</div>
+	
+	<div  ng-file-drop 
+				drag-over-class="dragover" 
+				ng-model="header" 
+				allow-dir="false" 
+				multiple="false" 
+				class="drop zone">
+	
+		<p>{{ '* - drop image here. Allow format - jpg, png.'}}</p>
+		<p>{{ '* - max size of 500kb.'}}</p>
+
+		<md-button ng-file-select ng-model="header" multiple="false">
+			<span>
+				<i class="fa fa-file-image-o"></i>
+				{{ 'select file'| translate}}
+			</span>
+		</md-button>
+
+		<md-button ng-disabled="allowUploadHeader" ng-click="uploadHeader()">
+			<span>
+				<i class="fa fa-cloud-upload"></i>
+				{{ 'upload' | translate}}
+			</span>
+		</md-button>	
+
+    <div ng-show="!allowUploadHeader" layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-linear md-mode="determinate" value="{{headerUploadProgress || 0}}"></md-progress-linear>
+    </div>
+
+    <p style="margin-top: 7px; color: #3F51B5;" ng-show="headerUploadProgress === 100">{{ 'upload success!' | translate | capitalize:'first' }}</p>
+
+	</div>
+		
+</div>

@@ -49,6 +49,7 @@
     "read-chunk": "^1.0.1",
     "remarkable": "^1.4.2",
     "remarkable-regexp": "~0.2.4",
+    "request": "^2.53.0",
     "rss": "~1.0.1",
     "sails": "~0.10.5",
     "sails-disk": "~0.10.0",

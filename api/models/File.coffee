@@ -28,6 +28,10 @@ File =
 		postHeaderImage:
 			model: "post"
 
+		activated: 
+			type: "boolean"
+			defaultsTo: false
+
 
 ###
 Associations

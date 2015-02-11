@@ -74,6 +74,7 @@ module.exports = (req, res) ->
 							mime: image.filetype
 							size: image.filesize
 							headingImg: user.id
+							activated: true
 						File.create $file, (error, file) ->
 							cb error, file
 							return

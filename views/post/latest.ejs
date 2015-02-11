@@ -5,14 +5,33 @@
 
 	window.thisPage = <%= page %>;
 	window.postsPage = "/latest";
+	window.locale = "<%= locale %>";
 </script>
+
+<%- script("/stagging/semantic/modules/dropdown.min.js") %>
 
 <%- script("/libs/ng-lazyload/nglazyload.js") %>
 <%- script("/js/app/appPosts.js", "defer") %>
-<%- partial("../partials/menu.ejs") %>
 
-<div class="posts list header">
+
+<div class="posts list header latest">
+	<%- partial("../partials/menu.ejs") %>
 	
+	<h2><%= __("Tape posts «Latests»") %></h2>
+	<p><%= __("In this tape contains all the most recent records of all users.") %></p>
+	
+	<div class="ui icon top left pointing dropdown basic button">
+		<i class="world icon"></i> 
+		<div class="menu">
+			<a href="?locale=ru" class="item">{{ 'russian' | translate | capitalize:'all'}}</a>
+			<a href="?locale=en" class="item">{{ 'english' | translate | capitalize:'all'}}</a>
+			<a href="?locale=pl" class="item">{{ 'polish'	 | translate | capitalize:'all'}}</a>
+		</div>	
+	</div>
+
+	<a href="/newest.<%= (locale !== "ru" ? locale : "ru") %>.xml" class="ui icon top left pointing basic button">
+		<i class="feed icon"></i>
+	</a>
 </div>
 
 <div class="posts lists main" ng-controller="PostsCtrl">

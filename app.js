@@ -1,5 +1,7 @@
 process.chdir(__dirname);
 var config;
+var fse = require("fs-extra");
+var fs = require("fs");
 
 (function() {
   var e, e0, e1, rc, sails;
@@ -18,20 +20,31 @@ var config;
     return;
   }
 
+  require("async").each(["en", "ru", "pl"], function (i18n, next) {
+    var translations = require("./translations/"+i18n+"/index.js");
+    var _path = "./config/locales/"+i18n+".json";
+    
+    fse.removeSync(_path);
+    fs.writeFileSync(_path, JSON.stringify(translations, null, "\t"), "utf-8");
+    next();
+  }, function (error) {
+    if (error) console.error(error);
 
-  require("fs").exists(__dirname+"/.sailsrc", function (exists) {
-    if (!exists) return sails.lift();
-
-    require("fs").readFile(__dirname+"/.sailsrc", "utf-8", function (error, config) {
-      if (error) {console.error("Error while reading .sailsrc config");}
-      
-      try {
-        var config = JSON.parse(config);
-      } catch (_e) {
-        console.warn("Error parse .sailsrc file. File isnt valid json.");
-      }
-
-      sails.lift(config);
+    fs.exists(__dirname+"/.sailsrc", function (exists) {
+      if (!exists) return sails.lift();
+  
+      fs.readFile(__dirname+"/.sailsrc", "utf-8", function (error, config) {
+        if (error) {console.error("Error while reading .sailsrc config");}
+        
+        try {
+          var config = JSON.parse(config);
+        } catch (_e) {
+          console.warn("Error parse .sailsrc file. File isnt valid json.");
+        }
+  
+        sails.lift(config);
+      });
     });
-  })
+  });
+
 })();

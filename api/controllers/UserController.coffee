@@ -3,6 +3,8 @@
  # @description :: Server-side logic for managing users
  # @help        :: See http://links.sailsjs.org/docs/controllers
 
+require "coffee-script/register"
+
 nodemailer = require "nodemailer"
 bcrypt = require "bcrypt-nodejs"
 Promise = require "bluebird"
@@ -18,77 +20,27 @@ class sendError extends Error
 
 module.exports = {
 
-	# @name: create
-	# @description: create new user with respond activation mail && i18n
-	# @dependencies: nodemailer, bluebird, i18n
-	# @params: {username, password, email, firstname, lastname} by POST
-	# @rest: POST "/utils/user/register"
+	existsUser: (req, res) ->
+		ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+		username = req.param "username"
 
-	create: (req, res) ->
+		if !username then res.badRequest() else
+			User.findOneByUsername(username).then((user) ->
+				if user then res.json(exists: true) else res.json exists: false
+			).error (error) -> res.serverError()
 
-		# Params for new user
-		params = 
-			username: req.param "username"
-			password: req.param "password"
-			email: req.param "email"
 
-			firstname: req.param "firstname"
-			lastname: req.param "lastname"
+	existsEmail: (req, res) ->
+		email = req.param "email"
 
-		User.create(params)
+		if !email then res.badRequest() else
 
-		.then((user) ->
-			# read template file for mail
-			[user, readFile("#{sails.config.appPath}/views/mailTemplates/activation.ejs", "utf-8")]
-		)
+			User.findOneByEmail(email).then((user) ->
+				if user then res.json(exists: true) else res.json(exists: false)
+			).error (error) -> res.serverError()
 
-		.spread((user, template) ->
-			# Create transport
-			transport = nodemailer.createTransport sails.config.mail
-
-			# options mail
-			mailOptions = 
-				from: "#{sails.config.app.host.toUpperCase()} <#{sails.config.mail.auth.user}>"
-				to: user.email
-
-				subject: req.__ "Activate your new account on {{website}}",
-					website: sails.config.application.name
-
-				# Render html mail from locale, template
-				html: ejs.render template,
-					link: "#{sails.config.application.url}/utils/activate?id=#{user.id}&token=#{user.activationToken}"
-					text: req.__ "Welcome to our website {{firstname}} {{lastname}}! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link.",
-						firstname: user.firstname
-						lastname: user.lastname
-					linkText: req.__ "Activate"
-
-			# Send mail from options
-			transport.sendMail mailOptions, (errorSend, reply) ->
-				if errorSend # if error - throw send mail error
-					throw new sendError "error send activation mail"
-				else
-					[user, reply]
-		)
-
- 		# promise spread user data, reply data
-		.spread((user, reply) ->
-			res.json
-				complete: true
-		)
-
-		# Handle send mail error
-		.caught(sendError, (e) ->
-			sails.log.error e
-			res.json
-				complete: true				
-		)
-
-		# Handle othrwise error
-		.caught((e) ->
-			sails.log.error e
-			res.json 
-				complete: false
-		)
+	# @See "api/controllers/user/create.coffee"
+	create: require "./user/create.coffee"
 
 	# @name: activate
 	# @description: activate user account

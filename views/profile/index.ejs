@@ -3,13 +3,13 @@
 <%- script("/js/app/appProfile.js") %>
 
 <div class="page profile" ng-controller="ProfileCtrl">
-	<%- partial("../partials/menu.ejs") %>
 
 	<!-- Header Profile -->
 	<div class="profile header" 
-		style="background: url(<% if (user.headingImg.length > 0) {%><%= (_.find(session.user.headingImg, {"restrict": "full"})).link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;">
+		style="background: url(<% if (user.headingImg.length > 0) {%><%= (_.find(user.headingImg, {"restrict": "full"})).link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;">
+		<%- partial("../partials/menu.ejs") %>
 		<div class="avatar text center">
-			<% var avatarImg = _.find(session.user.avatarImg, {"restrict": "full"}); %>
+			<% var avatarImg = _.find(user.avatarImg, {"restrict": "full"}); %>
 			<img class="ui image circular" src="<% if (user.avatarImg.length>0) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
 			<h4 class="ui header"><%= user.firstname %> <%= user.lastname %></h4>
 		</div>

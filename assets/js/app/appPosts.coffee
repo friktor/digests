@@ -10,8 +10,10 @@
 
 		# Set default language
 		$translateProvider.preferredLanguage window.i18nLocale
-		return
 
+		# Init dropdown
+		$(".ui.dropdown").dropdown()
+		return
 	]
 
 	App.controller "PostsCtrl", ["$scope", "$http", "$log", "$mdDialog", 
@@ -23,11 +25,11 @@
 			$scope.posts = []
 	
 			$scope.loadPosts = ->
-				$http.get($scope.locationPage+"/"+($scope.page+1)+"?ajax=true")
+				$http.get($scope.locationPage+"/"+($scope.page+1)+"?ajax=true#{if window.locale isnt "ru" then ("&locale="+window.locale)}")
 	
 				.success((response) ->
 					$("title").text(response.title)
-					window.history.pushState {}, $("title").text(), $scope.locationPage+"/"+($scope.page+1)
+					window.history.pushState {}, $("title").text(), $scope.locationPage+"/"+($scope.page+1)+"#{if window.locale isnt "ru" then ("?locale="+window.locale)}"
 					$scope.posts = $.merge($scope.posts, response.posts)
 					$scope.page += 1
 					return

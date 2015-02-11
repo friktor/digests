@@ -4,8 +4,55 @@
 	}
 
 	.profile.header {
-		.padding(50px, 2rem, 50px, 2rem);
-		height: 260px;
+		height: 320px;
+
+		header {
+			overflow-y: hidden;
+			height: 60px;
+
+			margin-bottom: 40px;
+		}
+
+		header .blured {
+			position: absolute;
+			top: 0; right: 0; left: 0;
+		}
+		
+		header .ui.menu.header {
+			background: rgba(0, 0, 0, 0.4) !important;
+	
+			text-align: left;
+			.brand {
+				color: #FFF;
+			}
+	
+			a.item, div.item {
+				opacity: 1 !important;
+				color: #FFF !important;
+
+				.ui.image.avatar {
+					height: 35px;
+					width: 35px;
+				}
+
+				&.user_ {
+					span {
+						color: #2196F3 !important;
+					}
+				}
+	
+				.ui.button {
+					border: 1px solid rgba(255, 255, 255, 0.6);
+					text-shadow: 0 0 2px #000;
+					color: #FFF !important;
+					box-shadow: none;
+					&:hover, &:active {
+						background: transparent !important;
+					}
+				}
+			}
+		}
+
 		.avatar {
 			.ui.image {
 				display: inline-block;
@@ -14,6 +61,7 @@
 			}
 		}
 		h4.ui.header {
+			text-shadow: 0 0 2px black;
 			font-size: 1.2rem;
 			color: #FFF;
 		}

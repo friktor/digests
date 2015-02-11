@@ -88,13 +88,14 @@ module.exports = (req, res) ->
 		if !images then throw new Error "Images resized not exists" else
 			iteratorCreateRecordToDb = (image, cb) ->
 				$file = 
+					link: image.filedisk.replace sails.config.upload.serve, ""
 					absolutePath: image.filedisk
 					restrict: image.restrict
 					postHeaderImage: post.id
 					filename: image.filename
 					mime: image.filetype
 					size: image.filesize
-					link: image.filedisk.replace sails.config.upload.serve, ""
+					activated: true
 	
 				File.create($file).exec (error, file) ->
 					cb error, file

@@ -54,6 +54,7 @@ module.exports = (req, res, next) ->
 				completed =
 					title: req.__("Newest Posts") + "● Digests.me ●" + req.__("%s page", page)
 					posts: renderedPosts
+					locale: locale
 					page: page
 
 				# if param ajax is true - send json, else send html.

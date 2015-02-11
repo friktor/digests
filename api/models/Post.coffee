@@ -73,7 +73,7 @@ Post.beforeCreate = ($Post, next) ->
 	)
 
 	# If title is empty after XSS replace - throw new error
-	return next(new Error("title is empty after xss protect")) if $protect_title is "" or $protect_title is null
+	return next(new Error("title is empty after xss protect")) if $Post.title.length <= 0
 
 	next()
 

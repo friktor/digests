@@ -15,13 +15,22 @@ body, .pusher {background: #e8e8e8;}
     color: rgba(0, 0, 0, 0.8);
 }
 
+p {
+	line-height: 1.3 !important;
+	margin-bottom: 2px;
+}
+
+@import "components/headers.list.posts.less";
 @import "components/material.design.less";
 @import "components/ui.menu.header.less";
 @import "components/ui.sidebar.left.less";
 @import "components/ui.footer.less";
 @import "components/post";
+
+@import "auth.page/register";
 @import "auth.page/login";
 
-@import "page/settings";
 @import "page/profile";
 @import "page/details";
+@import "page/addpost";
+@import "page/settings";

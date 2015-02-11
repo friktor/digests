@@ -11,7 +11,7 @@ module.exports =
 		.then((posts) ->
 			_.each posts, (post) ->
 				mapPosts.push
-					url: "/details/#{post.id}"
+					url: "/details/#{post.numericId}"
 					changefreq: "monthly"
 					priority: 0.5
 				return

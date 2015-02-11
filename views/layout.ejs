@@ -15,7 +15,7 @@
       "pascalprecht.translate",
       "ngMaterial",
       <% if (!session.auth) {%>
-      "login"
+      "login",
       <%}%>
     ];</script>
 
@@ -23,13 +23,13 @@
     <%- meta("description", sails.config.app.description) %>
     <%- meta("keywords", sails.config.app.keywords) %>
 
+
     <%- style("/styles/importer.css") %>
     <%- script("/js/dependencies/jquery.min.js") %>
     <%- script("/stagging/semantic/modules/transition.min.js") %>
     <%- script("/stagging/semantic/modules/sidebar.min.js") %>
-    
-    <%- script("/libs/angular/angular.js") %>
 
+    <%- script("/libs/angular/angular.js") %>
     <%- partial("partials/angular-capitalize.ejs") %>
     <%- partial("partials/angular-translate.ejs") %>
     <%- partial("partials/angular-material.ejs") %>
@@ -44,7 +44,7 @@
     <% "body content" %>
     <%- partial("partials/sidebar.left.ejs") %>
     <% if (!session.auth) {%>
-    <%- partial("partials/sidebar.top.login.ejs")  %>
+    <%- partial("partials/sidebar.top.login.ejs") %>
     <%}%>
     <div class="pusher">
       <%- body %>
