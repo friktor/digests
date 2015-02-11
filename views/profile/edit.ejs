@@ -1,0 +1,212 @@
+<script>
+window.sessionUsername = "<%= session.user.username %>";
+window.username = "<%= user.username %>";
+window.userId = "<%= user.id %>";
+window.editPostNumericId = "<%= post.numericId %>";
+window.editPostId = "<%= post.id %>";
+window.usingModule.push(
+	"angularFileUpload",
+	"textAngular",
+	"ngTagsInput"
+);
+</script>
+<%- style("/base16/base16-default.light.css") %>
+
+<%- style("/libs/textAngular/src/textAngular.css") %>
+<%- script("/libs/textAngular/dist/textAngular-rangy.min.js") %>
+<%- script("/libs/textAngular/dist/textAngular-sanitize.min.js") %>
+<%- script("/libs/textAngular/src/textAngular.js") %>
+
+<%- style("/libs/ng-tags-input/ng-tags-input.css") %>
+<%- script("/libs/ng-tags-input/ng-tags-input.js") %>
+
+<%- script("/libs/highlightjs/highlight.pack.js") %>
+<%- script("//cdn.jsdelivr.net/remarkable/1.6.0/remarkable.min.js") %>
+<%- script("/stagging/semantic/modules/dropdown.min.js") %>
+
+<%- script("/libs/ng-file-upload/angular-file-upload.js") %>
+<%- script("/libs/async/lib/async.js") %>
+<%- script("/js/app/editPostApp.js") %>
+
+<div ng-controller="EditPost" class="page addpost">
+	<%- partial("../partials/menu.ejs") %>
+
+	<div class="ui basic segment">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<div class="ui segment formAddPost">
+
+					<div class="row headerImageLoad" ng-show="!successCreatePost">
+						<div class="col-md-3 col-sm-4 col-xs-12">
+							<h3 class="ui header">
+								{{ 'Header post' | translate | capitalize:'first'}}
+								<div class="sub header">
+									{{ 'image file' | translate | capitalize:'first'}}
+								</div>
+							</h3>
+							<md-radio-group ng-model="headerImgType">
+								<md-radio-button value="link">{{ 'from link' | translate | capitalize:'first'}}</md-radio-button>
+								<md-radio-button value="upload">{{ 'upload file' | translate | capitalize:'first'}}</md-radio-button>
+							</md-radio-group>
+						</div>
+						<div class="col-md-9 col-sm-8 col-xs-12">
+							<div ng-show="isShowSetHeader('link')" class="downloadImage">
+								<md-input-container>
+									<label><i class="fa fa-link"></i> {{ 'link to target image' | translate | capitalize:'first'}}</label>
+									<input ng-model="headerImageLink" type="url">
+									<div ng-show="headerImageLink" class="drop zone">
+										<img src="{{headerImageLink}}">
+									</div>
+								</md-input-container>
+								<ng-include src="'/partials/elements/terms-upload-header.html'"></ng-include>
+							</div>
+
+							<div ng-show="isShowSetHeader('upload')" class="uploadImage">
+								<div	ng-file-drop 
+											drag-over-class="dragover" 
+											ng-model="postHeaderImage" 
+											allow-dir="false" 
+											multiple="false" 
+											class="drop zone">
+								
+									<p ng-show="!thumbnail">{{ '* - drop image here. Allow format - jpg, png.'}}</p>
+									<p ng-show="!thumbnail">{{ '* - max size of 2000kb'}}</p>
+
+									<img ng-show="thumbnail" src="{{thumbnail}}">
+							
+									<md-button ng-file-select ng-model="postHeaderImage" multiple="false">
+										<span>
+											<i class="fa fa-file-image-o"></i>
+											{{ 'select file'| translate}}
+										</span>
+									</md-button>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div ng-show="!successCreatePost" class="ui divider"></div>
+
+					<form name="postForm" class="visual form" novalidate>
+
+						<div class="ui input fluid" ng-show="!successCreatePost">
+							<input type="text" 
+								ng-model="postTitle" maxlength="120" 
+								placeholder="{{ 'title of your post' | translate | capitalize:'first' }}" 
+								required
+							>
+						</div>
+
+						<div ng-show="!successCreatePost" layout="row" layout-sm="column" layout-align="center center">
+								
+								<md-switch 
+									ng-true-value="'html (visual edit)'" 
+									aria-label="Markup langulage" 
+									ng-false-value="'markdown'" 
+									ng-model="markLang" 
+									class="md-warn"
+								>
+									{{ 'markup langulage' | translate |capitalize:'first'}}: {{ markLang }}
+								</md-switch>
+								
+								<md-switch 
+									ng-init="showMarkdownPreview = false;" 
+									ng-show="setMarkupLang('markdown')" 
+									ng-model="showMarkdownPreview" 
+									aria-label="Show Preview" 
+									class="md-primary"
+								>
+									{{ 'show preview' | translate |capitalize:'first'}}: {{ showMarkdownPreview }}
+								</md-switch>
+
+								<div class="ui selection dropdown">
+										<input name="locale" type="hidden">
+										<div class="default text">{{ 'language' | translate | capitalize:'all'}}</div>
+										<i class="dropdown icon"></i>
+										<div class="menu">
+											<div class="item" data-value="ru">{{ 'russian' | translate | capitalize:'all'}}</div>
+											<div class="item" data-value="en">{{ 'english' | translate | capitalize:'all'}}</div>
+											<div class="item" data-value="pl">{{ 'polish'  | translate | capitalize:'all'}}</div>
+										</div>
+								</div>
+						</div>
+	
+						<text-angular
+							ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"
+							ng-show="setMarkupLang('html (visual edit)') && !successCreatePost" 
+							ng-model="postContent" 
+						></text-angular>
+						
+						<p ng-show="setMarkupLang('markdown') && showMarkdownPreview && !successCreatePost" class="previewText">{{ 'this a preview area' | translate | capitalize:'first'}}</p>
+						<div class="ui segment" ng-show="setMarkupLang('markdown') && showMarkdownPreview && !successCreatePost" ng-bind-html="$previewMarkdown"></div>
+
+						<textarea ng-show="setMarkupLang('markdown') && !successCreatePost" 
+											class="ui textarea" ng-model="postContent" 
+											placeholder="{{ 'enter your post here' | translate | capitalize:'all'}}"
+											ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"
+						></textarea>
+
+						<tags-input ng-show="!successCreatePost" ng-model="habs" 
+							placeholder="{{ 'add habs here' | translate | capitalize:'first'}}"
+							add-from-autocomplete-only="true"
+							display-property="name"
+						>
+							<auto-complete source="loadHabs($query)"></auto-complete>
+						</tags-input>
+
+						<tags-input 
+							placeholder="{{ 'enter tags here' | translate | capitalize:'first'}}"
+							ng-show="!successCreatePost" 
+							ng-model="tags" 
+						>
+						</tags-input>
+
+						<div class="text center actionsBtn">
+							
+							<div class="ui segment messagePost" ng-show="successCreatePost" style="min-height: auto !important;">
+								{{ 'update exists post success' | translate | capitalize:'first'}}
+								<div class="ui basic segment text center" style="min-height: auto !important;">
+									<img src="/images/icons/cat_laptop.png" alt="" style="height: 120px;">
+								</div>
+								<div ng-show="UploadResult">
+									{{ 'upload header image for post complete success!' | translate | capitalize:'first'}}
+								</div>
+								<div ng-show="startUploadheaderImage && !UploadResult" class="ui basic segment" style="min-height: auto !important;">
+									{{ 'start uploading image...' | translate | capitalize:'first'}}
+									<div ng-show="headerImgType === 'link'" layout="row" layout-sm="column" layout-align="space-around">
+										<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+									</div>
+									<div ng-show="headerImgType === 'upload'" layout="row" layout-sm="column" layout-align="space-around">
+										<md-progress-linear 
+											md-buffer-value="{{headerUploadProgress+4}}"
+											value="{{headerUploadProgress}}" 
+											md-mode="buffer" 
+											class="md-warn" 
+										>
+									</div>
+								</div>
+							</div>
+
+
+
+							<md-button ng-hide="successCreatePost" ng-click="postForm.$valid && submit()">
+								{{ 'publish' | translate}}
+							</md-button>
+							<md-button href="{{ linkToPost }}" class="md-warn" ng-show="successCreatePost">
+								{{ 'post page' | translate}}
+							</md-button>	
+						</div>
+
+					</form>
+				</div>
+			</div>
+			<div class="col-md-2">
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<%- partial("../partials/footer.ejs") %>
