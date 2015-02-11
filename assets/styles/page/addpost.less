@@ -1,0 +1,139 @@
+.page.addpost {
+	.row {
+		margin: 0 !important;
+	}
+	md-radio-group {
+		border: none;
+	}
+
+	.animate-enter {
+  	-webkit-animation-name: slideOut;
+  	animation-name: slideOut;
+  	-webkit-transform-origin: 50% 100%;
+  	-ms-transform-origin: 50% 100%;
+  	transform-origin: 50% 100%;
+	}
+	 
+	.animate-enter.animate-enter-active {
+  	-webkit-animation-name: slideIn;
+  	animation-name: slideIn;
+  	-webkit-transform-origin: 50% 100%;
+  	-ms-transform-origin: 50% 100%;
+  	transform-origin: 50% 100%;
+	}
+
+	.ui.segment.formAddPost	{
+		.material-shadow();
+		border-radius: 1px;
+		background: #FFF;
+
+		.row.headerImageLoad {
+			.ui.header {
+				color: rgba(0, 0, 0, 0.87);
+				margin-left: 15px;
+				font-weight: 500;
+				.sub.header {
+					color: rgba(0, 0, 0, 0.4);
+					font-size: 13px;
+				}
+			}
+
+			md-input-container.md-default-theme label, md-input-container.md-default-theme .md-placeholder {
+				color: rgba(0, 0, 0, 0.75);
+			}
+		
+			md-input-container.md-default-theme .md-input {
+				border-color: rgba(0, 0, 0, 0.4);
+			}
+
+			md-input-container.md-default-theme.md-input-invalid label {
+			    color: #F44336 !important;
+			}
+
+			md-input-container.md-default-theme.md-input-invalid .md-input {
+			    border-color: #F44336 !important;
+			}
+			
+			img {
+				display: inline-block;
+				max-width: 100%;
+			}
+		}
+
+
+		.visual.form {
+
+			.actionsBtn {
+				margin-top: 1.2rem;
+			}
+
+			.ui.input > input, .ui.segment {
+				border-radius: 0;
+			}
+
+			.ui.input {
+				input.ng-invalid.ng-dirty {
+					border: 1px solid #F44336;
+				}
+			}
+
+			.previewText {
+				font-style: italic; 
+				margin-bottom: 0px;
+				font-size: 13px; 
+				color: #666; 
+			}
+
+			.ui.segment {
+				padding-top: 0.5rem !important;
+				.content_Header();
+				min-height: 240px;
+				margin-top: 7px;
+				&.messagePost {
+					padding-top: 14px !important;
+					min-height: auto !important;
+					text-transform: uppercase;
+					font-weight: 500;
+				}
+			}
+
+			.ui.textarea {
+				background: rgba(0,0,0,0.001);
+				margin-top: 1.1rem;
+				border-radius: 0;
+				display: block;
+				width: 100%;
+
+				margin-top: 6px;
+			}
+
+			.btn-toolbar {
+				text-align: center;
+			}
+
+			.ui.buttons {
+				border-radius: 0;
+				margin-top: 12px;
+			}
+
+		}
+	}
+}
+
+@media screen and (max-width: 769px) {
+	.page.addpost {
+		.downloadImage {
+			text-align: center;
+			md-input-container {
+				text-align: left;
+			}
+			span {
+				font-size: 13px !important;
+			}
+			img {
+				height: 40px;
+				width: 40px;
+			}
+		}
+	}
+}

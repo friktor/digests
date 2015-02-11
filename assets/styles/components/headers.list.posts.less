@@ -1,0 +1,79 @@
+.posts.list.header {
+
+	header {
+		
+		overflow-y: hidden;
+		position: relative;
+		height: 60px;
+		
+		.ui.menu {
+			background-image: url("/images/backgrounds/latest.header.menu.bg.jpg");
+			background-size: 1600px auto;
+
+			text-align: left;
+			.brand {
+				color: #FFF;
+			}
+
+			a.item, div.item {
+				opacity: 1 !important;
+				color: #FFF;
+
+				.ui.button {
+					box-shadow: none;
+				}
+			}
+		}
+	}
+
+	&.latest, .blured.menu.bg {
+		background-image: url("/images/backgrounds/latest.header.bg.jpg");
+		background-repeat: no-repeat;
+		background-size: 1600px auto;
+	}
+
+	margin-bottom: 1.5rem;
+	height: 300px;
+
+	text-align: center;
+
+	h2 {
+		margin-top: 2.6rem;
+
+		text-shadow: 0 0 2px black;
+		text-transform: uppercase;
+		color: #fff !important;
+		display: inline-block;
+		font-weight: 500;
+	}
+
+	p {
+		text-shadow: 0 0 2px black;
+		color: #FFF !important;
+		font-weight: 400;
+		font-size: 14px;
+
+		margin-bottom: 1rem;
+	}
+
+	.ui.button.basic {
+		border: 1px solid rgba(255, 255, 255, 0.6);
+		color: #FFF !important;
+		font-size: 18px;
+		padding: 0.5rem;
+
+		i {
+			text-shadow: 0 0 2px black;
+			opacity: 1 !important;
+		}
+
+		&:hover {
+			background: transparent !important;
+			color: #FFF !important;
+		}
+
+		&:active {
+			background: rgba(255, 255, 255, 0.5) !important;
+		}
+	}
+}
