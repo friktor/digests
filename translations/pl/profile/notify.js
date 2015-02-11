@@ -1,0 +1,3 @@
+module.exports = {
+	"Warning! You have not activated your account via email. If you want to use all the features of the service - you need to activate your account via the link in the email sent to your email. If after 24 hours you do not activate your account - it will be removed.": "Ostrzeżenie! Nie aktywacji konta poprzez e-mail. Jeśli chcesz korzystać ze wszystkich funkcji serwisu - musisz aktywować swoje konto na link w wiadomości e-mail wysłany do Ciebie e-mail. Jeśli po 24 godzinach nie aktywujesz konta - zostanie on usunięty.",
+};

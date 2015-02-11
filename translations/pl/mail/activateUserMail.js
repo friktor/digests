@@ -1,0 +1,3 @@
+module.exports = {
+	"Welcome to our website {{firstname}} {{lastname}}! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link.": "Witamy na naszej stronie internetowej {{firstname}} {{lastname}}! Aby w pełni korzystać z konta, musisz zweryfikować swój adres e-mail. W ten sposób można aktywować konto - i być w stanie korzystać z pełnej funkcjonalności. Aby to zrobić, kliknij na odpowiedni link.",
+};
