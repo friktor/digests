@@ -3,47 +3,60 @@
  # @description :: TODO: You might write a short summary of how this model works and what it represents here.
  # @docs				:: http://sailsjs.org/#!documentation/models
 
+translit = require('transliteration')
+
 Hab =
 
 	attributes:
 
+		# @HeadingImg: "array".
+		# assiciations
 		headingImg:
-		  type: "string"
-		  required: true
+		  collection: "file"
+		  via: "projectImage"
 	
+		
+		# @Name: "array".
+		# Example: [{ locale: '$locale', name: '$name'}]
 		name: 
-			type: "array", # [{locale: "en", name: "Programming"}, {locale: "ru", name: "Программирование"}...]
 			required: true
+			type: "array"
 	
+		
+		# @Description: "array". 
+		# Example: [{ locale: '$locale', desc: '$description' }]
 		description: 
-			type: "array" # [{locale: "en", desc: "Test description"}, {locale: "ru", desc: "Тестовое описание"}]
 			required: true
+			type: "array"
 	
-		tags:
-			type: "array" # Example: ["tag1", "tag2"] 
-			required: true
-			defaultsTo: []
+		
+		# @Tags: "string". 
+		# Example "tag1, tag2, tag3"
+		tags: "string"
 	
-		subscribers: 
-			type: "array" 
-			defaultsTo: [] # Example: ["_uuid", etc....]
+		
+		# @Type: "string". 
+		# Variations: global or locale.
+		type:
+			defaultsTo: "local"
+			type: "string"
+
+		
+		# @Project "boolean".
+		# type habs 
+		project:
+			type: "boolean"
+			defaultsTo: false
+
 
 	beforeCreate: ($Hab, next) ->
 		# find name on english
 		en = _.find $Hab.name, "locale": "en"
 
 		# If find = set translit version from en name
-		if en
-			$Hab.translitName = en.name
-		else
-			# else - set name from transit name version any lang
-			$Hab.translitName = require('transliteration')( 
+		if en then $Hab.translitName = en.name else $Hab.translitName = translit((_.first $Hab.name).name)
 
-				(_.first($Hab.name)).name 
-			)
-
-		next()
-		
-		
+		# Callback
+		next()		
 
 module.exports = Hab;

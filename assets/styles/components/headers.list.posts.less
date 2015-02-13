@@ -7,7 +7,6 @@
 		height: 60px;
 		
 		.ui.menu {
-			background-image: url("/images/backgrounds/latest.header.menu.bg.jpg");
 			background-size: 1600px auto;
 
 			text-align: left;
@@ -30,8 +29,27 @@
 		background-image: url("/images/backgrounds/latest.header.bg.jpg");
 		background-repeat: no-repeat;
 		background-size: 1600px auto;
+
+		.ui.menu {
+			background-image: url("/images/backgrounds/latest.header.menu.bg.jpg");
+		}
 	}
 
+	&.popular, .blured.menu.bg {
+		background-image: url("/images/backgrounds/popular.header.bg.jpg");
+		background-repeat: no-repeat;
+		background-size: 1600px auto;
+
+		.ui.menu {
+			background-image: url("/images/backgrounds/popular.header.menu.bg.jpg");
+			div.item {
+				.ui.button {
+					i {text-shadow: none !important;}
+				}
+			}
+		}		
+	}
+ 
 	margin-bottom: 1.5rem;
 	height: 300px;
 

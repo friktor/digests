@@ -56,7 +56,7 @@ module.exports = (req, res) ->
 			# Async rendered content. And cut content to sinopsis
 			async.map posts, common.renderPost, (error, renderedPosts) ->
 				completed =
-					title: req.__("Popular posts") + "⚫ Digests.me ⚫" + req.__("%s page", page)
+					title: req.__("Popular") + " ⚫ Digests.me ⚫ " + req.__("%s page", page)
 					posts: renderedPosts
 					page: page
 

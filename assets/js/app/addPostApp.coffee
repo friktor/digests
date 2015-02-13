@@ -29,8 +29,8 @@
 
 	]
 
-	App.controller "AddPost", ["$scope", "$http", "$upload", "$log", "$timeout",
-		($scope, $http, $upload, $log, $timeout) ->
+	App.controller "AddPost", ["$scope", "$http", "$upload", "$log", "$timeout", "$translate",
+		($scope, $http, $upload, $log, $timeout, $translate) ->
 
 			$scope.markdown = new Remarkable "full",
 				langPrefix: "language-"

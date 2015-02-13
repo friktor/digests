@@ -38,10 +38,10 @@ module.exports =
 
 			.then((posts) ->
 				Constructor =
-					description: sails.__ {phrase: "RSS Feed «New» in the World Digest", locale: locale}
-					title: sails.__ {phrase: "Newest posts. World Digests", locale: locale}
-					feed_url: "http://localhost:9000/rss/newest.xml"
-					site_url: "http://localhost:9000/"
+					description: sails.__ {phrase: "RSS Feed «New» in the Digests", locale: locale}
+					title: sails.__ {phrase: "Newest posts. Digests", locale: locale}
+					feed_url: "http://digests.me/rss/newest.xml"
+					site_url: "http://digests.me/"
 					webMaster: "Anton Shramko"
 					language: locale
 
@@ -51,7 +51,7 @@ module.exports =
 					description = toPlainText post.content.substr(0, 250)+"..."
 	
 					Feed.item
-						url: "http://localhost:9000/details/#{post.id}"
+						url: "http://digests.me/details/#{post.numericId}"
 						description: description
 						date: post.createdAt
 						title: post.title
@@ -92,9 +92,9 @@ module.exports =
 		.spread((user, posts) ->
 			Constructor = 
 				description: i18n.__ "Personal RSS with posts by %s %s", user.firstname, user.lastname
-				feed_url: "http://localhost:9000/rss/author/#{user.username}.xml?locale=#{locale}"
+				feed_url: "http://digests.me/rss/author/#{user.username}.xml?locale=#{locale}"
 				title: i18n.__ "RSS feed by user %s", user.username
-				site_url: "http://localhost:9000/"
+				site_url: "http://digests.me/"
 				webMaster: "Anton Shramko"
 
 			Feed = new RSS(Constructor)
@@ -103,7 +103,7 @@ module.exports =
 				description = toPlainText post.content.substr(0, 250)+"..."
 
 				Feed.item
-					url: "http://localhost:9000/details/#{post.id}"
+					url: "http://digests.me/details/#{post.numericId}"
 					author: "#{user.firstname} #{user.lastname}"
 					description: description
 					date: post.createdAt
@@ -142,8 +142,8 @@ module.exports =
 				Constructor =
 					title: i18n.name
 					description: i18n.desc
-					feed_url: "http://localhost:9000/rss/hab/#{hab.translitName}/#{locale}.xml"
-					site_url: "http://localhost:9000/"
+					feed_url: "http://digests.me/rss/hab/#{hab.translitName}/#{locale}.xml"
+					site_url: "http://digests.me/"
 					webMaster: "Anton Shramko"
 					language: locale
 
@@ -166,7 +166,7 @@ module.exports =
 				description = toPlainText post.content.substr(0, 250)+"..."
 
 				Feed.item
-					url: "http://localhost:9000/details/#{post.id}"
+					url: "http://digests.me/details/#{post.numericId}"
 					description: description
 					date: post.createdAt
 					title: post.title

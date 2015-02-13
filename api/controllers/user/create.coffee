@@ -13,9 +13,9 @@
 require "coffee-script/register"
 
 # dependencies
-Promise = require "blurbird"
+Promise = require "bluebird"
 request = Promise.promisify(require("request").post)
-readFile = Prmise.promisify(require("fs").readFile)
+readFile = Promise.promisify(require("fs").readFile)
 nodemailer = require "nodemailer"
 
 # Errors Handler

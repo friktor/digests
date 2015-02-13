@@ -52,14 +52,7 @@
 					</div>
 					
 					<div class="text center">
-						<div 
-							data-description="<%= xss("" + (post.content.substr(0, 250)) + "...", {stripIgnoreTagBody: ['script'],stripIgnoreTag: true,whiteList: []}) %>" 
-							data-title="<%= post.title %>" 
-							data-url="http://digests.me/<%= post.numericId %>" 
-							class="pluso" data-background="#ebebeb" 
-							data-options="medium,round,line,horizontal,counter,theme=04" 
-							data-services="vkontakte,facebook,twitter,google,email"
-						></div>
+						<div data-description="<%= xss("" + (post.content.substr(0, 250)) + "...", {stripIgnoreTagBody: ['script'],stripIgnoreTag: true,whiteList: []}) %>" data-title="<%= post.title %>" data-url="http://digests.me/<%= post.numericId %>" class="pluso" data-background="#ebebeb" data-options="medium,round,line,horizontal,counter,theme=04" data-services="vkontakte,facebook,twitter,google,email"></div>
 					</div>
 
 					<main class="post content">
@@ -76,8 +69,8 @@
 								</div>
 								<div class="col-md-6 text right">
 									<a href="/profile/<%= author.username %>" class="ui avatar image">
-									<% var avatarImg = _.find(session.user.avatarImg, {"restrict": "preview"}); %>
-									<img src="<% if (session.user.avatarImg.length>0) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
+									<% var authorAvatarImg = _.find(author.avatarImg, {"restrict": "preview"}); %>
+									<img src="<% if (authorAvatarImg) {%><%= authorAvatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
 									</a>
 									<a href="/profile/<%= author.username %>">
 										<%= author.firstname %> <%= author.lastname %>

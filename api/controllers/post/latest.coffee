@@ -52,7 +52,7 @@ module.exports = (req, res, next) ->
 			async.map posts, common.renderPost, (error, renderedPosts) ->
 				# Copleted array with rendered posts. Title & page & posts
 				completed =
-					title: req.__("Newest Posts") + "● Digests.me ●" + req.__("%s page", page)
+					title: req.__("Latest") + " ⚫ Digests.me ⚫ " + req.__("%s page", page)
 					posts: renderedPosts
 					locale: locale
 					page: page
@@ -70,5 +70,5 @@ module.exports = (req, res, next) ->
 	)
 
 	.caught (error) ->
-		sails.log.error
+		sails.log.error error
 		res.serverError()

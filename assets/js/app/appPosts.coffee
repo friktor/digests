@@ -25,12 +25,16 @@
 			$scope.posts = []
 	
 			$scope.loadPosts = ->
-				$http.get($scope.locationPage+"/"+($scope.page+1)+"?ajax=true#{if window.locale isnt "ru" then ("&locale="+window.locale)}")
+				$getlocale = "?locale=#{window.locale}"
+				$getDatUrl = $scope.locationPage+"/"+($scope.page+1)+"#{$getlocale}&ajax=true"
+
+				$http.get($getDatUrl)
 	
-				.success((response) ->
+				.success((response) ->					
+					window.history.pushState {}, $("title").text(), $scope.locationPage+"/"+($scope.page+1)+$getlocale
+					$scope.posts = $scope.posts.concat(response.posts)
+					
 					$("title").text(response.title)
-					window.history.pushState {}, $("title").text(), $scope.locationPage+"/"+($scope.page+1)+"#{if window.locale isnt "ru" then ("?locale="+window.locale)}"
-					$scope.posts = $.merge($scope.posts, response.posts)
 					$scope.page += 1
 					return
 				)

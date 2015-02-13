@@ -15,7 +15,7 @@ module.exports = (req, res) ->
 
 	.then((user) ->
 		res.view
-			title: req.__("Add new post")+" ● Digests.me"
+			title: req.__("Add new post")+" ⚫ Digests.me"
 			user: user
 	)
 

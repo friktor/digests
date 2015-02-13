@@ -5,14 +5,33 @@
 
 	window.thisPage = <%= page %>;
 	window.postsPage = "/popular";
+	window.locale = "<%= locale %>";
 </script>
+
+<%- script("/libs/lodash/lodash.js") %>
+<%- script("/stagging/semantic/modules/dropdown.min.js") %>
 
 <%- script("/libs/ng-lazyload/nglazyload.js") %>
 <%- script("/js/app/appPosts.js", "defer") %>
-<%- partial("../partials/menu.ejs") %>
 
-<div class="posts list header">
+<div class="posts list header popular">
+	<%- partial("../partials/menu.ejs") %>
+	
+	<h2> {{ 'tape posts «Popular»' | translate | capitalize:'first' }}</h2>
+	<p> {{ 'in this tape contains all the most popular records of all users.' | translate | capitalize:'first' }}</p>
+	
+	<div class="ui icon top left pointing dropdown basic button">
+		<i class="world icon"></i> 
+		<div class="menu">
+			<a href="?locale=ru" class="item">{{ 'russian' | translate | capitalize:'all'}}</a>
+			<a href="?locale=en" class="item">{{ 'english' | translate | capitalize:'all'}}</a>
+			<a href="?locale=pl" class="item">{{ 'polish'	 | translate | capitalize:'all'}}</a>
+		</div>	
+	</div>
 
+	<a href="/rss/popular.<%= (locale !== "ru" ? locale : "ru") %>.xml" class="ui icon top left pointing basic button">
+		<i class="feed icon"></i>
+	</a>
 </div>
 
 <div class="posts lists main" ng-controller="PostsCtrl">

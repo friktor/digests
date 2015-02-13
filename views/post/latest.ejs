@@ -8,6 +8,7 @@
 	window.locale = "<%= locale %>";
 </script>
 
+<%- script("/libs/lodash/lodash.js") %>
 <%- script("/stagging/semantic/modules/dropdown.min.js") %>
 
 <%- script("/libs/ng-lazyload/nglazyload.js") %>
@@ -17,8 +18,8 @@
 <div class="posts list header latest">
 	<%- partial("../partials/menu.ejs") %>
 	
-	<h2><%= __("Tape posts «Latests»") %></h2>
-	<p><%= __("In this tape contains all the most recent records of all users.") %></p>
+	<h2> {{ 'tape posts «Latests»' | translate | capitalize:'first'}}</h2>
+	<p> {{ 'in this tape contains all the most recent records of all users.' | translate | capitalize:'first'}}</p>
 	
 	<div class="ui icon top left pointing dropdown basic button">
 		<i class="world icon"></i> 
@@ -29,7 +30,7 @@
 		</div>	
 	</div>
 
-	<a href="/newest.<%= (locale !== "ru" ? locale : "ru") %>.xml" class="ui icon top left pointing basic button">
+	<a href="/rss/newest.<%= (locale !== "ru" ? locale : "ru") %>.xml" class="ui icon top left pointing basic button">
 		<i class="feed icon"></i>
 	</a>
 </div>
@@ -42,10 +43,10 @@
 			<!-- End -->
 			
 			<!-- Client rendered post in posts -->
-			<div masonry-brick ng-repeat="post in posts" class="col-lg-3 col-md-3 col-sm-6 col-sm-12 masonry-brick">
+			<div masonry-brick ng-repeat="post in posts | orderBy: '-createdAt' " class="col-lg-3 col-md-3 col-sm-6 col-sm-12 masonry-brick">
 				<div class="post">		
-					<a ng-show="post.headerImg" class="heading image" href="/details/{{post.numericId}}">
-						<img post-img ng-src="{{ post.headerImg }}" alt="">
+					<a ng-show="post.previewImage" class="heading image" href="/details/{{post.numericId}}">
+						<img post-img ng-src="{{ post.previewImage }}" alt="">
 					</a> 	
 					<!-- Post title link -->
 					<div class="title">

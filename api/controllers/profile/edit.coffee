@@ -58,7 +58,7 @@ module.exports = (req, res) ->
 					res.json _object
 				else
 					res.view _.merge _object,
-						title: req.__("Edit post “%s” by %s %s", post.title, user.firstname, user.lastname)+" ● Digests.me"
+						title: req.__("Edit post “%s” by %s %s", post.title, user.firstname, user.lastname)+" ⚫ Digests.me"
 	)
 
 	.caught(notExists, (e) ->

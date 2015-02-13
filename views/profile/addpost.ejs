@@ -5,7 +5,8 @@ window.userId = "<%= user.id %>";
 window.usingModule.push(
 	"angularFileUpload",
 	"textAngular",
-	"ngTagsInput"
+	"ngTagsInput",
+	"ngAnimate"
 );
 </script>
 <%- style("/base16/base16-default.light.css") %>
@@ -37,7 +38,7 @@ window.usingModule.push(
 					<div class="row headerImageLoad" ng-show="!successCreatePost">
 						<div class="col-md-3 col-sm-4 col-xs-12">
 							<h3 class="ui header">
-								{{ 'Header post' | translate | capitalize:'first'}}
+								{{ 'header post' | translate | capitalize:'first'}}
 								<div class="sub header">
 									{{ 'image file' | translate | capitalize:'first'}}
 								</div>
@@ -67,8 +68,8 @@ window.usingModule.push(
 											multiple="false" 
 											class="drop zone">
 								
-									<p ng-show="!thumbnail">{{ '* - drop image here. Allow format - jpg, png.'}}</p>
-									<p ng-show="!thumbnail">{{ '* - max size of 2000kb'}}</p>
+									<p ng-show="!thumbnail">{{ '* - drop image here. Allow format - jpg, png.' | translate}}</p>
+									<p ng-show="!thumbnail">{{ '* - max size of 2000kb' | translate}}</p>
 
 									<img ng-show="thumbnail" src="{{thumbnail}}">
 							
@@ -115,7 +116,7 @@ window.usingModule.push(
 									aria-label="Show Preview" 
 									class="md-primary"
 								>
-									{{ 'show preview' | translate |capitalize:'first'}}: {{ showMarkdownPreview }}
+									{{ 'show preview' | translate |capitalize:'first'}}: {{ showMarkdownPreview | translate }}
 								</md-switch>
 
 								<div class="ui selection dropdown">
@@ -145,16 +146,18 @@ window.usingModule.push(
 											ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"
 						></textarea>
 
+						<p ng-show="!successCreatePost"  style="margin-top: 10px; margin-bottom: 5px; font-style: italic; color: #666;">{{ 'add habs here' | translate | capitalize:'first'}}</p>
 						<tags-input ng-show="!successCreatePost" ng-model="habs" 
-							placeholder="{{ 'add habs here' | translate | capitalize:'first'}}"
+							placeholder="{{ '...' }}"
 							add-from-autocomplete-only="true"
 							display-property="name"
 						>
 							<auto-complete source="loadHabs($query)"></auto-complete>
 						</tags-input>
 
+						<p ng-show="!successCreatePost"  style="margin-top: 10px; margin-bottom: 5px; font-style: italic; color: #666;">{{ 'enter tags here' | translate | capitalize:'first'}}</p>
 						<tags-input 
-							placeholder="{{ 'enter tags here' | translate | capitalize:'first'}}"
+							placeholder="{{ '...' }}"
 							ng-show="!successCreatePost" 
 							ng-model="tags" 
 						>

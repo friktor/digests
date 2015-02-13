@@ -4,10 +4,10 @@
     <div class="ui heading unauth">
       <div class="ui vertical buttons">
         <a href="/login" class="ui button green">
-          <%= __("Login") %>
+          {{ 'login' | translate | capitalize:'first'}}
         </a>
         <a href="/register" class="ui button blue">
-          <%= __("Register") %>
+          {{ 'register' | translate | capitalize:'first'}}
         </a>
       </div>
     </div>
@@ -15,7 +15,7 @@
     <div class="ui heading auth" style="background: url(<% if (session.user.headingImg.length > 0) {%><%= (_.find(session.user.headingImg, {"restrict": "sidebar"})).link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;">
       <div class="ui avatar">
         <% var avatarImg = _.find(session.user.avatarImg, {"restrict": "preview"}); %>
-        <img src="<% if (session.user.avatarImg.length > 0) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="" class="ui image circular">
+        <img src="<% if (avatarImg) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="" class="ui image circular">
       </div>
       <div class="ui panel profile">
         <img src="<% if (session.user.headingImg) {%><%= session.user.headingImg.link %><%} else {%>/images/profile.jpg<%};%>" alt="">
@@ -32,36 +32,36 @@
   <div class="ui list ">
     <% if (session.auth && session.user) {%>
     <a href="/profile/<%= session.user.username %>/addpost" class="item">
-      <i class="fa fa-plus"></i> <%= __("Add new post") %>
+      <i class="fa fa-plus"></i> {{ 'add new post' | translate | capitalize:'first' }}
     </a>
 
     <a href="/profile/<%= session.user.username %>" class="item">
-      <i class="fa fa-user"></i> <%= __("My profile") %>
+      <i class="fa fa-user"></i> {{ 'my profile' | translate | capitalize:'first' }}
     </a>
 
     <a href="/profile/<%= session.user.username %>/subscribes" class="item">
-      <i class="fa fa-bookmark"></i> <%= __("My subscriptions") %>
+      <i class="fa fa-bookmark"></i> {{ 'my subscriptions' | translate | capitalize:'first' }}
     </a>
     <%};%>
     
     <a href="/authors" class="item">
-     <i class="fa fa-users"></i> <%= __("popular authors") %>
+     <i class="fa fa-users"></i> {{ 'popular authors' | translate | capitalize:'first' }}
     </a>
     
     <a href="/popular" class="item">
-     <i class="fa fa-newspaper-o"></i> <%= __("popular posts") %>
+     <i class="fa fa-newspaper-o"></i> {{ 'popular posts' | translate | capitalize:'first' }}
     </a>
     
     <a href="/latest" class="item">
-     <i class="fa fa-newspaper-o"></i> <%= __("latest posts") %>
+     <i class="fa fa-newspaper-o"></i> {{ 'latest posts' | translate | capitalize:'first' }}
     </a>
     
     <a href="/projects" class="item">
-     <i class="fa fa-flask"></i> <%= __("projects") %>
+     <i class="fa fa-flask"></i> {{ 'projects' | translate | capitalize:'first' }}
     </a>
     
     <a href="/habs" class="item">
-     <i class="fa fa-lightbulb-o"></i> <%= __("habs") %>
+     <i class="fa fa-lightbulb-o"></i> {{ 'habs' | translate | capitalize:'first' }}
     </a>
     
     <a href="/faq" class="item">
@@ -69,17 +69,17 @@
     </a>
     
     <a href="mailto:info@digests.me" class="item">
-      <i class="fa fa-at"></i> <%= __("feedback") %>
+      <i class="fa fa-at"></i> {{ 'feedback' | translate | capitalize:'first' }}
     </a>
     
     <a href="/about" class="item">
-     <i class="fa fa-map-marker"></i> <%= __("about us") %>
+     <i class="fa fa-map-marker"></i> {{ 'about us' | translate | capitalize:'first' }}
     </a>
 
     <% if (session.auth && session.user) {%>
     <a href="/logout" class="item">
       <i class="fa fa-power-off"></i>
-      <%= __("Logout") %>
+      {{ 'logout' | translate | capitalize:'first' }}
     </a>
     <% } %>
   </div>

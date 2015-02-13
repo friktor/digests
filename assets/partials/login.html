@@ -1,7 +1,7 @@
 <form name="LoginForm" class="login form" novalidate>
 	<h4 class="ui header">
 		<!-- Login -->
-		{{ 'Login' | translate}}
+		{{ 'login' | translate | capitalize:'all'}}
 		<div class="sub header">
 			<!-- Auth on Digests.me -->
 			{{ 'Auth on Digests.me' | translate}}
@@ -27,8 +27,8 @@
 	</div>
 
 	<div class="text center">
-		<md-button ng-click="LoginForm.$valid && LoginCtrl.Auth(LoginCtrl.formData)" md-theme="cyan">
-			{{ 'Login' | translate }}
+		<md-button class="submit" ng-click="LoginForm.$valid && LoginCtrl.Auth(LoginCtrl.formData)" md-theme="cyan">
+			{{ 'login' | translate | capitalize:'all'}}
 		</md-button>
 	</div>
 </form>

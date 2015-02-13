@@ -43,13 +43,19 @@ module.exports =
 	# @Async rendered post content using markdown
 	renderPost: (post, cb) ->		
 		renderedContent = markdown.render(post.content)
+		previewImage = _.find post.headerImg, "restrict": "preview"
 
 		contentPlainText = xss "#{renderedContent.substr(0, 250)}...",
 			stripIgnoreTagBody: ['script']
 			stripIgnoreTag: true
 			whiteList: []
-		
-		post = _.merge post, content: contentPlainText
+
+		post = _.merge post,
+			headerImg: false
+			content: contentPlainText
+			previewImage: if previewImage then previewImage.link else false
+
+		delete post.headerImg
 
 		cb null, post
 		return

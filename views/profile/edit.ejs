@@ -148,16 +148,18 @@ window.usingModule.push(
 											ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}"
 						></textarea>
 
+						<p ng-show="!successCreatePost" style="margin-top: 10px; margin-bottom: 5px; font-style: italic; color: #666;">{{ 'add habs here' | translate | capitalize:'first'}}</p>
 						<tags-input ng-show="!successCreatePost" ng-model="habs" 
-							placeholder="{{ 'add habs here' | translate | capitalize:'first'}}"
+							placeholder="{{ '...' }}"
 							add-from-autocomplete-only="true"
 							display-property="name"
 						>
 							<auto-complete source="loadHabs($query)"></auto-complete>
 						</tags-input>
-
+						
+						<p ng-show="!successCreatePost"  style="margin-top: 10px; margin-bottom: 5px; font-style: italic; color: #666;">{{ 'enter tags here' | translate | capitalize:'first'}}</p>
 						<tags-input 
-							placeholder="{{ 'enter tags here' | translate | capitalize:'first'}}"
+							placeholder="{{ '...' }}"
 							ng-show="!successCreatePost" 
 							ng-model="tags" 
 						>

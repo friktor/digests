@@ -1,11 +1,13 @@
  # HabController
  #
  # @description :: Server-side logic for managing habs
- # @help        :: See http://links.sailsjs.org/docs/controllers
+ # @help	:: See http://links.sailsjs.org/docs/controllers
 
 require "coffee-script/register"
 
-module.exports = {
+module.exports =
+
+	tapeHabs: require "./hab/tapeHabs.coffee"
 	
 	publicList: require "./hab/serealizedList.coffee"
 
@@ -13,4 +15,3 @@ module.exports = {
 		shortcuts: false 
 		actions: false 
 		rest: false
-}

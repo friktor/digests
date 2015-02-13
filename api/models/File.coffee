@@ -43,6 +43,9 @@ File.attributes.avatarImg  = model: "user"
 #@ Profile header image
 File.attributes.headingImg = model: "user"
 
+#@ Project Images
+File.attributes.projectImage = model: "hab"
+
 #@ Post header image
 
 module.exports = File;

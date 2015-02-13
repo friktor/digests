@@ -2,13 +2,11 @@
 	<div class="col-lg-3 col-md-3 col-sm-6 col-sm-12 masonry-brick">
 		
 		<div class="post">
-
-			<% var previewImage = _.find(post.headerImg, {"restrict": "preview"}); /*sails.log(previewImage);*/ %>
 			
 			<!-- Post heading image -->
-			<% if (_.find(post.headerImg, {"restrict": "preview"})) {%> 
+			<% if (post.previewImage) {%> 
 				<a class="heading image" href="/details/<%= post.numericId %>">
-					<img post-img src="<%= (_.find(post.headerImg, {"restrict": "preview"})).link %>" alt="">
+					<img post-img src="<%= post.previewImage %>" alt="">
 				</a> 
 			<% }; %>
 			
@@ -27,7 +25,7 @@
 			<!-- Post button share&read -->
 			<div class="button group">
 				<a href="/details/<%= post.numericId %>" class="read">
-					<%= __("read") %>
+					{{ 'read' | translate}}
 				</a>
 			</div>
 

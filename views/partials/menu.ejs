@@ -11,41 +11,41 @@
     </a>
   
     <a class="item sidebar show_">
-      <i class="fa fa-bars"></i> <%= __("menu") %>
+      <i class="fa fa-bars"></i> {{ 'menu' | translate | capitalize:'first' }}
     </a>
   
     <a href="/latest" class="item">
-      <%= __("latest") %>
+      {{ 'latest' | translate | capitalize:'first' }}
     </a>
   
     <a href="/popular" class="item">
-      <%= __("popular") %>
+      {{ 'popular' | translate | capitalize:'first' }}
     </a>
   
     <a href="/habs" class="item">
-      <%= __("habs") %>
+      {{ 'habs' | translate | capitalize:'first' }}
     </a>
   
     <a href="/projects" class="item">
-      <%= __("projects") %>
+      {{ 'projects' | translate | capitalize:'first' }}
     </a>
   
     <div class="right menu">
       <% if (!session.auth) {%>
       <div class="item">
         <a href="/register" class="ui basic button">
-          <%= __("Become a blogger") %>
+          {{ 'become a blogger' | translate | capitalize:'first'}}
         </a>
       </div>
       <div class="item">
         <a class="ui basic button login">
-          <%= __("Login") %>
+          {{ 'login' | translate | capitalize:'all'}}
         </a>
       </div>
       <%} else if (session.auth == true && session.user) {%>
       <div class="item addpost">
         <a href="/profile/<%= session.user.username %>/addpost" class="ui basic button">
-          <i class="fa fa-plus"></i> <%= __("Add post") %>
+          <i class="fa fa-plus"></i> {{ 'add post' | translate | capitalize:'first'}}
         </a>
       </div>
       <div class="item">
@@ -54,7 +54,7 @@
       <div class="item avatar">
         <a href="/profile/<%= session.user.username %>" class="ui image avatar">
           <% var avatarImg = _.find(session.user.avatarImg, {"restrict": "preview"}); %>
-          <img src="<% if (session.user.avatarImg.length>0) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
+          <img src="<% if (avatarImg) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
         </a>
       </div>
       <a href="/profile/<%= session.user.username %>" class="item user_">
