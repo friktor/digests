@@ -1,29 +1,20 @@
 module.exports = {
-	"get /latest/:page": {
-	  controller: "post", action: "latest"
-	},
+	"get /latest/:page": "PostController.latest",
 
-	"get /popular/:page": {
-	  controller: "post", action: "popular"
-	},
+	"get /popular/:page": "PostController.popular",
 	
-	"get /popular": {
-	  controller: "post", action: "popular"
-	},
+	"get /popular": "PostController.popular",
 
-	"get /latest": {
-	  controller: "post", action: "latest"
-	},
+	"get /latest": "PostController.latest",
 
-	"get /details/:id": {
-	  controller: "post", action: "details"
-	},
+	"get /details/:id": "PostController.details",
 
-	"get /byauthor/:username/:page": {
-	  controller: "post", action: "byauthor"
-	},
+	"get /byauthor/:username/:page": "PostController.byauthor",
 
-	"get /byauthor/:username": {
-	  controller: "post", action: "byauthor"
-	}
+	"get /byauthor/:username": "PostController.byauthor",
+
+	"get /tapePersonal/:page": "PostController.tapePersonal",
+
+	"get /tapePersonal": "PostController.tapePersonal"
+
 };

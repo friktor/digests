@@ -1,9 +1,9 @@
 acceptLanguage = require "accept-language"
-Promise = require "bluebird"
-Remarkable = require "remarkable"
-hljs = require "highlight.js"
-_ = require "lodash"
-xss = require "xss"
+Promise        = require "bluebird"
+Remarkable     = require "remarkable"
+hljs           = require "highlight.js"
+_              = require "lodash"
+xss            = require "xss"
 
 # @Markdown render sync based on Remarkable
 markdown = new Remarkable "full",
@@ -39,7 +39,6 @@ module.exports =
 		else
 			acceptLanguage.parse(headerLanguage)[0].language
 
-
 	# @Async rendered post content using markdown
 	renderPost: (post, cb) ->		
 		renderedContent = markdown.render(post.content)
@@ -60,9 +59,7 @@ module.exports =
 		cb null, post
 		return
 
-
-
-	# Find and rendered posts by this user.
+	# @Find and rendered posts by this user.
 	FindAndRenderPostsByThisUser : (authorId, page) ->
 		$scope = @
 
@@ -78,3 +75,21 @@ module.exports =
 						return
 				return
 			return
+
+	iteratorHab : (locale, habId, cb) ->
+		Hab.findOne(habId).then (hab) ->
+			nameHab = _.find hab.name, "locale": locale
+
+			if hab then cb null, 
+				name: if nameHab then nameHab.name else hab.translitName
+				translitName: hab.translitName
+				id: hab.id
+			else cb()
+			return
+
+	# @Uniques array
+	arrayUnique: (a) ->
+		a.reduce (p, c) ->
+			if p.indexOf(c) < 0 then p.push(c)
+			p
+		, []

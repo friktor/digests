@@ -1,10 +1,15 @@
 require "coffee-script/register"
+
+Promise = require "bluebird"
 common = require "./common.coffee"
 async = require "async"
 _ = require "lodash"
 
 # Error class for handle promise
 notExists = require "../errors/notExists.coffee"
+
+# Promisify
+map = Promise.promisify(async.map)
 
 ####
 #@action: list latest posts
@@ -16,20 +21,24 @@ notExists = require "../errors/notExists.coffee"
 module.exports = (req, res, next) ->
 	
 	# Locale (Language) set forming
-	locale = if req.param("locale")
-		req.param("locale") 
-	else common.getLocaleGlobal(req.cookies.locale, req.headers["accept-language"])
+	locale = req.param "locale", null
 
 	# Page for sort
-	page = parseInt(req.param("page", 1))
-	page = if isNaN(page) then 1 else page
+	page = try
+		parseInt(req.param("page", 1))
+	catch e
+		1
 
 	# Sort by Language / View all
-	where = new Object()
-	where.locale = if req.param("locale") and req.param("locale") is "all"
-		undefined
-	else
-		locale
+	where = {}
+
+	# Switch validate for and set locale.
+	switch true
+		when /(^ru$|^en$|^pl$)/.test(locale)
+			where.locale = locale
+		else
+			where.locale = locale = common.getLocaleGlobal(req.cookies.locale, req.headers["accept-language"])
+
 
 	Post.find().populate("headerImg")
 
@@ -48,21 +57,19 @@ module.exports = (req, res, next) ->
 	.then((posts) ->
 		# If not posts on this page - send 404.
 		if !posts[0] then throw new notExists() else
-			# Async rendered posts. 
-			async.map posts, common.renderPost, (error, renderedPosts) ->
-				# Copleted array with rendered posts. Title & page & posts
-				completed =
-					title: req.__("Latest") + " ⚫ Digests.me ⚫ " + req.__("%s page", page)
-					posts: renderedPosts
-					locale: locale
-					page: page
+			renderedPosts = map(posts, common.renderPost).then (posts) -> posts
+	)
 
-				# if param ajax is true - send json, else send html.
-				if req.param("ajax") is "true"
-					res.json completed
-				else
-					res.view completed
-				return
+	.then((posts) ->
+		Forming =
+			title: req.__("Latest") + " ⚫ Digests.me ⚫ " + req.__("%s page", page)
+			locale: locale
+			posts: posts
+			page: page
+
+		switch req.param("ajax")
+			when "true" then res.json Forming
+			else res.view Forming
 	)
 
 	.caught(notExists, (e) ->

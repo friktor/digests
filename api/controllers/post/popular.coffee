@@ -1,11 +1,16 @@
 require "coffee-script/register"
+
 common = require "./common.coffee"
+Promise = require "bluebird"
 moment = require "moment"
 async = require "async"
 _ = require "lodash"
 
 # Error class for handle promise
 notExists = require "../errors/notExists.coffee"
+
+# Promisify
+map = Promise.promisify(async.map)
 
 #@action: list latest populars posts
 #@description: list all posts with json response for ajax
@@ -14,23 +19,23 @@ notExists = require "../errors/notExists.coffee"
 
 module.exports = (req, res) ->
 
-	# Locale (Language) set forming
-	locale = if req.param("locale")
-		req.param("locale") 
-	else common.getLocaleGlobal(req.cookies.locale, req.headers["accept-language"])
+	locale = req.param "locale", null
 
 	# Page (req.param) for slice
-	page = parseInt(req.param("page", 1))
-	page = if isNaN(page) then 1 else page
+	page = try
+		parseInt(req.param("page", 1))
+	catch e
+		1
 
 	# Where data
 	where = createdAt: ">": moment().subtract(21, "d").toDate()
 
-	# Sort by Language / View all
-	where.locale = if req.param("locale") and req.param("locale") is "all"
-		undefined
-	else
-		locale
+	# Switch validate for and set locale.
+	switch true
+		when /(^ru$|^en$|^pl$)/.test(locale)
+			where.locale = locale
+		else
+			where.locale = locale = common.getLocaleGlobal(req.cookies.locale, req.headers["accept-language"])
 
 	# Main Action
 	Post.find().populate("headerImg")
@@ -47,25 +52,22 @@ module.exports = (req, res) ->
 		limit: 20
 	)
 
-	# Promise success
 	.then((posts) ->
-		
-		# If not posts - send 404 error
+		# If not posts on this page - send 404.
 		if !posts[0] then throw new notExists() else
+			renderedPosts = map(posts, common.renderPost).then (posts) -> posts
+	)
 
-			# Async rendered content. And cut content to sinopsis
-			async.map posts, common.renderPost, (error, renderedPosts) ->
-				completed =
-					title: req.__("Popular") + " ⚫ Digests.me ⚫ " + req.__("%s page", page)
-					posts: renderedPosts
-					page: page
+	.then((posts) ->
+		Forming =
+			title: req.__("Popular") + " ⚫ Digests.me ⚫ " + req.__("%s page", page)
+			locale: locale
+			posts: posts
+			page: page
 
-				# response data
-				if req.param("ajax") is "true"
-					res.json completed
-				else
-					res.view completed
-				return
+		switch req.param("ajax")
+			when "true" then res.json Forming
+			else res.view Forming
 	)
 
 	.caught(notExists, (e) ->

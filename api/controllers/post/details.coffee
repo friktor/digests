@@ -12,6 +12,9 @@ common = require "./common.coffee"
 # Error class for handle promise
 notExists = require "../errors/notExists.coffee"
 
+# Promisify
+map = Promise.promisify(async.map)
+
 ####
 #@action: details view post
 #@description: details show post - with render markdown, with comments
@@ -20,6 +23,7 @@ notExists = require "../errors/notExists.coffee"
 ####
 
 module.exports = (req, res, next) ->
+	locale = req.getLocale()
 	id = req.param "id"
 
 	if !id then res.notFound() else
@@ -40,7 +44,7 @@ module.exports = (req, res, next) ->
 				post.save()
 
 				# Fomrating created date
-				moment.locale("ru")
+				moment.locale(locale)
 				post.createdAt = moment(post.createdAt).format("LL")
 
 				# Render and protect content
@@ -50,31 +54,9 @@ module.exports = (req, res, next) ->
 
 				# @Author association for this post
 				Author = User.findOne(post.author).populate("avatarImg").then (user) -> user.toJSON()
-				
-				# @List Habs for this post
-				promisedGetHabs = ->
-					new Promise (resolve, reject) ->
-						# Find And Push Habs.
-						iteratorHab = (habId, cb) ->
-							Hab.findOne(habId).then (hab) ->
-								nameHab = _.find hab.name, "locale": req.getLocale()
 
-								if hab
-									cb null, 
-										name: if nameHab then nameHab.name else hab.translitName
-										translitName: hab.translitName
-										id: hab.id
-								else
-									cb()
-								return
-
-						# Async find using iterator
-						async.map post.hab.split(/\s*,\s*/), iteratorHab, (error, Habs) ->
-							if error then reject(error) else resolve(Habs)
-							return
-						return 
-
-				Habs = promisedGetHabs().then (habs) -> habs
+				# @Habs parse & find habs
+				Habs = map(post.hab.split(/\s*,\s*/), _.partial(common.iteratorHab, locale)).then (habs) -> habs
 
 				[post, Author, Habs]
 		)

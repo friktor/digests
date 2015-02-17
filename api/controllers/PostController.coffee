@@ -19,6 +19,9 @@ module.exports =
 	# See "api/controllers/post/latest.coffee"
 	latest: require "./post/latest.coffee"
 
+	# See "api/controllers/post/tapePersonal.coffee"
+	tapePersonal: require "./post/tapePersonal.coffee"
+
 	# See "api/controllers/post/byauthor.coffee"
 	byauthor: require "./post/byauthor.coffee"
 
