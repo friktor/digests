@@ -35,9 +35,9 @@ module.exports.policies = {
     index: true,
   },
 
-  CommentController: {
-    create: ["pushCommentAllow"]
-  },
+  // CommentController: {
+  //   create: ["pushCommentAllow"]
+  // },
 
   UserController: {
     create: true,
