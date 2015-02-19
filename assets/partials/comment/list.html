@@ -1,0 +1,93 @@
+<div class="ui segment comment list">
+	<div class="ui header text center">
+		{{countComments}} {{ 'comments' | translate | capitalize:'first'}}
+	</div>
+
+	<div class="ui comments threaded">
+	 
+	 	<!-- Comment main -->
+		<div class="comment" ng-repeat="comment in comments | orderBy: '-createdAt'">
+			<a href="{{ '/profile/'+comment.author.username }}" class="avatar">
+				<img src="{{ comment.author.avatars }}">
+			</a>
+			<div class="content">
+				<a href="{{ '/profile/'+comment.author.username }}" class="author">
+					{{ comment.author.firstname }} {{ comment.author.lastname }}
+				</a>
+				<div class="metadata">
+					<span class="date">{{ comment.createdAt | date:'dd.MM.yyyy'}}</span>
+				</div>
+				<div class="text" ng-bind-html="comment.message"></div>
+
+				<div class="actions">
+					<a class="reply">{{ 'reply' | translate | capitalize:'all'}}</a>
+					<a class="remove">{{ 'remove' | translate | capitalize:'all'}}</a>
+				</div>
+			</div>
+			
+			<!-- Reply comments -->
+			<div class="comments" ng-show="comment.reply.length > 0">
+				
+				<div class="comment" ng-repeat="comment in comment.reply | orderBy: '-createdAt'">
+					<a href="{{ '/profile/'+comment.author.username }}" class="avatar">
+						<img src="{{ comment.author.avatars }}">
+					</a>
+					<div class="content">
+						<a href="{{ '/profile/'+comment.author.username }}" class="author">
+							{{ comment.author.firstname }} {{ comment.author.lastname }}
+						</a>
+						<div class="metadata">
+							<span class="date">{{ comment.createdAt | date:'dd.MM.yyyy'}}</span>
+						</div>
+						<div class="text" ng-bind-html="comment.message"></div>
+						<div class="actions">
+							<a class="reply">{{ 'reply' | translate | capitalize:'all'}}</a>
+							<a class="remove">{{ 'remove' | translate | capitalize:'all'}}</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- End reply comments -->
+
+		</div>
+		<!-- End Main Comment -->
+
+	</div>
+
+	<div class="ui divider"></div>
+
+	<!-- Preview Comment Area -->
+	<div class="ui comments">
+		<div class="comment">
+			<div class="comment">
+				<a href="{{ '/profile/'+username }}" class="avatar">
+					<img src="{{ avatars }}">
+				</a>
+				<div class="content">
+					<a href="{{ '/profile/'+comment.author.username }}" class="author">
+						{{ fullname }}
+					</a>
+					<div class="metadata">
+						<span class="info">{{ 'preview comment' | translate | capitalize:'first'}}</span>
+					</div>
+					<div class="text" ng-show="!newCommentMessage">
+						<em style="color: #666;">
+							{{ 'here will be displayed the contents of the comment' | translate | capitalize: 'first'}}
+						</em>
+					</div>
+					<div class="text" ng-bind-html="newCommentMessage"></div>
+				</div>
+			</div>			
+		</div>
+	</div>
+
+	<textarea ng-model="newCommentMessage" class="ui textarea fluid" style="display: block; width: 100%;"
+		placeholder="{{ 'enter your comment here' | translate | capitalize:'first'}}"
+	></textarea>
+	<div class="text center ui basic segment">
+		<md-button class="md-primary">
+			{{ 'publish comment' | translate | capitalize:'all'}}
+		</md-button>
+	</div>
+</div>
