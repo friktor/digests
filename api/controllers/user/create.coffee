@@ -17,6 +17,7 @@ Promise = require "bluebird"
 request = Promise.promisify(require("request").post)
 readFile = Promise.promisify(require("fs").readFile)
 nodemailer = require "nodemailer"
+ejs = require "ejs"
 
 # Errors Handler
 notValidCaptcha = require "../errors/notValidCaptcha.coffee"
@@ -35,33 +36,37 @@ module.exports = (req, res) ->
 	remoteip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
 	captcha = req.param "captcha"
 
-	request("https://www.google.com/recaptcha/api/siteverify", 
+	validCaptcha = request("https://www.google.com/recaptcha/api/siteverify", 
 		secret: reCaptchaSecret
 		remoteip: remoteip
 		response: captcha
-	)
+	).then((recaptcha) -> JSON.parse recaptcha[0].body)
 
-	.then((response) ->
-		data = JSON.parse response.body # parse response
-		# if success promise next, else if not success throw error
-		if !data.success then throw new notValidCaptcha() else true
-	)
+	Promise.join(validCaptcha, (resultVerify) ->
+		# switch resultVerify.success
+		# 	when false then throw new notValidCaptcha()
+		# 	when true then User.create(params)
 
-	# create new user
-	.then((successCaptcha) ->
+		sails.log.info resultVerify
 		User.create(params)
 	)
 
 	# Promised spread with user data and template
 	.then((user) -> [
 		user
-		readFile("../../../views/mailTemplates/activation.ejs", "utf-8")
+		readFile(sails.config.appPath+"/views/mailTemplates/activation.ejs", "utf-8")
 	])
 
 	# send notify with link to activation new user
 	.spread((user, template) ->
 		transporter = nodemailer.createTransport sails.config.mail # create transporter mail
-		promisedSendMail = Promise.promisify(transporter.sendMail) # promised send mail function
+		
+		promisedSendMail = (MailOptions) -> # promised send mail function
+			new Promise (resolve, reject) ->
+				transporter.sendMail MailOptions, (error, reply) ->
+					if error then reject(error) else resolve(reply)
+					return
+				return
 
 		# options mail
 		Mail = 
@@ -71,7 +76,12 @@ module.exports = (req, res) ->
 
 			html: ejs.render template,
 				link: "http://digests.me/utils/activate?id=#{user.id}&token=#{user.activationToken}"
-				text: req.__ "Welcome to our website %s %s! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link.", user.firstname, user.lastname
+				title:
+					top: req.__ "Welcome"
+					bottom: req.__ "Account Activation"
+				text: 
+					header: req.__ "Congratulations on your registration!"
+					main: req.__ "Welcome to our website %s %s! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link.", user.firstname, user.lastname
 				linkText: req.__ "Activate"
 
 		# Promised send activation mail notify
