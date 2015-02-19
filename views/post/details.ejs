@@ -4,6 +4,7 @@
 
 <script>
 	window.postLocale = "<%= post.locale %>";
+	window.postId = "<%= post.numericId %>";
 </script>
 
 <script src="/js/app/appDetails.js"></script>
@@ -80,6 +81,9 @@
 						</div>
 					</div>
 				</div>
+
+				<div ng-controller="CommentsListCtrl" ng-include="'/partials/comment/list.html'"></div>
+			
 			</div>
 			<div class="col-md-2"></div>
 		</div>

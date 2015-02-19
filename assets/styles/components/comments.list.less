@@ -1,0 +1,29 @@
+.comment.list {
+	padding: 1.2rem 2rem 2rem 2rem !important;
+	border-radius: 2px;
+	.material-shadow();
+
+	.ui.comments {
+
+		.comment {
+			padding-bottom: 0.4rem;
+			padding-top: 0.4rem;
+
+			.content {
+				.author {
+					color: #3F51B5;
+					font-weight: 500;
+					&:hover {
+						color: desaturate(#3F51B5, 13%);
+					}
+				}
+				.text {
+					color: rgba(0, 0, 0, 0.76) !important;
+					.content_Header();
+					strong {font-weight: 500;}
+				}
+			}
+		}
+
+	}
+}

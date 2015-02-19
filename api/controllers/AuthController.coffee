@@ -3,6 +3,7 @@
  # @description :: Server-side logic for managing auths
  # @help        :: See http://links.sailsjs.org/docs/controllers
 bcrypt = require "bcrypt-nodejs"
+_ = require "lodash"
 
 module.exports = 
 	
@@ -17,6 +18,24 @@ module.exports =
 
 		res.view 
 			title: title
+
+	session: (req, res) ->
+		if req.session.auth and req.session.user
+			$user = req.session.user
+			avatars = _.find($user.avatarImg, "restrict": "preview")
+
+			res.json 
+				fullname: $user.firstname+" "+$user.lastname
+				username: $user.username
+				auth: true
+				avatars: try
+					avatars.link
+				catch e
+					false			
+		else
+			res.json
+				auth: false
+
 
 	isLoggedIn: (req, res) ->
 		res.json 
