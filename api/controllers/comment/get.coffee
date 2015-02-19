@@ -19,6 +19,8 @@ map = Promise.promisify(require("async").map)
 _ = require "lodash"
 xss = require "xss"
 
+common = require "./common.coffee"
+
 # errors
 notExists = require "../errors/notExists.coffee"
 
@@ -32,32 +34,11 @@ module.exports = (req, res) ->
 
 	if !isValid then res.badRequest() else
 
-		Comment.find().where(target: target).sort("createdAt desc")
+		Comment.find().where(target: target, reply: false).sort("createdAt desc")
 
 		.then((comments) ->
-			
 			if !comments then throw new notExists() else
-				iteratorRender = (comment, cb) ->
-					User.findOne(comment.author).populate("avatarImg").exec (error, user) ->
-						message = xss md.render(comment.message),
-							whiteList: sails.config.xss
-							stripIgnoreTag: false
-
-						avatars = _.find(user.avatarImg, "restrict": "preview")
-
-						author = 
-							firstname: user.firstname
-							username: user.username
-							lastname: user.lastname
-							avatars: avatars.link or false
-	
-						cb error, _.merge comment, 
-							message: message
-							author: author
-						return
-					return
-
-				rendered = map(comments, iteratorRender).then (rendered) -> rendered
+				rendered = map(comments, common.asyncCommentsWithReply).then (rendered) -> rendered
 		)
 
 		.then((comments) ->
