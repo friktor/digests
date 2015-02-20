@@ -1,3 +1,6 @@
 {
-  "directory": "assets/libs"
+  "directory": "assets/libs",
+  "scripts": {
+    "postinstall": "./node_modules/.bin/bower-requirejs -c ./assets/js/dependencies/require.config.js -b ./assets"
+  }
 }
