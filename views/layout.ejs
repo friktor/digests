@@ -9,6 +9,10 @@
       <%};%>
     </title>
 
+    <%- meta("viewport", "width=device-width, initial-scale=1, maximum-scale=1") %>
+    <%- meta("description", sails.config.app.description) %>
+    <%- meta("keywords", sails.config.app.keywords) %>
+
     <script>window.i18nLocale = "<%= req.getLocale() %>";</script>
     <script>window.usingModule = [
       "angular-capitalize-filter",
@@ -19,25 +23,33 @@
       <%}%>
     ];</script>
 
-    <%- meta("viewport", "width=device-width, initial-scale=1, maximum-scale=1") %>
-    <%- meta("description", sails.config.app.description) %>
-    <%- meta("keywords", sails.config.app.keywords) %>
-
-
     <%- style("/styles/importer.css") %>
-    <%- script("/js/dependencies/jquery.min.js") %>
+
+
     <%- script("/stagging/semantic/modules/transition.min.js") %>
     <%- script("/stagging/semantic/modules/sidebar.min.js") %>
 
+    <%- script("/libs/jquery/dist/jquery.js") %>
     <%- script("/libs/angular/angular.js") %>
-    <%- partial("partials/angular-capitalize.ejs") %>
-    <%- partial("partials/angular-translate.ejs") %>
-    <%- partial("partials/angular-material.ejs") %>
+    <%- script("/libs/angular-capitalize-filter/capitalize.js") %>
+    <%- script("/libs/angular-translate/angular-translate.js") %>
+    <%- script("/libs/angular-translate-loader-static-files/angular-translate-loader-static-files.js") %>
 
+    <%- script("/libs/angular-animate/angular-animate.js") %>
+    <%- script("/libs/angular-aria/angular-aria.js") %>
+    <%- script("/libs/hammerjs/hammer.js") %>
 
-    <% if (!session.auth) {%><%- script("/js/app/appLogin.js") %><%}%>
+    <%- script("/libs/angular-material/angular-material.js") %>
+    <%- script("/libs/sails.io.js/dist/sails.io.js") %>
+    <%- script("/libs/socket.io/index.js") %>
+    
+    <%- script("/js/main.js") %>
+
+    <% if (!session.auth) {%>
+        <%- script("/js/app/appLogin.js") %>
+    <%}%>
+
     <%- script("/js/app/app.js") %>
-
   </head>
 
   <body>
@@ -49,8 +61,5 @@
     <div class="pusher">
       <%- body %>
     </div>
-    <%- script("/js/dependencies/socket.io.min.js") %>
-    <%- script("/js/dependencies/sails.io.js") %>
-    <%- script("/js/initializationUi.js") %>
   </body>
 </html>

@@ -45,6 +45,8 @@
     "socket.io": "~0.9.16",
     "stalker": "~1.0.0",
     "textAngular": "~1.3.5",
-    "vc-angular-recaptcha": "https://github.com/VividCortex/angular-recaptcha.git#master"
+    "vc-angular-recaptcha": "https://github.com/VividCortex/angular-recaptcha.git#master",
+    "hammerjs": "~2.0.4",
+    "semantic-ui": "~1.9.2"
   }
 }

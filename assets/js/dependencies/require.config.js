@@ -30,7 +30,9 @@ require.config({
     textAngular: "libs/textAngular/src/textAngular",
     "textAngular-sanitize": "libs/textAngular/src/textAngular-sanitize",
     textAngularSetup: "libs/textAngular/src/textAngularSetup",
-    "vc-angular-recaptcha": "libs/vc-angular-recaptcha/release/angular-recaptcha"
+    "vc-angular-recaptcha": "libs/vc-angular-recaptcha/release/angular-recaptcha",
+    hammerjs: "libs/hammerjs/hammer",
+    "semantic-ui": "libs/semantic-ui/dist/semantic"
   },
   packages: [
 
