@@ -1,15 +1,16 @@
-(->
-	App = angular.module "login", window.usingModule
+define [
+		"angular",
+		"js/app/app"
+	], (angular, App) ->
 
+	"use strict";
 	App.directive "loginForm", ["$http", "$timeout", "$log", ($http, $timeout, $log) ->
-
-		templateUrl: "/partials/login.html"
+		controllerAs: "LoginCtrl"
 		restrict: "E"
-		
+		templateUrl: "/partials/login.html"
 		controller: ->
 			$self = @
 			
-			# formData
 			$self.formData =
 				username: ""
 				password: ""
@@ -44,10 +45,5 @@
 						return
 					return
 				return
-
 			return
-
-		controllerAs: "LoginCtrl"
 	]
-
-)()

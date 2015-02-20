@@ -4,29 +4,7 @@ window.username = "<%= user.username %>";
 window.userId = "<%= user.id %>";
 window.editPostNumericId = "<%= post.numericId %>";
 window.editPostId = "<%= post.id %>";
-window.usingModule.push(
-	"angularFileUpload",
-	"textAngular",
-	"ngTagsInput"
-);
 </script>
-<%- style("/base16/base16-default.light.css") %>
-
-<%- style("/libs/textAngular/src/textAngular.css") %>
-<%- script("/libs/textAngular/dist/textAngular-rangy.min.js") %>
-<%- script("/libs/textAngular/dist/textAngular-sanitize.min.js") %>
-<%- script("/libs/textAngular/src/textAngular.js") %>
-
-<%- style("/libs/ng-tags-input/ng-tags-input.css") %>
-<%- script("/libs/ng-tags-input/ng-tags-input.js") %>
-
-<%- script("/libs/highlightjs/highlight.pack.js") %>
-<%- script("//cdn.jsdelivr.net/remarkable/1.6.0/remarkable.min.js") %>
-<%- script("/stagging/semantic/modules/dropdown.min.js") %>
-
-<%- script("/libs/ng-file-upload/angular-file-upload.js") %>
-<%- script("/libs/async/lib/async.js") %>
-<%- script("/js/app/editPostApp.js") %>
 
 <div ng-controller="EditPost" class="page addpost">
 	<%- partial("../partials/menu.ejs") %>

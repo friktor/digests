@@ -1,65 +1,29 @@
 <!DOCTYPE html>
-<html ng-app="main">
-  <head>
-    <title>
-      <% if (typeof title !== "undefined") {%>
-      <%= title %>
-      <%} else {%>
-      <%= sails.config.app.name %>
-      <%};%>
-    </title>
+<html>
+	<head>
+		<title>		
+			<%= title || sails.config.app.name %>
+		</title>
 
-    <%- meta("viewport", "width=device-width, initial-scale=1, maximum-scale=1") %>
-    <%- meta("description", sails.config.app.description) %>
-    <%- meta("keywords", sails.config.app.keywords) %>
+		<%- meta("viewport", "width=device-width, initial-scale=1, maximum-scale=1") %>
+		<%- meta("description", sails.config.app.description) %>
+		<%- meta("keywords", sails.config.app.keywords) %>
 
-    <script>window.i18nLocale = "<%= req.getLocale() %>";</script>
-    <script>window.usingModule = [
-      "angular-capitalize-filter",
-      "pascalprecht.translate",
-      "ngMaterial",
-      <% if (!session.auth) {%>
-      "login",
-      <%}%>
-    ];</script>
+		<script>window.i18nLocale = "<%= req.getLocale() %>";</script>
 
-    <%- style("/styles/importer.css") %>
+		<%- style("/styles/importer.css") %>
 
+		<script src="/libs/requirejs/require.js" data-main="/js/require.config"></script>
+	</head>
 
-    <%- script("/stagging/semantic/modules/transition.min.js") %>
-    <%- script("/stagging/semantic/modules/sidebar.min.js") %>
-
-    <%- script("/libs/jquery/dist/jquery.js") %>
-    <%- script("/libs/angular/angular.js") %>
-    <%- script("/libs/angular-capitalize-filter/capitalize.js") %>
-    <%- script("/libs/angular-translate/angular-translate.js") %>
-    <%- script("/libs/angular-translate-loader-static-files/angular-translate-loader-static-files.js") %>
-
-    <%- script("/libs/angular-animate/angular-animate.js") %>
-    <%- script("/libs/angular-aria/angular-aria.js") %>
-    <%- script("/libs/hammerjs/hammer.js") %>
-
-    <%- script("/libs/angular-material/angular-material.js") %>
-    <%- script("/libs/sails.io.js/dist/sails.io.js") %>
-    <%- script("/libs/socket.io/index.js") %>
-    
-    <%- script("/js/main.js") %>
-
-    <% if (!session.auth) {%>
-        <%- script("/js/app/appLogin.js") %>
-    <%}%>
-
-    <%- script("/js/app/app.js") %>
-  </head>
-
-  <body>
-    <% "body content" %>
-    <%- partial("partials/sidebar.left.ejs") %>
-    <% if (!session.auth) {%>
-    <%- partial("partials/sidebar.top.login.ejs") %>
-    <%}%>
-    <div class="pusher">
-      <%- body %>
-    </div>
-  </body>
+	<body>
+		<% "body content" %>
+		<%- partial("partials/sidebar.left.ejs") %>
+		<% if (!session.auth) {%>
+		<%- partial("partials/sidebar.top.login.ejs") %>
+		<%}%>
+		<div class="pusher">
+			<%- body %>
+		</div>
+	</body>
 </html>

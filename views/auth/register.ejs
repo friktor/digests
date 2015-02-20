@@ -1,13 +1,6 @@
 <%- partial("../partials/menu.ejs") %>
 
-<script>window.usingModule.push("ngAnimate", "angular.password", "vcRecaptcha");</script>
-
 <script src="//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecapthaApiLoaded&hl=<%= req.getLocale() %>" async defer></script>
-
-<script src="/libs/vc-angular-recaptcha/release/angular-recaptcha.js"></script>
-<script src="/libs/angular-password/angular-password.js"></script>
-<script src="/libs/lodash/lodash.js"></script>
-<script src="/js/app/appRegister.js"></script>
 
 <div class="ui basic segment page register">
 	<div class="row">

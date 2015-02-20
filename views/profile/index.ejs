@@ -1,7 +1,5 @@
 <script async>window.username = "<%= req.param("username") %>";</script>
 
-<%- script("/js/app/appProfile.js") %>
-
 <div class="page profile" ng-controller="ProfileCtrl">
 
 	<!-- Header Profile -->
@@ -70,7 +68,6 @@
 
 				<!-- Directive Post By User -->
 				<posts-by-user></posts-by-user>
-
 			</div>
 		</div>
 	</div>

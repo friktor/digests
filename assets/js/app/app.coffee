@@ -1,17 +1,49 @@
-(->
-	App = angular.module "main", window.usingModule
+define [
+		"angular",
+		"angular-translate",
+		"angular-translate-loader-url",
+		"angular-translate-loader-static-files",
+		"angular-capitalize-filter",
+		"angular-aria",
+		"angular-material",
+		"angular-animate",
+		"vc-angular-recaptcha",
+		"angular-password",
+		"ng-file-upload",
+		"ng-lazyload",
+		
+		"textAngular",
+		"textAngularSetup",
+		"js/options/textEditor",
+
+		"textAngular-sanitize",
+		"textAngular-rangy",
+		"ng-tags-input"
+	], (angular) ->
+
+	"use strict";
+	depsModules = [
+		"pascalprecht.translate",
+		"angular-capitalize-filter",
+		"ngMaterial",
+		"ngAnimate",
+		"ngLazyload",
+		"vcRecaptcha",
+		"angular.password",
+		"angularFileUpload",
+		"textAngular",
+		"ngTagsInput"
+	]
+
+	App = angular.module "app", depsModules
 
 	App.config ["$translateProvider", ($translateProvider) ->
-		
-		# Get Translate .json
 		$translateProvider.useStaticFilesLoader
 			prefix: "/i18n/"
 			suffix: ".json"
 
-		# Set default language
 		$translateProvider.preferredLanguage window.i18nLocale
 		return
 	]
 
-	return
-)()
+	return App

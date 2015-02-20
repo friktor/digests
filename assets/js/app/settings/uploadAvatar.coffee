@@ -1,7 +1,9 @@
-(->
-	$usingModules = window.usingModule
-	App = angular.module "settingsUploadAvatar", $usingModules
+define [
+		"angular",
+		"js/app/app"
+	], (angular, App) ->
 
+	"use strict";
 	App.directive "uploadAvatar", ["$http", "$upload", "$timeout", "$log", "$translate", 
 		($http, $upload, $timeout, $log, $translate) ->
 			templateUrl: "/partials/settings/upload-avatar.html"
@@ -45,4 +47,5 @@
 	
 				return
 	]
-)()
+
+	return

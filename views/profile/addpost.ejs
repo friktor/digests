@@ -2,29 +2,7 @@
 window.sessionUsername = "<%= session.user.username %>";
 window.username = "<%= user.username %>";
 window.userId = "<%= user.id %>";
-window.usingModule.push(
-	"angularFileUpload",
-	"textAngular",
-	"ngTagsInput",
-	"ngAnimate"
-);
 </script>
-<%- style("/base16/base16-default.light.css") %>
-
-<%- style("/libs/textAngular/src/textAngular.css") %>
-<%- script("/libs/textAngular/dist/textAngular-rangy.min.js") %>
-<%- script("/libs/textAngular/dist/textAngular-sanitize.min.js") %>
-<%- script("/libs/textAngular/src/textAngular.js") %>
-
-<%- style("/libs/ng-tags-input/ng-tags-input.css") %>
-<%- script("/libs/ng-tags-input/ng-tags-input.js") %>
-
-<%- script("/libs/highlightjs/highlight.pack.js") %>
-<%- script("//cdn.jsdelivr.net/remarkable/1.6.0/remarkable.min.js") %>
-<%- script("/stagging/semantic/modules/dropdown.min.js") %>
-
-<%- script("/libs/ng-file-upload/angular-file-upload.js") %>
-<%- script("/js/app/addPostApp.js") %>
 
 <div ng-controller="AddPost" class="page addpost">
 	<%- partial("../partials/menu.ejs") %>
@@ -104,9 +82,8 @@ window.usingModule.push(
 									aria-label="Markup langulage" 
 									ng-false-value="'markdown'" 
 									ng-model="markLang" 
-									class="md-warn"
-								>
-									{{ 'markup langulage' | translate |capitalize:'first'}}: {{ markLang }}
+									class="md-warn">
+									{{ 'markup langulage' | translate | capitalize:'first'}}: {{ markLang }}
 								</md-switch>
 								
 								<md-switch 
@@ -114,9 +91,8 @@ window.usingModule.push(
 									ng-show="setMarkupLang('markdown')" 
 									ng-model="showMarkdownPreview" 
 									aria-label="Show Preview" 
-									class="md-primary"
-								>
-									{{ 'show preview' | translate |capitalize:'first'}}: {{ showMarkdownPreview | translate }}
+									class="md-primary">
+									{{ 'show preview' | translate | capitalize:'first'}}: {{ showMarkdownPreview | translate }}
 								</md-switch>
 
 								<div class="ui selection dropdown">
@@ -147,20 +123,21 @@ window.usingModule.push(
 						></textarea>
 
 						<p ng-show="!successCreatePost"  style="margin-top: 10px; margin-bottom: 5px; font-style: italic; color: #666;">{{ 'add habs here' | translate | capitalize:'first'}}</p>
-						<tags-input ng-show="!successCreatePost" ng-model="habs" 
+						<tags-input 
+							ng-show="!successCreatePost" 
+							ng-model="habs" 
 							placeholder="{{ '...' }}"
 							add-from-autocomplete-only="true"
-							display-property="name"
-						>
+							display-property="name">
 							<auto-complete source="loadHabs($query)"></auto-complete>
 						</tags-input>
 
 						<p ng-show="!successCreatePost"  style="margin-top: 10px; margin-bottom: 5px; font-style: italic; color: #666;">{{ 'enter tags here' | translate | capitalize:'first'}}</p>
+						
 						<tags-input 
 							placeholder="{{ '...' }}"
 							ng-show="!successCreatePost" 
-							ng-model="tags" 
-						>
+							ng-model="tags">
 						</tags-input>
 
 						<div class="text center actionsBtn">

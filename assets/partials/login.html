@@ -9,12 +9,16 @@
 	</h4><br>
 
 	<md-input-container>
-		<label><i class="fa fa-user"></i> {{ 'username' | translate | capitalize:'all' }}</label>
+		<label>
+			<i class="fa fa-user"></i> {{ 'username' | translate | capitalize:'all' }}
+		</label>
 		<input ng-model="LoginCtrl.formData.username" type="text" name="username">
 	</md-input-container>
 
 	<md-input-container>
-		<label><i class="icon lock"></i> {{ 'password' | translate | capitalize:'all' }}</label>
+		<label>
+			<i class="icon lock"></i> {{ 'password' | translate | capitalize:'all' }}
+		</label>
 		<input ng-model="LoginCtrl.formData.password" type="password" name="password">
 	</md-input-container>
 

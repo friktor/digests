@@ -3,66 +3,66 @@
 
 <header>
 
-  <div class="blured"></div>
+	<div class="blured"></div>
 
-  <div class="ui secondary menu header">
-    <a href="/" class="brand">
-      ME DIGESTS
-    </a>
-  
-    <a class="item sidebar show_">
-      <i class="fa fa-bars"></i> {{ 'menu' | translate | capitalize:'first' }}
-    </a>
-  
-    <a href="/latest" class="item">
-      {{ 'latest' | translate | capitalize:'first' }}
-    </a>
-  
-    <a href="/popular" class="item">
-      {{ 'popular' | translate | capitalize:'first' }}
-    </a>
-  
-    <a href="/habs" class="item">
-      {{ 'habs' | translate | capitalize:'first' }}
-    </a>
-  
-    <a href="/projects" class="item">
-      {{ 'projects' | translate | capitalize:'first' }}
-    </a>
-  
-    <div class="right menu">
-      <% if (!session.auth) {%>
-      <div class="item">
-        <a href="/register" class="ui basic button">
-          {{ 'become a blogger' | translate | capitalize:'first'}}
-        </a>
-      </div>
-      <div class="item">
-        <a class="ui basic button login">
-          {{ 'login' | translate | capitalize:'all'}}
-        </a>
-      </div>
-      <%} else if (session.auth == true && session.user) {%>
-      <div class="item addpost">
-        <a href="/profile/<%= session.user.username %>/addpost" class="ui basic button">
-          <i class="fa fa-plus"></i> {{ 'add post' | translate | capitalize:'first'}}
-        </a>
-      </div>
-      <div class="item">
-        <a href="/profile/<%= session.user.username %>/settings" class="ui basic button settings"><i class="fa fa-cog"></i></a>
-      </div>
-      <div class="item avatar">
-        <a href="/profile/<%= session.user.username %>" class="ui image avatar">
-          <% var avatarImg = _.find(session.user.avatarImg, {"restrict": "preview"}); %>
-          <img src="<% if (avatarImg) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
-        </a>
-      </div>
-      <a href="/profile/<%= session.user.username %>" class="item user_">
-        <span><%= session.user.username.substr(0,1) %></span><%= session.user.username.substr(1,120) %>
-      </a>
-      <% }; %>
-    </div>
-  </div>
+	<div class="ui secondary menu header">
+		<a href="/" class="brand">
+			ME DIGESTS
+		</a>
+	
+		<a class="item sidebar show_">
+			<i class="fa fa-bars"></i> {{ 'menu' | translate | capitalize:'first' }}
+		</a>
+	
+		<a href="/latest" class="item">
+			{{ 'latest' | translate | capitalize:'first' }}
+		</a>
+	
+		<a href="/popular" class="item">
+			{{ 'popular' | translate | capitalize:'first' }}
+		</a>
+	
+		<a href="/habs" class="item">
+			{{ 'habs' | translate | capitalize:'first' }}
+		</a>
+	
+		<a href="/projects" class="item">
+			{{ 'projects' | translate | capitalize:'first' }}
+		</a>
+	
+		<div class="right menu">
+			<% if (!session.auth) {%>
+			<div class="item">
+				<a href="/register" class="ui basic button">
+					{{ 'become a blogger' | translate | capitalize:'first'}}
+				</a>
+			</div>
+			<div class="item">
+				<a class="ui basic button login">
+					{{ 'login' | translate | capitalize:'all'}}
+				</a>
+			</div>
+			<%} else if (session.auth == true && session.user) {%>
+			<div class="item addpost">
+				<a href="/profile/<%= session.user.username %>/addpost" class="ui basic button">
+					<i class="fa fa-plus"></i> {{ 'add post' | translate | capitalize:'first'}}
+				</a>
+			</div>
+			<div class="item">
+				<a href="/profile/<%= session.user.username %>/settings" class="ui basic button settings"><i class="fa fa-cog"></i></a>
+			</div>
+			<div class="item avatar">
+				<a href="/profile/<%= session.user.username %>" class="ui image avatar">
+					<% var avatarImg = _.find(session.user.avatarImg, {"restrict": "preview"}); %>
+					<img src="<% if (avatarImg) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
+				</a>
+			</div>
+			<a href="/profile/<%= session.user.username %>" class="item user_">
+				<span><%= session.user.username.substr(0,1) %></span><%= session.user.username.substr(1,120) %>
+			</a>
+			<% }; %>
+		</div>
+	</div>
 </header>
 
 <!-- googleon: all-->

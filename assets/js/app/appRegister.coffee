@@ -1,23 +1,13 @@
-(->
-	App = angular.module "main", window.usingModule
+define [
+		"angular",
+		"js/app/app"
+	], (angular, App) ->
 
-	App.config ["$translateProvider", ($translateProvider) ->
-
-		# Get Translate .json
-		$translateProvider.useStaticFilesLoader
-			prefix: "/i18n/"
-			suffix: ".json"
-
-		# Set default language
-		$translateProvider.preferredLanguage window.i18nLocale
-		return
-	]
-
+	"use strict";
 	App.directive "registerForm", ["$http", "$log", "vcRecaptchaService", ($http, $log, $reCaptcha) ->
 		templateUrl: "/partials/register.html"
 		restrict: "E"
 		controller: ($scope) ->
-		
 			$scope.$watch "username", ->
 				$http.get("/utils/user/isExists?username=#{$scope.username}").success (response) ->
 					$scope.isExistsUsername = response.exists
@@ -58,29 +48,26 @@
 								$scope.disableInputs = false
 						)	
 					)
-				return
-					
+				return	
 			return
 	]
 
-
-	`App.directive('ngModelOnblur', function() {
-	    return {
-	        priority: 1,
-	        restrict: 'A',
-	        require: 'ngModel',
-	        link: function(scope, elm, attr, ngModelCtrl) {
-	            if (attr.type === 'radio' || attr.type === 'checkbox') return;
+	# App.directive('ngModelOnblur', function() {
+	#     return {
+	#         priority: 1,
+	#         restrict: 'A',
+	#         require: 'ngModel',
+	#         link: function(scope, elm, attr, ngModelCtrl) {
+	#             if (attr.type === 'radio' || attr.type === 'checkbox') return;
 	            
-	            elm.off('input keydown change');
-	            elm.on('blur', function() {
-	                scope.$apply(function() {
-	                    ngModelCtrl.$setViewValue(elm.val());
-	                });         
-	            });
-	        }
-	    };
-	})`
+	#             elm.off('input keydown change');
+	#             elm.on('blur', function() {
+	#                 scope.$apply(function() {
+	#                     ngModelCtrl.$setViewValue(elm.val());
+	#                 });         
+	#             });
+	#         }
+	#     };
+	# })
 
 	return
-)()

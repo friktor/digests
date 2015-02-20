@@ -1,34 +1,13 @@
-(->
-	App = angular.module "main", window.usingModule
+define [
+		"angular",
+		"js/app/app",
 
-	App.config ["$translateProvider", ($translateProvider) ->
-		# Init dropdown
-		$(".ui.dropdown").dropdown()
+		"remarkable",
+		"highlightjs",
+		"async"
+	], (angular, App, Remarkable, hljs) ->
 
-		# tabular '\n' for textarea init
-		$("textarea").keydown (e) ->
-			if e.keyCode is 9
-				start = @selectionStart
-				end = @selectionEnd
-				$this = $(this)
-				$value = $this.val()
-
-				$this.val($value.substring(0, start)+"\t"+$value.substring(end))
-				@selectionStart = @selectionEnd = start+1
-				e.preventDefault()
-			return
-
-		# Get Translate .json
-		$translateProvider.useStaticFilesLoader
-			prefix: "/i18n/"
-			suffix: ".json"
-
-		# Set default language
-		$translateProvider.preferredLanguage window.i18nLocale
-		return
-
-	]
-
+	"use strict";
 	App.controller "EditPost", ["$scope", "$http", "$upload", "$log", "$timeout",
 		($scope, $http, $upload, $log, $timeout) ->
 
@@ -232,4 +211,3 @@
 	]
 
 	return
-)()

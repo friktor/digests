@@ -1,16 +1,7 @@
 <script>
 window.sessionUsername = "<%= session.user.username %>";
 window.username = "<%= user.username %>";
-window.usingModule.push(
-	"angularFileUpload"
-);
 </script>
-
-<%- script("/libs/ng-file-upload/angular-file-upload.js") %>
-<%- script("/js/app/settings/uploadAvatar.js") %>
-<%- script("/js/app/settings/uploadHeader.js") %>
-<%- script("/js/app/settings/updatePersonal.js") %>
-<%- script("/js/app/appSettings.js") %>
 
 <div ng-controller="SettingsCtrl as settings" class="page settings">
 	

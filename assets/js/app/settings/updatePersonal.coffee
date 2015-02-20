@@ -1,15 +1,13 @@
-(->
-	$usingModules = window.usingModule
-	
-	# Define application
-	App = angular.module "settingsUpdatePersonal", $usingModules
+define [
+		"angular",
+		"js/app/app"
+	], (angular, App) ->
 
-	# Directive personal for event update personal information.
+	"use strict";
 	App.directive "personal", ["$http", "$timeout", "$log", "$mdToast", ($http, $timeout, $log, $mdToast) ->
-		templateUrl: "/partials/settings/personal.html"
 		controllerAs: "PersonCtrl"
 		restrict: "E"
-	
+		templateUrl: "/partials/settings/personal.html"
 		controller: ->
 			$scope = @
 	
@@ -50,4 +48,5 @@
 	
 			return
 	]
-)()
+
+	return

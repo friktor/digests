@@ -1,24 +1,9 @@
-(->
-	$modules = window.usingModule
-	$modules.push "ngAnimate"
+define [
+		"angular",
+		"js/app/app"
+	], (angular, App) ->
 
-	App = angular.module "main", $modules
-
-	App.config ["$translateProvider", ($translateProvider) ->
-
-		# Get Translate .json
-		$translateProvider.useStaticFilesLoader
-			prefix: "/i18n/"
-			suffix: ".json"
-
-		# Set default language
-		$translateProvider.preferredLanguage window.i18nLocale
-
-		# Initial Hypher
-		$("main.post.content p").hyphenate(window.postLocale)
-		return
-	]
-
+	"use strict";
 	App.controller "CommentsListCtrl", ["$scope", "$http", "$log", "$sce", ($scope, $http, $log, $sce) ->
 		
 		$scope.$watch "newCommentMessage", ->
@@ -53,4 +38,5 @@
 
 		return
 	]
-)()
+	
+	return

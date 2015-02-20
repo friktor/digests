@@ -1,9 +1,9 @@
-(->
-	$usingModules = window.usingModule
-	
-	# Define application
-	App = angular.module "settingsUploadHeader", $usingModules
+define [
+		"angular",
+		"js/app/app"
+	], (angular, App) ->
 
+	"use strict";
 	App.directive "uploadHeader", ["$http", "$upload", "$timeout", "$log", 
 		($http, $upload, $timeout, $log) ->
 			templateUrl: "/partials/settings/upload-header.html"
@@ -53,4 +53,5 @@
 					
 				return
 	]
-)()
+
+	return

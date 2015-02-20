@@ -1,34 +1,13 @@
-(->
-	App = angular.module "main", window.usingModule
+define [
+		"jquery",
+		"angular",
+		"js/app/app",
 
-	App.config ["$translateProvider", ($translateProvider) ->
-		# Init dropdown
-		$(".ui.dropdown").dropdown()
+		"remarkable",
+		"highlightjs"
+	], ($, angular, App, Remarkable, hljs) ->
 
-		# tabular '\n' for textarea init
-		$("textarea").keydown (e) ->
-			if e.keyCode is 9
-				start = @selectionStart
-				end = @selectionEnd
-				$this = $(this)
-				$value = $this.val()
-
-				$this.val($value.substring(0, start)+"\t"+$value.substring(end))
-				@selectionStart = @selectionEnd = start+1
-				e.preventDefault()
-			return
-
-		# Get Translate .json
-		$translateProvider.useStaticFilesLoader
-			prefix: "/i18n/"
-			suffix: ".json"
-
-		# Set default language
-		$translateProvider.preferredLanguage window.i18nLocale
-		return
-
-	]
-
+	"use strict";
 	App.controller "AddPost", ["$scope", "$http", "$upload", "$log", "$timeout", "$translate",
 		($scope, $http, $upload, $log, $timeout, $translate) ->
 
@@ -110,116 +89,122 @@
 					$locale = $("input[name=\"locale\"]").val()
 					if $locale.length > 0 then $locale else "ru"
 
-				if $validContent() and $validTags() and $validHabs()
-					
-					formPost = 
-						content: $scope.postContent
-						markLang: $scope.markLang
-						title: $scope.postTitle
-						author: window.userId
-						tags: JSON.stringify($scope.tags)
-						habs: JSON.stringify($scope.habs)
-						locale: $setLocale()
+				if not $validContent() or not $validTags() or not $validHabs()
+					$log.info "Validate error"
+					$log.info "Content:#{$validContent()}"
+					$log.info "Tags:#{$validTags()}"
+					$log.info "Habs:#{$validHabs()}"
 
-					$uploadHeaderImage = (postId) ->
-						$log.info "StartUploading::"
+					return
 
-						$sendHeaderUrl = () ->
-							$log.info "StartUploading:: From Link"
+				formPost = 
+					content: $scope.postContent
+					markLang: $scope.markLang
+					title: $scope.postTitle
+					author: window.userId
+					tags: JSON.stringify($scope.tags)
+					habs: JSON.stringify($scope.habs)
+					locale: $setLocale()
 
-							if $scope.headerImageLink isnt "undefined" and $scope.headerImageLink.length > 0
-								$http.get("/csrfToken").success (token) ->
-									$scope.startUploadheaderImage = true
+				$uploadHeaderImage = (postId) ->
+					$log.info "StartUploading::"
+
+					$sendHeaderUrl = () ->
+						$log.info "StartUploading:: From Link"
+
+						if $scope.headerImageLink isnt "undefined" and $scope.headerImageLink.length > 0
+							$http.get("/csrfToken").success (token) ->
+								$scope.startUploadheaderImage = true
+
+								paramsImage = 
+									imageLink: $scope.headerImageLink
+									uploadType: "link"
+									postId: postId
+
+								$http.post("/upload/uploadPostHeaderImages", angular.extend({}, paramsImage, token))
 	
-									paramsImage = 
-										imageLink: $scope.headerImageLink
-										uploadType: "link"
-										postId: postId
-	
-									$http.post("/upload/uploadPostHeaderImages", angular.extend({}, paramsImage, token))
-		
-									.success((data, status) ->
-										$scope.UploadResult = data.success or status
-										# $log.info data
-										return
-									)
-	
-									.error (error) ->
-										$scope.UploadResult = false
-										$scope.UploadError = error
-										# $log.error error
-										return
+								.success((data, status) ->
+									$scope.UploadResult = data.success or status
+									# $log.info data
 									return
-							return
+								)
 
-						$uploadHeader = ->
-							# $log.info "StartUploading::"
+								.error (error) ->
+									$scope.UploadResult = false
+									$scope.UploadError = error
+									# $log.error error
+									return
+								return
+						return
 
-							if $scope.postHeaderImage and $scope.postHeaderImage.length > 0
-								$http.get("/csrfToken").success (token) ->
-									$scope.startUploadheaderImage = true
-									
-									$upload.upload(
-										headers: "X-CSRF-Token": token._csrf
-										url: "/upload/uploadPostHeaderImages"
-										file: $scope.postHeaderImage
-										fileFormDataName: "image"
-										data:
-											uploadType: "upload" 
-											postId: postId
-									)
-									
-									.progress((evt) ->
-										progressProcent = parseInt(100.0 * evt.loaded / evt.total)
-										$scope.headerUploadProgress = progressProcent
-										# $log.info "Progress: "+progressProcent+"%;"
-										return
-									)
-		
-									.success((data, status) ->
-										$scope.UploadResult = data.success or status
-										return
-									)
+					$uploadHeader = ->
+						# $log.info "StartUploading::"
+
+						if $scope.postHeaderImage and $scope.postHeaderImage.length > 0
+							$http.get("/csrfToken").success (token) ->
+								$scope.startUploadheaderImage = true
+								
+								$upload.upload(
+									headers: "X-CSRF-Token": token._csrf
+									url: "/upload/uploadPostHeaderImages"
+									file: $scope.postHeaderImage
+									fileFormDataName: "image"
+									data:
+										uploadType: "upload" 
+										postId: postId
+								)
+								
+								.progress((evt) ->
+									progressProcent = parseInt(100.0 * evt.loaded / evt.total)
+									$scope.headerUploadProgress = progressProcent
+									# $log.info "Progress: "+progressProcent+"%;"
+									return
+								)
 	
-									.error((error) ->
-										$scope.UploadError = error
-										$scope.UploadResult = false
-										# $log.error error
-										return
-									)
-							return
+								.success((data, status) ->
+									$scope.UploadResult = data.success or status
+									return
+								)
 
-
-						switch $scope.headerImgType
-							when "upload" then $uploadHeader()
-							when "link" then $sendHeaderUrl()
+								.error((error) ->
+									$scope.UploadError = error
+									$scope.UploadResult = false
+									# $log.error error
+									return
+								)
 						return
 
-					$log.info "Send post form with data"
 
-					$http.get("/csrfToken").success((token) ->
-						$http.post("/utils/post/create", angular.extend({}, formPost, token))
+					switch $scope.headerImgType
+						when "upload" then $uploadHeader()
+						when "link" then $sendHeaderUrl()
+					return
 
-						.success((data, status) ->
-							# $log.info "Reply from server:: data Created\n"
+				$log.info "Send post form with data"
 
-							$scope.successCreatePost = data.success || false
-							$scope.linkToPost = "/details/#{data.post.numericId}"
-							if data.success then $uploadHeaderImage(data.post.id)
-						)
+				$http.get("/csrfToken").success((token) ->
+					$http.post("/utils/post/create", angular.extend({}, formPost, token))
 
-						.error((error) ->
-							# $log.error "Error in request create post: #{error}"
-							return
-						)
+					.success((data, status) ->
+						# $log.info "Reply from server:: data Created\n"
+
+						$scope.successCreatePost = data.success || false
+						$scope.linkToPost = "/details/#{data.post.numericId}"
+						if data.success then $uploadHeaderImage(data.post.id)
 					)
+
 					.error((error) ->
-						# $log.error "Error in request _CSRF token: #{error}"
+						$log.error "Error in request create post: #{error}"
 						return
 					)
+				)
+				.error((error) ->
+					$log.error "Error in request _CSRF token: #{error}"
+					return
+				)
+
 				return
 
 	]
 
 	return
-)()

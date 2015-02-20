@@ -1,21 +1,11 @@
-(->
-	App = angular.module "main", window.usingModule
+define [
+		"jquery",
+		"angular",
+		"masonry",
+		"js/app/app"
+	], ($, angular, Masonry, App) ->
 
-	App.config ["$translateProvider", ($translateProvider) ->
-		
-		# Get Translate .json
-		$translateProvider.useStaticFilesLoader
-			prefix: "/i18n/"
-			suffix: ".json"
-
-		# Set default language
-		$translateProvider.preferredLanguage window.i18nLocale
-
-		# Init dropdown
-		$(".ui.dropdown").dropdown()
-		return
-	]
-
+	"use strict";
 	App.controller "PostsCtrl", ["$scope", "$http", "$log", "$mdDialog", 
 		
 		($scope, $http, $log, $mdDialog) ->
@@ -46,7 +36,7 @@
 	
 				return
 		
-			$(".posts.lists .row").masonry
+			new Masonry document.querySelector(".posts.lists .row"), 
 				itemSelector: ".posts.lists .row .masonry-brick"
 				columnWidth: ".posts.lists .row .masonry-brick"
 	
@@ -61,14 +51,13 @@
 			loadImage
 
 			.then((img) ->
-				$(".posts.lists .row").masonry("reloadItems").masonry()
+				new Masonry(document.querySelector(".posts.lists .row")).reloadItems()
 				return
 			, (error) ->
-				$(".posts.lists .row").masonry("reloadItems").masonry()
+				new Masonry(document.querySelector(".posts.lists .row")).reloadItems()
 				return
 			)
 			return
 		]
 
 	return
-)()
