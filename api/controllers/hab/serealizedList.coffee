@@ -1,7 +1,7 @@
 Promise = require "bluebird"
 async = require "async"
 _ = require "lodash"
-
+map = Promise.promisify(async.map)
 
 module.exports = (req, res) ->
 
@@ -10,24 +10,16 @@ module.exports = (req, res) ->
 	Hab.find()
 
 	.then((habs) ->
-		asyncFormingList = ->
-			new Promise (resolve, reject) ->
-				iterator = (hab, cb) ->
-					nameHab = _.find hab.name, "locale": locale
+		iterator = (hab, cb) ->
+			nameHab = _.find hab.name, "locale": locale
 
-					cb null,
-						name: if nameHab then nameHab.name else hab.translitName
-						translitName: hab.translitName
-						id: hab.id
-					return
+			cb null,
+				name: if nameHab then nameHab.name else hab.translitName
+				translitName: hab.translitName
+				id: hab.id
+			return
 
-				async.map habs, iterator, (errors, result) -> 
-					if errors then reject(errors) else resolve(result)
-					return
-				return
-
-		habs = asyncFormingList().then (habs) -> habs
-		return habs
+		habs = map(habs, iterator).then (habs) -> habs
 	)
 
 	.then((habs) -> res.json habs)
