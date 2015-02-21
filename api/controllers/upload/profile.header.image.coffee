@@ -4,6 +4,8 @@ require "coffee-script/register"
 fse = require "fs-extra"
 Download = require "download"
 Promise = require "bluebird"
+async = require "async"
+map = Promise.promisify(async.map)
 
 # Common and Utils
 utils = require "../../services/Utils.coffee"
@@ -43,15 +45,11 @@ module.exports = (req, res) ->
 	)
 
 	.spread((user, status) ->
-		# sails.log.info user
-
 		UploadedImage = common.UploadImage(req.file("imageFile"), "/personal/#{user.username}/headingImg/source").then (image) -> image
 		[user, UploadedImage]
 	)
 
 	.spread((user, image) ->
-		# sails.log.info image
-
 		if !image then throw new Error "Image not found" else
 			workDir = sails.config.upload.dir+"/personal/"+user.username+"/headingImg"
 			resizedImages = common.resizeUserHeadingImages(image.filedisk, workDir).then ($images) -> $images
@@ -59,40 +57,30 @@ module.exports = (req, res) ->
 	)
 
 	.spread((user, images) ->
-		# sails.log images
 
 		if !images then throw new Error "Images not resized" else
 
-			createRecordFileImages = ->
-				new Promise (resolve, reject) ->
-					iteratorCreateRecord = (image, cb) ->
-						$file = 
-							link: image.filedisk.replace sails.config.upload.serve, ""
-							absolutePath: image.filedisk
-							filename: image.filename
-							restrict: image.restrict
-							mime: image.filetype
-							size: image.filesize
-							headingImg: user.id
-							activated: true
-						File.create $file, (error, file) ->
-							cb error, file
-							return
-						return
-
-					async.map images, iteratorCreateRecord, (error, $files) ->
-						if error then reject(error) else resolve($files)
-						return
+			iteratorCreateRecord = (image, cb) ->
+				$file = 
+					link: image.filedisk.replace sails.config.upload.serve, ""
+					absolutePath: image.filedisk
+					filename: image.filename
+					restrict: image.restrict
+					mime: image.filetype
+					size: image.filesize
+					headingImg: user.id
+					activated: true
+				File.create $file, (error, file) ->
+					cb error, file
 					return
+				return
 
-			recordsImages = createRecordFileImages().then ($files) -> $files
+			recordsImages = map(images, iteratorCreateRecord).then ($files) -> $files
 
 			[user, recordsImages]
 	)
 
 	.spread((user, filesImages) ->
-		# sails.log filesImages
-
 		res.json
 			filesImages: filesImages
 			user: user

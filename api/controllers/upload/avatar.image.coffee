@@ -6,6 +6,7 @@ Download = require "download"
 Promise = require "bluebird"
 async = require "async"
 _ = require "lodash"
+map = Promise.promisify(async.map)
 
 # Common and Utils
 utils = require "../../services/Utils.coffee"
@@ -25,19 +26,12 @@ module.exports = (req, res) ->
 	.then((user) ->
 		if !user then throw new notExists "User not found" else
 			if user.avatarImg.length > 0
-				asyncRemoveAvatarImages = ->
-					new Promise (resolve, reject) ->
-						iterator = (image, cb) ->
-							File.destroy image.id, (error) ->
-								fse.removeSync image.absolutePath
-								cb error, true
+				iteratorDestroyAvatar = (image, cb) ->
+					File.destroy image.id, (error) ->
+						fse.removeSync image.absolutePath
+						cb error, true
 
-						async.map user.avatarImg, iterator, (error, $destroyed) ->
-							if error then reject(error) else resolve(true)
-							return
-						return
-
-				destroyed = asyncRemoveAvatarImages().then (status) -> status
+				destroyed = map(user.avatarImg, iteratorDestroyAvatar).then (status) -> status
 
 				[user, destroyed]
 			else
@@ -63,30 +57,22 @@ module.exports = (req, res) ->
 	.spread((user, images) ->
 		if !images then throw new Error "images resized not found" else
 			
-			asyncCreateFileRecords = ->
-				new Promise (resolve, reject) ->
-					iterator = (image, cb) ->
-						$file =
-							link: image.filedisk.replace sails.config.upload.serve, ""
-							absolutePath: image.filedisk
-							restrict: image.restrict
-							filename: image.filename
-							mime: image.filetype
-							size: image.filesize
-							avatarImg: user.id
-							activated: true
-
-						File.create $file, (error, file) ->
-							cb error, file
-							return
-						return
-
-					async.map images, iterator, (error, $files) ->
-						if error then reject(error) else resolve($files)
-						return
+			iteratorCreateRecords = (image, cb) ->
+				$file =
+					link: image.filedisk.replace sails.config.upload.serve, ""
+					absolutePath: image.filedisk
+					restrict: image.restrict
+					filename: image.filename
+					mime: image.filetype
+					size: image.filesize
+					avatarImg: user.id
+					activated: true
+				File.create $file, (error, file) ->
+					cb error, file
 					return
+				return
 
-			FileRecords = asyncCreateFileRecords().then (files) -> files
+			FileRecords = map(images, iteratorCreateRecords).then (files) -> files
 
 			[user, FileRecords]
 	)

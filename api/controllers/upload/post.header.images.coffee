@@ -4,6 +4,8 @@ require "coffee-script/register"
 fse = require "fs-extra"
 Download = require "download"
 Promise = require "bluebird"
+async = require "async"
+map = Promise.promisify(async.map)
 
 # Common and Utils
 utils = require "../../services/Utils.coffee"
@@ -96,20 +98,14 @@ module.exports = (req, res) ->
 					mime: image.filetype
 					size: image.filesize
 					activated: true
+					imagesize: image.imgsizes
 	
 				File.create($file).exec (error, file) ->
 					cb error, file
 					return
 				return
-	
-			promisedAsyncCreateRecordFileWithImage = ->
-				new Promise (resolve, reject) ->
-					async.map images, iteratorCreateRecordToDb, (error, records) ->
-						if error then reject(error) else resolve(records)
-						return
-					return
-	
-			headerImages = promisedAsyncCreateRecordFileWithImage().then (files) -> files
+
+			headerImages = map(images, iteratorCreateRecordToDb).then (files) -> files
 	
 			[post, headerImages]
 	)
@@ -119,4 +115,9 @@ module.exports = (req, res) ->
 		res.json
 			images: parsedImages
 			success: true
+	)
+
+	.caught((error) ->
+		sails.log.error error
+		res.serverError()
 	)
