@@ -10,6 +10,7 @@ module.exports =
 	uploadPostHeaderImages: require "./upload/post.header.images.coffee"
 	uploadProfileHeadingImage: require "./upload/profile.header.image.coffee"
 	uploadAvatarImage: require "./upload/avatar.image.coffee"
+	uploadHabHeader: require "./upload/hab.header.image.coffee"
 
 	# _config: 
 	# 	shortcuts: false 
