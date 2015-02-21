@@ -92,13 +92,15 @@ module.exports =
 					gm(sourceFile)
 						.resize(optImg.width).autoOrient()
 						.write saveAsTo, (error) ->
-							cb error,
-								filesize: (fs.statSync(saveAsTo)).size #size file 
-								restrict: optImg.restrict #image restrict
-								filename: nameImage #image filename
-								filedisk: saveAsTo #image absolutepath
-								filetype: filetype #image type
-
+							gm(saveAsTo).size (errorSize, imgSize) ->
+								cb error,
+									filesize: (fs.statSync(saveAsTo)).size #size file 
+									restrict: optImg.restrict #image restrict
+									filename: nameImage #image filename
+									filedisk: saveAsTo #image absolutepath
+									filetype: filetype #image type
+									imgsizes: imgSize
+								return
 							return
 					return
 
