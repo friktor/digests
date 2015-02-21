@@ -32,6 +32,9 @@ File =
 			type: "boolean"
 			defaultsTo: false
 
+		imagesize: 
+			type: "object"
+
 
 ###
 Associations
