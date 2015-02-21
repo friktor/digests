@@ -1,1 +1,149 @@
-<%- partial("../partials/menu.ejs") %>
+<div class="page habs">
+	<div class="posts list header habs">
+		<%- partial("../partials/menu.ejs") %>
+		
+		<h2>{{ 'habs' | translate | capitalize:'first'}}</h2>
+	</div>
+	
+	<div class="ui basic segment">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<div class="ui segment content text center">
+					<div class="ui basic segment description">
+						<h4 class="ui header">{{ 'whats habs?' | translate | uppercase}}</h4>
+						<p>{{ 'Habs is a system of branching and categorization of the areas in which you intend to participate or read. Habs allow you to create different branches and areas. Share two types of habs - local and global. Global - unite the direction or concept that raises the whole context of the semantic branches. Local - this sub-cluster which emanate from the global context.' | translate}}</p>
+					</div>
+
+					<h4 class="ui header">{{ 'recent global habs' | translate | uppercase }}</h4>
+					<div class="ui divider"></div>
+
+					<md-button class="md-primary" href="/habs/global">
+						{{ 'see all' | translate}}
+					</md-button>
+				</div>
+
+				<!-- Global Habs Tape -->
+				<div class="tape habs">
+					<div class="row">
+
+						<!-- Another normal hab in habs globals -->
+						<% global.forEach(function(hab, index) {%>
+							<div class="col-md-6">
+								<div class="hab block">
+									<div class="hab header">
+										<img src="<%= hab.headingImage.link || '' %>" alt="">
+										<div class="actions">
+											<div class="buttons">
+												<md-button class="subscribe" href=""><i class="fa fa-envelope-o"></i> {{ 'subscribe' | translate}}</md-button>
+												<md-button class="feed" href="/rss/hab/<%= hab.translitName %>/<%= req.getLocale() %>.xml"><i class="fa fa-rss"></i> {{ 'rss feed' | translate}}</md-button>
+											</div>
+										</div>
+										<a href="/hab/<%= hab.translitName %>" class="hab title">
+											<div class="titleContent">
+												<%= hab.name %>
+												<p class="description">
+													<%= hab.description.substr(0, 50)+"..." %>
+												</p>
+											</div>
+											<div class="blured" style="background-image: url('<%= hab.headingImage.link || '' %>');"></div>
+										</a>									
+									</div>
+									
+								</div>
+							</div>
+						<%});%>
+
+					</div>
+				</div>
+				<!-- end Global Habs -->
+
+				<div class="ui segment local text center">
+					<h4 class="ui header">{{ 'recent local habs' | translate | uppercase }}</h4>
+					<div class="ui divider"></div>
+					<md-button class="md-primary" href="/habs/local">
+						{{ 'see all' | translate}}
+					</md-button>
+				</div>
+
+				<div class="tape habs">
+					<div class="row">
+						<!-- Another normal hab in habs locals -->
+						<% local.forEach(function(hab, index) {%>
+							<div class="col-md-6">
+								<div class="hab block">
+									<div class="hab header">
+										<img src="<%= hab.headingImage.link || '' %>" alt="">
+										<div class="actions">
+											<div class="buttons">
+												<md-button class="subscribe" href=""><i class="fa fa-envelope-o"></i> {{ 'subscribe' | translate}}</md-button>
+												<md-button class="feed" href="/rss/hab/<%= hab.translitName %>/<%= req.getLocale() %>.xml"><i class="fa fa-rss"></i> {{ 'rss feed' | translate}}</md-button>
+											</div>
+										</div>
+										<a href="/hab/<%= hab.translitName %>" class="hab title">
+											<div class="titleContent">
+												<%= hab.name %>
+												<p class="description">
+													<%= hab.description.substr(0, 50)+"..." %>
+												</p>
+											</div>
+											<div class="blured" style="background-image: url('<%= hab.headingImage.link || '' %>');"></div>
+										</a>									
+									</div>
+									
+								</div>
+							</div>
+						<%});%>
+					</div>
+				</div>
+
+				<% if (session.auth && session.user) {%>
+					<div class="ui segment local text center">
+						<h4 class="ui header">{{ 'habs to which you have subscribed' | translate | uppercase }}</h4>
+						<div class="ui divider"></div>
+
+						<md-button class="md-primary" href="/profile/<%= session.user.username %>/subscribes">
+							{{ 'all subscriptions' | translate}}
+						</md-button>
+					</div>
+
+					<div class="tape habs">
+						<div class="row">
+							<!-- Another normal hab in habs locals -->
+							<% bySubscribe.forEach(function(hab, index) {%>
+								<div class="col-md-6">
+									<div class="hab block">
+										<div class="hab header">
+											<img src="<%= hab.headingImage.link || '' %>" alt="">
+											<div class="actions">
+												<div class="buttons">
+													<md-button class="subscribe" href=""><i class="fa fa-envelope-o"></i> {{ 'subscribe' | translate}}</md-button>
+													<md-button class="feed" href="/rss/hab/<%= hab.translitName %>/<%= req.getLocale() %>.xml"><i class="fa fa-rss"></i> {{ 'rss feed' | translate}}</md-button>
+												</div>
+											</div>
+											<a href="/hab/<%= hab.translitName %>" class="hab title">
+												<div class="titleContent">
+													<%= hab.name %>
+													<p class="description">
+														<%= hab.description.substr(0, 50)+"..." %>
+													</p>
+												</div>
+												<div class="blured" style="background-image: url('<%= hab.headingImage.link || '' %>');"></div>
+											</a>									
+										</div>
+										
+									</div>
+								</div>
+							<%});%>	
+						</div>
+					</div>
+			
+				<%}; %>
+
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	</div>
+</div>
+
+<%- partial("../partials/footer.ejs") %>
