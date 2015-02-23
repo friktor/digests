@@ -8,16 +8,12 @@ define [
 		"angular-material",
 		"angular-animate",
 		"vc-angular-recaptcha",
-		"angular-password",
 		"ng-file-upload",
 		"ng-lazyload",
 		
 		"textAngular",
-		"textAngularSetup",
 		"js/options/textEditor",
 
-		"textAngular-sanitize",
-		"textAngular-rangy",
 		"ng-tags-input"
 	], (angular) ->
 
@@ -29,7 +25,6 @@ define [
 		"ngAnimate",
 		"ngLazyload",
 		"vcRecaptcha",
-		"angular.password",
 		"angularFileUpload",
 		"textAngular",
 		"ngTagsInput"

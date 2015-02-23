@@ -12,7 +12,8 @@ define [
  	 	"js/app/editPostApp",
  	 	"js/app/addPostApp",
 
- 	 	"semantic-ui",
+ 	 	"semantic-modules/dropdown",
+ 	 	"semantic-modules/sidebar"
 
  	 	# TODO: Удалить, и подтягивать через bower
  	 	"stagging/jquery.hypher"
