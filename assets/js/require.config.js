@@ -122,9 +122,10 @@ require.config({
                 "jquery"
             ]
         },
-        "semantic-modules": {
+        "semantic-modules/dropdown": {
             deps: [
-                "jquery"
+                "jquery",
+                "semantic-modules/transition"
             ]
         }
     },
