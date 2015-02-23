@@ -10,10 +10,9 @@
 		<%- meta("keywords", sails.config.app.keywords) %>
 
 		<script>window.i18nLocale = "<%= req.getLocale() %>";</script>
-
-		<%- style("/styles/importer.css") %>
-
-		<script src="/libs/requirejs/require.js" data-main="/js/require.config"></script>
+		
+ 		<link rel="stylesheet" href="/resources/styles.css">
+		<script src="/resources/js.js"></script>
 	</head>
 
 	<body>

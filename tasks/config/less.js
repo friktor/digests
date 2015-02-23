@@ -3,7 +3,7 @@
  *
  * ---------------------------------------------------------------
  *
- * Only the `assets/styles/importer.less` is compiled.
+ * Only the `assets/styles/styles.less` is compiled.
  * This allows you to control the ordering yourself, i.e. import your
  * dependencies, mixins, variables, resets, etc. before other stylesheets)
  *
@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 			files: [{
 				expand: true,
 				cwd: 'assets/styles/',
-				src: ['importer.less', 'homepage.less', "profile.less"],
+				src: ['styles.less'],
 				dest: '.tmp/public/styles/',
 				ext: '.css'
 			}]
