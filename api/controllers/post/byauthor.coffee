@@ -43,7 +43,7 @@ module.exports = (req, res) ->
 			
 			# Completed formin object with title and etc..
 			completed =
-				title: req.__("Posts by %s", "#{user.firstname} #{user.lastname}") + " ⚫ Digests.me"
+				title: req.__("Posts by %s", "#{user.firstname} #{user.lastname}") + " · Digests.me"
 				numberOfSubscribers: numberOfSubscribers
 				posts: postsByThisUser
 				user: user

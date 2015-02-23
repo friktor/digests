@@ -64,7 +64,7 @@ module.exports = (req, res) ->
 
 	Promise.join(GlobalHabs, LocalHabs, UserHabsSubscribtions, (global, local, bySubscribe) ->
 		res.view
-			title: req.__("Habs") + " ⚫ Digests.me"
+			title: req.__("Habs") + " · Digests.me"
 			bySubscribe: bySubscribe
 			global: global
 			local: local

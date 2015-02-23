@@ -62,7 +62,7 @@ module.exports = (req, res, next) ->
 
 	.then((posts) ->
 		Forming =
-			title: req.__("Latest") + " ⚫ Digests.me ⚫ " + req.__("%s page", page)
+			title: req.__("Latest") + " · Digests.me · " + req.__("%s page", page)
 			locale: locale
 			posts: posts
 			page: page

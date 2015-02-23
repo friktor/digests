@@ -79,7 +79,18 @@ module.exports = (req, res) ->
 		mergePosts = habsPosts.concat authorsPosts # merge authors posts & habs posts
 		mergePosts.uniqueObjectArray "id" # clean all posts by duplicate - id
 
-		res.json mergePosts 
+		if mergePosts.length is 0 then res.notFound() else
+
+			target =
+				title: req.__("My personal feed")+" · Digests.me · "+req.__("%s page", page)
+				locale: req.getLocale()
+				posts: mergePosts
+				page: page
+	
+			switch req.param("ajax", "otherwise")
+				when "true" then res.json target
+				else res.view target
+
 	)
 
 	.error((error) ->

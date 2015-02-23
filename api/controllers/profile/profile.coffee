@@ -29,7 +29,7 @@ module.exports = (req, res) ->
 	.spread((user, latestRecord, numberOfPosts, numberOfComments) ->
 		
 		responseObject = 
-			title: req.__("Profile %s", username)+" ⚫ Digests.me"
+			title: req.__("Profile %s", username)+" · Digests.me"
 			numberOfComments: numberOfComments
 			numberOfPosts: numberOfPosts
 			latestRecord: latestRecord

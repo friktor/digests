@@ -23,6 +23,6 @@ module.exports = (req, res) ->
 				res.json user
 			else
 				res.view
-					title: req.__("Settings %s", user.username)+" ⚫ Digests.me"
+					title: req.__("Settings %s", user.username)+" · Digests.me"
 					user: user
 	)

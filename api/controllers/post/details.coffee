@@ -64,7 +64,7 @@ module.exports = (req, res, next) ->
 		.spread((post, author, habs) ->
 			# response rendered html
 			res.view
-				title  : post.title + " ⚫ Digests.me"
+				title  : post.title + " · Digests.me"
 				author : author
 				post   : post
 				habs   : habs
