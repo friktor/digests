@@ -15,6 +15,8 @@ module.exports = {
 
 	"get /tapePersonal/:page": "PostController.tapePersonal",
 
-	"get /tapePersonal": "PostController.tapePersonal"
+	"get /myfeed": "PostController.tapePersonal",
+
+	"get /myfeed/:page": "PostController.tapePersonal"
 
 };
