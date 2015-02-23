@@ -1,19 +1,8 @@
-<%- script("/libs/masonry/dist/masonry.pkgd.js") %>
-
 <script>
-	window.usingModule.push("ngLazyload");
-
 	window.thisPage = <%= page %>;
 	window.postsPage = "/myfeed";
 	window.locale = "<%= locale %>";
 </script>
-
-<%- script("/libs/lodash/lodash.js") %>
-<%- script("/stagging/semantic/modules/dropdown.min.js") %>
-
-<%- script("/libs/ng-lazyload/nglazyload.js") %>
-<%- script("/js/app/appPosts.js", "defer") %>
-
 
 <div class="posts list header myfeed">
 	<%- partial("../partials/menu.ejs") %>
