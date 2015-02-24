@@ -1,8 +1,8 @@
 {
   "name": "digest-engine",
   "private": true,
-  "version": "0.0.0",
-  "description": "a Sails application",
+  "version": "0.2.0-alpha",
+  "description": "Digests.me - multi-lingual extensible blogging platform.",
   "keywords": [],
   "dependencies": {
     "accept-language": "^1.2.0",
@@ -72,8 +72,11 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/anton/digest-engine.git"
+    "url": "git@82.146.33.170:/home/git/digests.git"
   },
-  "author": "anton",
+  "authors": [
+    "Anton Shramko",
+    "Dmitriy Zhdanov"
+  ],
   "license": ""
 }

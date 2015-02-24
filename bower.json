@@ -1,12 +1,13 @@
 {
   "name": "digest-engine",
-  "version": "0.1",
+  "version": "0.2.0-alpha",
   "main": "app.js",
   "moduleType": [
     "node"
   ],
   "authors": [
-    "Anton Shramko"
+    "Anton Shramko",
+    "Dmitriy Zhdanov"
   ],
   "license": "EULA",
   "private": true,
