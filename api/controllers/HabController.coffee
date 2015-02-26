@@ -7,9 +7,13 @@ require "coffee-script/register"
 
 module.exports =
 
-	tapeHabs: require "./hab/tapeHabs.coffee"
+	habs: require "./hab/habs.coffee"
 	
 	publicList: require "./hab/serealizedList.coffee"
+
+	byhab: require "./hab/postsByHab.coffee"
+
+	habsList: require "./hab/listHabs.coffee"
 
 	_config: 
 		shortcuts: false 

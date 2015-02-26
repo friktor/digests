@@ -8,43 +8,31 @@
 # 		* 5 local habs
 # 		* by subscribes
 
+require "coffee-script/register"
+
 Promise = require "bluebird"
 map = Promise.promisify(require("async").map)
+common = require "./common.coffee"
+
 _ = require "lodash"
 
 module.exports = (req, res) ->
 	locale = req.getLocale()
-
-	iteratorTranslate = (hab, cb) ->
-		desc = _.find(hab.description, "locale": locale)
-		name = _.find(hab.name, "locale": locale)
-		image = _.find(hab.headingImg, "restrict": "preview")
-
-		cb null, _.merge hab, 
-			name: name.name or hab.translitName
-			description: desc.desc or null
-			headingImg: false
-			headingImage: try
-				size: image.imagesize
-				link: image.link
-			catch e
-				false
-			
-		return
+	iteratorForming = _.partial(common.iteratorForming, locale, "preview")
 
 	GlobalHabs = Hab.find()
 		.populate("headingImg")
 		.where(type: "global")
 		.sort("createdAt desc")
 		.limit(6)
-		.then (habs) -> map(habs, iteratorTranslate)
+		.then (habs) -> map(habs, iteratorForming)
 
 	LocalHabs = Hab.find()
 		.populate("headingImg")
 		.where(type: "local")
 		.sort("createdAt desc")
 		.limit(6)
-		.then (habs) -> map(habs, iteratorTranslate)
+		.then (habs) -> map(habs, iteratorForming)
 
 	if req.session.auth and req.session.user
 		
@@ -60,7 +48,7 @@ module.exports = (req, res) ->
 					return
 
 				Hab.find(tapeId).populate("headingImg").sort("createdAt desc").limit(6)
-			).then (habs) -> map(habs, iteratorTranslate)
+			).then (habs) -> map(habs, iteratorForming)
 
 	Promise.join(GlobalHabs, LocalHabs, UserHabsSubscribtions, (global, local, bySubscribe) ->
 		res.view
