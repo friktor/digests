@@ -7,10 +7,12 @@ define [
  	 	"js/app/appProfile",
  	 	"js/app/appSettings",
  		"js/app/appLogin",
-	    "js/app/appDetails",
+	  "js/app/appDetails",
  	 	"js/app/appPosts",
  	 	"js/app/editPostApp",
  	 	"js/app/addPostApp",
+
+ 	 	"js/actions/habsMasonry",
 
  	 	"semantic-modules/dropdown",
  	 	"semantic-modules/sidebar"
