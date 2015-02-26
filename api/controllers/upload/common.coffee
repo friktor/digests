@@ -31,6 +31,28 @@ badFileType = require "../errors/badFileType.coffee"
 
 module.exports = 
 
+	cropAndBlurNavbarBg : (filepath, workDir) ->
+		new Promise (resolve, reject) ->
+			existsFile = fs.existsSync filepath
+			existsWorkDir = fs.existsSync workDir
+	
+			if !existsWorkDir then fs.mkdirSync workDir
+			if !existsFile then throw new Error "file isnt exists" else
+				saveAsTo = workDir+"/navbar.bg.jpg"
+
+				gm(filepath).crop(1600, 80, 0, 0).quality(87).fill("rgba(0,0,0,0.45)").blur(24, 4).write saveAsTo, (err) ->			
+					if err then reject err else 
+						resolve
+							filesize: (fs.statSync(saveAsTo)).size #size file 
+							restrict: "navbarBg" #image restrict
+							filename: "navbar.bg.jpg" #image filename
+							filedisk: saveAsTo #image absolutepath
+							filetype: "image/jpeg" #image type
+							imgsizes: 
+								height: 1600
+								width: 80
+					return
+				return
 
 	# @params: {filepath|stringFilepath, workDir|stringFilePath}
 	# @descriptions: function for resize profile header images. After complete - preview blured image & full image.
@@ -90,7 +112,7 @@ module.exports =
 
 					# Resize image using image-magick with auto orientation.
 					gm(sourceFile)
-						.resize(optImg.width).autoOrient()
+						.resize(optImg.width).autoOrient().quality(87)
 						.write saveAsTo, (error) ->
 							gm(saveAsTo).size (errorSize, imgSize) ->
 								cb error,
@@ -118,7 +140,7 @@ module.exports =
 	UploadImage: (file, filepath) ->
 		new Promise (resolve, reject) ->
 			saveDirSrc = sails.config.upload.dir+filepath
-	
+
 			file.upload dirname: saveDirSrc, (error, uploaded) ->
 				# sails.log uploaded
 

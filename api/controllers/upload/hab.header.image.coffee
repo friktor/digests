@@ -59,6 +59,20 @@ module.exports = (req, res) ->
 
 	.spread((hab, images) ->
 		if !images then throw new Error "Images resized not exists or found" else
+			
+			workDir = sails.config.upload.dir+"/habs/#{hab.translitName}/headingImg"
+			fullImageFiledisk = _.find(images, "restrict": "full")
+
+			cropNavbarBgAndForming = common.cropAndBlurNavbarBg(fullImageFiledisk.filedisk, workDir)
+				.then (navbarBgImage) -> 
+					images.push navbarBgImage
+					return images
+
+			[hab, cropNavbarBgAndForming]
+	)
+
+	.spread((hab, images) ->
+		if !images then throw new Error "Images resized not exists or found" else
 
 			iteratorCreateRecord = (image, cb)->
 				$file = 
