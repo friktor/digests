@@ -1,0 +1,81 @@
+<div class="page habs">
+	<div class="posts list header habs">
+		<%- partial("../partials/menu.ejs") %>
+		
+		<h2>{{ 'habs' | translate | capitalize:'first'}}</h2>
+	</div>
+
+	<div class="ui basic segment">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+				<div class="ui segment content text center" style="width:100%;">
+					<div class="ui basic segment description">
+						<h4 class="ui header">{{ '<%= req.param("type", "global") %> habs' | translate | uppercase}}</h4>
+						<div class="ui divider horizontal"><i class="world icon"></i></div>
+						<% if (req.param("type") === "global") {%>
+						<p>{{ 'Global habs is a semantic Association, which concluded themes which may contain many branches as directions in the study of power. On this page you can view all global habs.' | translate}}</p>
+						<%};%>
+						<% if (req.param("type") === "local") {%>
+						<p>{{ 'Local habs are branches and direction that comes from the context of the global (unites) habs. On this page you can view a list of all local habs.' | translate}}</p>
+						<%}; %>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	</div>	
+
+	<div class="ui basic segment">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+			
+				<!-- Global Habs Tape -->
+				<div class="tape habs">
+					<div class="row">
+
+						<!-- Another normal hab in habs globals -->
+						<% habs.forEach(function(hab, index) {%>
+							<div class="col-md-6 col-sm-6">
+								<div class="hab block">
+									<div class="hab header">
+										<img src="<%= hab.headingImage.link || '' %>" alt="">
+										<div class="actions">
+											<div class="buttons">
+												<md-button class="subscribe" href=""><i class="fa fa-envelope-o"></i> {{ 'subscribe' | translate}}</md-button>
+												<md-button class="feed" href="/rss/hab/<%= hab.translitName %>/<%= req.getLocale() %>.xml"><i class="fa fa-rss"></i> {{ 'rss feed' | translate}}</md-button>
+											</div>
+										</div>
+										<a href="/hab/<%= hab.translitName %>" class="hab title">
+											<div class="titleContent">
+												<%= hab.name %>
+												<p class="description">
+													<%= hab.description.substr(0, 50)+"..." %>
+												</p>
+											</div>
+											<div class="blured" style="background-image: url('<%= hab.headingImage.link || '' %>');"></div>
+										</a>									
+									</div>
+									
+								</div>
+							</div>
+						<%});%>
+
+					</div>
+				</div>
+				<!-- end Global Habs -->
+
+
+				<div class="ui basic segment text center">
+					<md-button href="/habs/<%= req.param("type") %>/<%= page+1 %>" class="md-primary nextpage">
+						{{ 'next page' | translate}}
+					</md-button>
+				</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	</div>
+</div>
+
+<%- partial("../partials/footer.ejs") %>

@@ -4,7 +4,7 @@
 		
 		<h2>{{ 'habs' | translate | capitalize:'first'}}</h2>
 	</div>
-	
+
 	<div class="ui basic segment">
 		<div class="row">
 			<div class="col-md-1"></div>
@@ -22,6 +22,15 @@
 						{{ 'see all' | translate}}
 					</md-button>
 				</div>
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	</div>
+	
+	<div class="ui basic segment">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
 
 				<!-- Global Habs Tape -->
 				<div class="tape habs">
@@ -29,7 +38,7 @@
 
 						<!-- Another normal hab in habs globals -->
 						<% global.forEach(function(hab, index) {%>
-							<div class="col-md-6">
+							<div class="col-md-6 col-sm-6">
 								<div class="hab block">
 									<div class="hab header">
 										<img src="<%= hab.headingImage.link || '' %>" alt="">
