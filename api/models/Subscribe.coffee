@@ -1,61 +1,66 @@
  # Subscribe.coffee
  #
  # @description :: TODO: You might write a short summary of how this model works and what it represents here.
- # @docs        :: http://sailsjs.org/#!documentation/models
+ # @docs				:: http://sailsjs.org/#!documentation/models
 
 randomString = require "random-string"
 
 Subscribe =
 
-	# Custom validations
-	types: 
+	types:
+		
 		# valid locale {ru || en || pl} without other
 		locale: (locale) ->
 			/(^ru$|^en$|^pl$)/.test(locale)
 
-	# Attributes field in collection
 	attributes: 
 
-		# email for send mails
+		# Email
+		# desc: email options if not registered user.
+		# explan: is optional
 		
 		email: 
 			type: "string"
 			required: true
 			email: true
 
-		# From 
-		#	{Hab || Author} - with id source @by field
-		# {Newest || Popular} - without source @by field
+		# Type 
+		#	desc: Variations type for subscribe:
+		# variant: 'hab', 'author'
 
-		from:
+		type:
 			type: "string"
 			required: true
 
-		# By {*_id} from {@from field}. 
-		# Ignore this field if @from is {Newest || Popular}
-		
-		by:
+		# Purpose
+		# desc: id targeted subscribe.
+		# explan: If 'hab' then hab.id, else if 'author' then user.id
+
+		purpose:
 			type: "string"
 			required: true
 
-		# Locale {locale from code (valid locale) || all}
-		
+		# Locale
+		# desc: locale options for set lang to send email. 
 		locale:
 			defaultsTo: "ru"
 			type: "string"
 			locale: true
 
 		# Association for user subscribtions. {user_id || null}
-		user:
-			model: "user"
+		user: model: "user"
 
-		# Enable mailing posts 
-		# if @user - can turn off
-		# if not @user - only remove
+		# Mailing
+		# desc: options for send email with posts
+		# explan: if subscribe without user associations - always 'true'
 
-		enableMailing:
+		mailing:
 			type: "boolean"
 			defaultsTo: true
+
+		# Activated
+		# desc: options for verify activated subscribe
+		# explan: activated after verfify, vefift link in email
 
 		activated:
 			type: "boolean"
