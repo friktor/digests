@@ -43,9 +43,9 @@ module.exports = (req, res) ->
 
 			# Each subscribes for forming array with tape
 			subscriptions.forEach (subscribe, index) ->
-				switch subscribe.from
-					when "Author" then byAuthor.push author: "contains": subscribe.by
-					when "Hab" then byHabs.push hab: "contains": subscribe.by
+				switch subscribe.type
+					when "author" then byAuthor.push author: "contains": subscribe.purpose
+					when "hab" then byHabs.push hab: "contains": subscribe.purpose
 				return
 
 			# Clean duplicate

@@ -3,6 +3,8 @@
  # @description :: Server-side logic for managing subscribes
  # @help        :: See http://links.sailsjs.org/docs/controllers
 
+require "coffee-script/register"
+
 Promise = require "bluebird"
 readFile = Promise.promisify(require("fs").readFile);
 ejs = require "ejs"
@@ -31,49 +33,7 @@ class subscribeExists extends Error
 # Main Eventer
 module.exports = 
 	
-	create: (req, res) ->
-		params = 
-			locale: req.param "locale", "ru"
-			email: req.param "email"
-			from: req.param "from"
-			user: req.param "user"
-			by: req.param "by"
-
-		# Main Action
-		Subscribe.findOne().where(params)
-			
-			# Finded subscribe
-			.then((subscribe) ->
-				if !subscribe
-					Subscribe.create(params)
-				else
-					throw new subscribeExists "subscribe is exists"
-				
-			)
-
-			# Send mail after create subscribe
-			.then((subscribe) ->
-				
-				res.json
-					success: true
-					message: req.__ "Congratulations! You request a subscription. To your email sent instructions to activate your subscription."
-				
-				mailingCommon.subscribeCreate(
-					token: subscribe.activateToken
-					locale: subscribe.locale
-					email: subscribe.email
-					id: subscribe.id
-				)
-				return
-			)
-
-			# Handle if subscribe is exists
-			.caught(subscribeExists, (e) ->
-				# sails.log.error e
-				res.json
-					success: false
-					message: req.__ "Error! Subscribe is exists."
-			)
+	create: require "./subscribe/create.coffee"
 
 
 	activateSubscribe: (req, res) ->

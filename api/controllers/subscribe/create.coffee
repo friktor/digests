@@ -2,6 +2,7 @@ require "coffee-script/register"
 
 brokenTokenError = require "../errors/brokenTokenError.coffee"
 subscribeExists = require "../errors/subscribeExists.coffee"
+common = require "./common.coffee"
 
 module.exports = (req, res) ->
 
@@ -24,7 +25,7 @@ module.exports = (req, res) ->
 
 	# Find Subscribe by params
 	Subscribe.findOne(findExists).then((subscribe) ->
-		if !subscribe then throw new subscribeExists() else Subscribe.create(params)
+		if subscribe then throw new subscribeExists() else Subscribe.create(params)
 	)
 
 	.then((subscribe) ->

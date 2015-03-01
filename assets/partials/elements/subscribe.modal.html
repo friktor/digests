@@ -1,0 +1,51 @@
+<md-dialog aria-label="Subscribe modal form">
+	<md-content>
+		<h3>{{ 'be aware of your interests' | translate | uppercase}}</h3>
+		
+		<img src="/images/icons/cat_cage.png" style="height: 100px;">
+		
+		<p>{{ 'If you want to receive regular newsletters with popular posts from this source (author, hub, etc), or add this source to a resource from which to create your personal tape - you can subscribe to the current resource. In the subscription, you can specify the language in which you want to receive the newsletter. Also using subscriptions you create your personal feed your interests. At any time you can unsubscribe in the profile settings.' | translate}}</p>
+		
+		<p ng-show="!auth" style="margin-top: 10px; color: #666; font-size: 14px;">
+			<em>
+				* {{ 'The opportunity is only available to authorized users. Please login or register.' | translate}}
+			</em>
+		</p>
+		
+		<p ng-show="auth" style="margin-top: 1rem; color: #666; font-size: 12px; font-style: italic;">
+			{{ 'default language in subscribe: '}} {{	getLocale(locale) | translate | capitalize:'all'}}
+		</p>
+
+		<div style="margin-top: 1rem;" ng-show="!auth" layout="row" layout-align="center center">
+			<md-button href="/register" class="md-warn">{{ 'register' | translate}}</md-button>
+			<md-button href="/login" style="color: #8BC34A;">{{ 'login' | translate}}</md-button>
+		</div>
+
+		<div ng-show="auth" layout="row" layout-align="center center">
+  		<md-select ng-model="locale">
+  			<md-select-label>{{	getLocale(locale) | translate | capitalize:'all'}}</md-select-label>
+  		  <md-option value="ru">{{ 'russian' | translate | capitalize:'all'}}</md-option>
+  		  <md-option value="pl">{{ 'polish' | translate | capitalize:'all'}}</md-option>
+  		  <md-option value="en">{{ 'english' | translate | capitalize:'all'}}</md-option>
+  		</md-select>				
+		</div>
+
+		<div ng-show="subscribeSuccess" class="ui inverted green segment">
+			{{ 'You have successfully subscribed to this source, to activate a broadcast email to activate your subscription. Your mail has been sent to you with instructions on how to activate. Note: even if the email sending is not activated and the subscription allows you to create your personal feed.' | translate}}
+		</div>
+
+		<div class="ui inverted red segment" ng-show="subscribeError">
+			{{ subscribeError | translate}}
+		</div>
+	</md-content>
+
+	<div ng-show="auth" class="md-actions" layout="row">	
+		<md-button ng-click="">
+		 {{ 'no thanks' | translate}}
+		</md-button>
+		<md-button ng-click="follow()" class="md-primary">
+			{{ 'subscribe' | translate}}
+		</md-button>
+	</div>
+</md-dialog>
+
