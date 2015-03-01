@@ -25,5 +25,5 @@ module.exports = (sails) ->
 					return
 				return
 
-		weeklyMailingByAuthors.start()
+		# weeklyMailingByAuthors.start()
 		cb()

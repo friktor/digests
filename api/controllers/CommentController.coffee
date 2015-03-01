@@ -10,3 +10,8 @@ module.exports =
 	update: require "./comment/update.coffee"
 	remove: require "./comment/remove.coffee"
 	get   : require "./comment/get.coffee"
+
+	_config: 
+		shortcuts: false 
+		actions: false 
+		rest: false

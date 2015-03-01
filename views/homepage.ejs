@@ -1,1 +1,37 @@
-<%- partial("partials/menu.ejs") %>
+<script async src="//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecapthaApiLoaded&hl=<%= req.getLocale() %>">
+</script>
+
+<style>
+	footer {
+		margin-top: 0;
+	}
+</style>
+
+<div class="page homepage" ng-controller="homepage">
+	<%- partial("partials/menu.ejs") %>
+
+	<div class="ui basic segment">
+		<div class="row">
+			<div class="col-md-8 col-sm-5">
+				<h1>{{ 'We will deprive your brain' | translate}}</h1>
+			</div>
+			<div class="col-md-4 col-sm-7">
+				<login-form ng-show="isShow('login')"></login-form>
+				<register-form ng-show="isShow('register')"></register-form>
+				
+				<div ng-show="isShow('login')" class="ui segment text center Desc">
+					<h4>{{ 'For the first time to "Digests"?' | translate}}</h4>
+					<md-button ng-click="changeForm('register')">{{ 'join' | translate}}</md-button>
+				</div>
+
+				<div ng-show="isShow('register')" class="ui segment text center Desc">
+					<h4>{{ 'With us already?' | translate}}</h4>
+					<md-button ng-click="changeForm('login')">{{ 'login' | translate}}</md-button>
+				</div>				
+
+			</div>
+		</div>
+	</div>
+	
+</div>
+<%- partial("partials/footer.ejs") %>

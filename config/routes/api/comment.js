@@ -1,4 +1,5 @@
 module.exports = {
 	"post /utils/comment/create": "CommentController.create",
-	"/utils/comment/get": "CommentController.get"
+	"get /utils/comment/get": "CommentController.get",
+	"/utils/comment/remove": "CommentController.remove"
 }

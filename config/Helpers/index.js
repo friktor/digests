@@ -13,5 +13,5 @@ module.exports = {
 
 	style: function (href) {
 		return "<link rel=\"stylesheet\" href=\""+href+"\">"
-	}
+	},
 }

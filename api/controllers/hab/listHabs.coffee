@@ -47,7 +47,7 @@ module.exports = (req, res) ->
 	)
 
 	.then((habs) ->
-		if !habs[0] then res.notFound() else
+		if !habs[0] and page > 1 then res.notFound() else
 			res.view
 				title: req.__("Habs - %s", type)+" · Digests.me · "+req.__("page %s", page)
 				habs: habs

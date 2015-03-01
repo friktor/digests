@@ -14,16 +14,23 @@
 	</div>
 
 	<!-- Content -->
-	<div class="ui basic segment">
+	<div class="ui basic segment ProfileMain"> 
 		<div class="row">
 			
 			<div class="col-md-3">
 				<!-- Actions in this profile -->
-				<div class="ui actions">
-					<md-button class="md-fab indigo">
-      			<md-tooltip>
-      			  <%= __("To subscribe to this user") %>
-      			</md-tooltip>
+				<div class="ui actions" ng-controller="subscribe">
+					<md-button class="md-fab green" aria-label="button actions"
+						ng-click="subscribe({ 
+							email: <%= req.session.user ? '"'+req.session.user.email+'"' : null %>,
+							user: <%= req.session.user ? '"'+req.session.user.id+'"' : null %>, 
+							auth: <%= req.session.auth ? req.session.auth : false %>, 
+							parentElement: '.page.profile .profile.header',
+							purpose: '<%= user.id %>', 
+							type: 'author', 
+						})"
+						>
+						<md-tooltip>{{ 'subscribe to this author' | translate | capitalize:'first'}}</md-tooltip>
 						<i class="fa fa-envelope"></i>
 					</md-button>
 					<md-button ng-click="redirectAllPosts()" class="md-fab blue">

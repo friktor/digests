@@ -7,12 +7,8 @@ require.config({
         "angular-material": "libs/angular-material/angular-material",
         "angular-translate": "libs/angular-translate/angular-translate",
         "angular-translate-loader-static-files": "libs/angular-translate-loader-static-files/angular-translate-loader-static-files",
-        async: "libs/async/lib/async",
         highlightjs: "libs/highlightjs/highlight.pack",
         jquery: "libs/jquery/dist/jquery",
-        "jquery.lazyload": "libs/jquery.lazyload/jquery.lazyload",
-        "jquery.scrollstop": "libs/jquery.lazyload/jquery.scrollstop",
-        lodash: "libs/lodash/lodash",
         masonry: "libs/masonry/dist/masonry.pkgd",
         "ng-file-upload": "libs/ng-file-upload/angular-file-upload",
         "ng-lazyload": "libs/ng-lazyload/nglazyload",
@@ -31,7 +27,8 @@ require.config({
         "angular-aria": "libs/angular-aria/angular-aria",
         "font-awesome": "libs/font-awesome/fonts/*",
         "semantic-ui": "libs/semantic-ui/dist/semantic",
-        "semantic-modules": "libs/semantic-ui/dist/components"
+        "semantic-modules": "libs/semantic-ui/dist/components",
+        "jquery-bridget": "libs/jquery-bridget/jquery.bridget",
     },
     shim: {
         angular: {

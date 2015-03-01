@@ -12,11 +12,10 @@ module.exports = (req, res) ->
 		target: req.param "target"
 		reply: req.param "reply"
 
-	Comment.create(params)
-
-	.then((comment) ->
-		author = User.findOneById(comment.author).populate("avatarImg").then (user) -> user
-		[comment, author]
+	User.findOneByUsername(params.author).populate("avatarImg").then((user) -> 
+		if !user then throw new Error("Author isnt exists") else
+			comment = Comment.create(_.merge(params, author: user.id)).then (comment) -> comment
+			[comment, user]
 	)
 
 	.spread((comment, author) ->
@@ -33,6 +32,8 @@ module.exports = (req, res) ->
 			avatars: avatars.link or false
 
 		_.merge comment,
+			replyTarget: comment.replyTarget
+			reply: comment.reply
 			message: message
 			author: $author
 	)

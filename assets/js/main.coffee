@@ -11,6 +11,8 @@ define [
  	 	"js/app/appPosts",
  	 	"js/app/editPostApp",
  	 	"js/app/addPostApp",
+ 	 	"js/app/appSubscribe",
+ 	 	"js/app/appHome",
 
  	 	"js/actions/habsMasonry",
 

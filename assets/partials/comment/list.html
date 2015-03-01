@@ -1,6 +1,6 @@
 <div class="ui segment comment list">
 	<div class="ui header text center">
-		{{countComments}} {{ 'comments' | translate | capitalize:'first'}}
+		{{comments.length}} {{ 'comments' | translate | capitalize:'first'}}
 	</div>
 
 	<div class="ui comments threaded">
@@ -19,30 +19,53 @@
 				</div>
 				<div class="text" ng-bind-html="comment.message"></div>
 
-				<div class="actions">
-					<a class="reply">{{ 'reply' | translate | capitalize:'all'}}</a>
-					<a class="remove">{{ 'remove' | translate | capitalize:'all'}}</a>
+				<div class="actions" ng-show="isOwner(comment.author.username)">
+					<a href="#addComment" class="reply" ng-click="setReply(comment.id)">
+						<i class="reply icon"></i>  {{ 'reply' | translate | capitalize:'all'}}
+					</a>
+					<a class="remove" 
+						ng-click="removeComment({
+							author: comment.author.username,
+							comment: comment.id,
+							reply: false,
+							index: $index
+						})"
+					>
+						<md-tooltip md-direction="top">{{ 'remove this comment' | translate | capitalize:'first'}}</md-tooltip>
+						<i class="remove icon"></i> {{ 'remove' | translate | capitalize:'all'}}
+					</a>
 				</div>
 			</div>
 			
 			<!-- Reply comments -->
 			<div class="comments" ng-show="comment.reply.length > 0">
 				
-				<div class="comment" ng-repeat="comment in comment.reply | orderBy: '-createdAt'">
-					<a href="{{ '/profile/'+comment.author.username }}" class="avatar">
-						<img src="{{ comment.author.avatars }}">
+				<div class="comment" ng-repeat="reply in comment.reply | orderBy: '-createdAt'">
+					<a href="{{ '/profile/'+reply.author.username }}" class="avatar">
+						<img src="{{ reply.author.avatars }}">
 					</a>
 					<div class="content">
-						<a href="{{ '/profile/'+comment.author.username }}" class="author">
-							{{ comment.author.firstname }} {{ comment.author.lastname }}
+						<a href="{{ '/profile/'+reply.author.username }}" class="author">
+							{{ reply.author.firstname }} {{ reply.author.lastname }}
 						</a>
 						<div class="metadata">
-							<span class="date">{{ comment.createdAt | date:'dd.MM.yyyy'}}</span>
+							<span class="date">{{ reply.createdAt | date:'dd.MM.yyyy'}}</span>
 						</div>
-						<div class="text" ng-bind-html="comment.message"></div>
-						<div class="actions">
-							<a class="reply">{{ 'reply' | translate | capitalize:'all'}}</a>
-							<a class="remove">{{ 'remove' | translate | capitalize:'all'}}</a>
+						<div class="text" ng-bind-html="reply.message"></div>
+						<div class="actions" ng-show="isOwner(reply.author.username)">
+							<a class="remove"
+								ng-click="removeComment({
+									author: reply.author.username,
+									comment: reply.id,
+									index: $index,
+									reply: true,
+
+									parent: comment
+								})"
+							>
+								<md-tooltip md-direction="top">{{ 'remove this comment' | translate | capitalize:'first'}}</md-tooltip>
+								<i class="remove icon"></i> {{ 'remove' | translate | capitalize:'all'}}
+							</a>
 						</div>
 					</div>
 				</div>
@@ -53,41 +76,69 @@
 		</div>
 		<!-- End Main Comment -->
 
+
 	</div>
 
-	<div class="ui divider"></div>
+	<p ng-show="comments.length == 0" class="text center" style="font-style: italic; color: #666; font-size: 14px;">
+		{{ 'to this entry no comments' | translate | capitalize:'first'}}
+	</p>
 
-	<!-- Preview Comment Area -->
-	<div class="ui comments">
-		<div class="comment">
+	<form 
+		class="push comments ui form" 
+		name="CommentForm" 
+		id="addComment" 
+		ng-show="auth" 
+		novalidate
+	>
+		<div class="ui divider"></div>
+
+		<!-- Preview Comment Area -->
+		<div class="ui comments">
 			<div class="comment">
-				<a href="{{ '/profile/'+username }}" class="avatar">
-					<img src="{{ avatars }}">
-				</a>
-				<div class="content">
-					<a href="{{ '/profile/'+comment.author.username }}" class="author">
-						{{ fullname }}
+				<div class="comment">
+					<a href="{{ '/profile/'+username }}" class="avatar">
+						<img src="{{ avatars }}">
 					</a>
-					<div class="metadata">
-						<span class="info">{{ 'preview comment' | translate | capitalize:'first'}}</span>
+					<div class="content">
+						<a href="{{ '/profile/'+comment.author.username }}" class="author">
+							{{ fullname }}
+						</a>
+						<div class="metadata">
+							<span ng-show="reply" class="info green">
+								<md-tooltip md-direction="top">{{ 'mode of response to the comment' | translate | capitalize:'first'}}</md-tooltip>
+								<i class="reply icon"></i> 
+								{{ 'is reply' | translate | capitalize:'first'}}
+							</span>
+						</div>
+						<div class="text" ng-show="!newCommentMessage">
+							<em style="color: #666;">
+								{{ 'here will be displayed the contents of the comment' | translate | capitalize: 'first'}}
+							</em>
+						</div>
+						<div class="text" ng-bind-html="newCommentMessage"></div>
+						<div class="actions">
+							<a ng-click="setNormal()"><i class="comment icon"></i> {{ 'set normal mode' | translate | capitalize:'first'}}</a>
+						</div>
 					</div>
-					<div class="text" ng-show="!newCommentMessage">
-						<em style="color: #666;">
-							{{ 'here will be displayed the contents of the comment' | translate | capitalize: 'first'}}
-						</em>
-					</div>
-					<div class="text" ng-bind-html="newCommentMessage"></div>
-				</div>
-			</div>			
+				</div>			
+			</div>
 		</div>
-	</div>
+		
+		<div class="field" ng-class="{error: CommentForm.newCommentMessage.$invalid && clickedSubmit}">
+			<textarea 
+				placeholder="{{ 'enter your comment here' | translate | capitalize:'first'}}"
+				ng-model="newCommentMessage" 
+				class="ui textarea fluid"
+				name="newCommentMessage" 
+				required 
+			></textarea>			
+		</div>
+		
+		<div class="text center ui basic segment">
+			<md-button class="md-primary" ng-click="addComment(CommentForm.$valid, newCommentMessage)">
+				{{ 'publish comment' | translate | capitalize:'all'}}
+			</md-button>
+		</div>		
+	</form>
 
-	<textarea ng-model="newCommentMessage" class="ui textarea fluid" style="display: block; width: 100%;"
-		placeholder="{{ 'enter your comment here' | translate | capitalize:'first'}}"
-	></textarea>
-	<div class="text center ui basic segment">
-		<md-button class="md-primary">
-			{{ 'publish comment' | translate | capitalize:'all'}}
-		</md-button>
-	</div>
 </div>

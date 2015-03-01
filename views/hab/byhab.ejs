@@ -7,7 +7,7 @@
 <style>
 	.posts.hab.header {
 		background: url('<%= hab.headingImage.link %>') no-repeat fixed top;
-		height: 670px;
+		height: 730px;
 	}
 
 	.posts.hab.header .blured {
@@ -27,7 +27,7 @@
 		<p><%= hab.description %></p>
 		
 		<div class="ui icon top left pointing dropdown basic button">
-			<i class="world icon"></i> 
+			<i class="world icon"></i>
 			<div class="menu">
 				<a href="?locale=ru" class="item">{{ 'russian' | translate | capitalize:'all'}}</a>
 				<a href="?locale=en" class="item">{{ 'english' | translate | capitalize:'all'}}</a>
@@ -35,14 +35,33 @@
 			</div>	
 		</div>
 	
-		<a href="/rss/hab/<%= hab.translitName %>/<%= locale %>.xml" class="ui icon top left pointing basic button">
-			<i class="feed icon"></i>
-		</a>		
 	</div>
 
 	<div class="text center">
 		<i class="fa fa-angle-double-down"></i>
 	</div>
+</div>
+
+<div class="buttons actions hab text center" ng-controller="subscribe">
+	<md-button class="md-fab green" aria-label="button actions"
+		ng-click="subscribe({ 
+			email: <%= req.session.user ? '"'+req.session.user.email+'"' : null %>,
+			user: <%= req.session.user ? '"'+req.session.user.id+'"' : null %>, 
+			auth: <%= req.session.auth ? req.session.auth : false %>, 
+			parentElement: '.buttons.actions.hab',
+			purpose: '<%= hab.id %>', 
+			type: 'hab', 
+		})"
+		>
+		<md-tooltip>{{ 'subscribe to this hab' | translate | capitalize:'first'}}</md-tooltip>
+		<i class="fa fa-envelope"></i>
+	</md-button>
+	<md-button class="md-fab indigo" aria-label="button actions"
+		ng-click="openLink('/rss/hab/<%= hab.translitName %>/<%= locale %>.xml')"
+	>
+		<md-tooltip>{{ 'RSS feeds by this hab' | translate}}</md-tooltip>
+		<i class="fa fa-rss"></i>
+	</md-button>
 </div>
 
 <div class="posts lists main" ng-controller="PostsCtrl">

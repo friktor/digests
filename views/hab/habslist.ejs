@@ -19,6 +19,9 @@
 						<% if (req.param("type") === "local") {%>
 						<p>{{ 'Local habs are branches and direction that comes from the context of the global (unites) habs. On this page you can view a list of all local habs.' | translate}}</p>
 						<%}; %>
+						<% if (req.param("type") === "projects") {%>
+						<p>{{ 'The projects are local hubs certain subjects. Projects have their own situation and context.' | translate}}</p>
+						<%}; %>
 					</div>
 				</div>
 			</div>
