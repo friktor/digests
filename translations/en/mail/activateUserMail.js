@@ -1,3 +1,0 @@
-module.exports = {
-	"Welcome to our website {{firstname}} {{lastname}}! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link." : "Welcome to our website {{firstname}} {{lastname}}! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link."
-}

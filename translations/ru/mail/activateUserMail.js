@@ -1,3 +1,0 @@
-module.exports = {
-	"Welcome to our website {{firstname}} {{lastname}}! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link.": "Приветствуем на нашем портале {{firstname}} {{lastname}}! Для полноценного использования вашей учетной записи необходимо подтвердить адрес электронной почты. Таким образом вы активируете аккаунт - и сможете использовать весь функционал. Для этого перейдите по соответствующей ссылке.",
-};
