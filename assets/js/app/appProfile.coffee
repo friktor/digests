@@ -13,19 +13,4 @@ define [
 		return
 	]
 
-	App.directive "postsByUser", ["$http", "$log", ($http, $log) ->
-		templateUrl: "/partials/profile/posts.html"
-		controllerAs: "ByUser"
-		restrict: "E"
-		controller: ->
-			$scope = this
-			$scope.posts = []
-
-			$http.get("/byauthor/#{window.username}?json=true").success (data) ->
-				if data.posts[0]
-					$scope.posts = data.posts
-				return
-			
-	]
-
 	return

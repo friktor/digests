@@ -1,6 +1,63 @@
 .page.homepage {
-	background: url("/images/homepage.bg.jpg") no-repeat;
-	background-size: cover;
+
+
+	register-form, login-form {
+		margin-top: 30px !important;
+		display: block;
+	}
+
+	.profile.homepage.block {
+		.material-shadow();
+		border-radius: 3px;
+		background: #FFF;
+		overflow: hidden;
+
+		margin: 20px 2rem 0 2rem;
+
+		.header {
+			background-size: cover;
+			text-align: center;
+			display: block;
+			width: 100%;
+
+			padding: 25px 25px;
+
+			.avatar.img {
+				display: inline-block;
+				height: 80px;
+				width: 80px;				
+				img {
+					height: 80px;
+					width: 80px;					
+				}
+			}
+
+			h4 {
+				text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+				text-transform: uppercase; 
+				margin: 12px 0 2px 0;
+				font-weight: 400;
+				color: #FFF;
+			}
+		}
+
+		.actions.list {
+			padding: 14px 0 14px 0;
+			.md-button {
+				padding: 7px 10px;
+				display: block;
+				width: 100%;
+
+				&:hover {
+					color: #3F51B5 !important;
+				}
+
+				&:active {
+					color: #283593 !important;
+				}
+			}
+		}
+	}
 
 	h1 {
 		margin-top: 20%;
@@ -9,8 +66,6 @@
 		font-size: 40px;
 		color: #FFF;
 	}
-
-	min-height: 800px;
 
 	.ui.menu {
 		background: transparent !important;
@@ -71,18 +126,23 @@
 
 
 	.ui.segment.Desc {
-		.material-shadow();
+		background-color: rgba(0, 0, 0, 0.15);
 		border-radius: 0;
+		display: block;
+		position: relative;
 
 		h4 {
 			font-weight: 400;
+			color: #FFF;
 			margin: 0;
 		}
 
 		.md-button {
-			border: 1px solid #2196F3;
+			border: 1px solid #fff;
+			padding: 5px 13px;
 			margin-top: 1rem;
-			color: #2196F3;
+			font-size: 15px;
+			color: #fff;
 		}
 	}
 }

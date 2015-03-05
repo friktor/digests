@@ -31,15 +31,15 @@
 	"menu": "меню",
 
 	"add new post": "добавить новый пост",
-	"my profile": "мой профиль",
-	"my subscriptions": "мои подписки",
 	"popular authors": "популярные авторы",
+	"my personal feed": "моя личная лента",
 	"popular posts": "популярные посты",
+	"my subscriptions": "мои подписки",
 	"latest posts": "последние посты",
+	"my profile": "мой профиль",
 	"feedback": "обратная связь",
 	"about us": "о проекте",
 	"logout": "выйти",
-	"my personal feed": "моя личная лента",
 
 	"russian": "русский",
 	"english": "английский",
@@ -77,5 +77,87 @@
 
 	"register": "регистрация",
 	"confirmation password": "подтверждение пароля",
-	"i agree with the rules of the portal": "Я согласен с правилами портала"
+	"i agree with the rules of the portal": "Я согласен с правилами портала",
+
+	"all right reserved": "все права защищены",
+	"help translate": "помочь с переводом",
+	"for authors": "авторам",
+	"contribute": "помочь",
+	"partners": "партнеры",
+	"support": "поддержка",
+	"other": "прочее",
+	"site": "сайт",
+
+	"subscribe to this author": "подписаться на этого автора",
+	"all posts by this user": "все посты этого пользователя",
+	"posts this author": "посты этого автора",
+	"subscribe": "подписаться",
+	"no subscriptions": "нет подписок",
+	"unsubscribe": "отписаться",
+	"this is author": "это автор",
+
+	"RSS feeds by this author": "RSS лента этого автора",
+	"users have signed up": "пользователей подписалось",
+	"posted in blog": "всего опубликовано в блоге",
+	"comments left": "всего комментариев оставлено",
+
+	"whats habs?": "что такое хабы?",
+	"Habs is a system of branching and categorization of the areas in which you intend to participate or read. Habs allow you to create different branches and areas. Share two types of habs - local and global. Global - unite the direction or concept that raises the whole context of the semantic branches. Local - this sub-cluster which emanate from the global context.": "Хабы - это разветвленная система областей, в которых вы можете участвовать или читать. Хабы позволяют создавать различные ветки и направления. Разделяют два типа хабов - локальные и глобальные. Глобальные - объеденяют направления или концепции, которые поднимают весь контекст смысловой ветви. Локальные - это суб-кластера, которые исходят из глобального контекста.",
+	"habs to which you have subscribed": "хабы на которые вы подписаны",
+	"recent global habs": "последние глобальные хабы",
+	"recent local habs": "последние локальные хабы",
+	"all subscriptions": "все подписки",
+	"rss feed": "rss лента",
+	"see all": "смотреть все",
+
+	"subscribe to this hab": "подписаться на этот хаб",
+	"RSS feeds by this hab": "RSS лента этого хаба",
+
+	"Global habs is a semantic Association, which concluded themes which may contain many branches as directions in the study of power. On this page you can view all global habs.": "Глобальный хаб - это смысловая ассоциация, в которой заключены темы, которые могут содержать множество ответвлений и направлений. На этой странице вы можете просмотреть все глобальные хабы.",
+
+	"Local habs are branches and direction that comes from the context of the global (unites) habs. On this page you can view a list of all local habs.": "Локальные хабы ответвления и направления, которые исходят из глобального (объеденяющего) хаба. На этой странице вы можете просмотреть список всех локальных хабов.",
+	
+	"The projects are local hubs certain subjects. Projects have their own situation and context.": "Проекты это локальные хабы с своими особенностями. Проекты имеют свои собственные направления и контекст.",
+
+	"next page": "следующая страница",
+	"projects habs": "проектные хабы",
+	"global habs": "глобальные хабы",
+	"local habs": "локальные хабы",
+
+	"For the first time to \"Digests\"?": "Впервые на \"Дайджестах\"?",
+	"With us already?": "Уже с нами?",
+	"join now": "начни сейчас",
+
+	"- comments": "- комментариев",
+	"- showed": "- просмотров",
+	"added -": "добавлено -",
+
+	"here will be displayed the contents of the comment": "здесь отображаеться содержимое вашего комментария",
+	"mode of response to the comment": "режим ответа на комментарий",
+	"to this entry no comments": "к этой записи нет комментариев",
+	"enter your comment here": "введите ваш комментарий сюда",
+	"remove this comment": "удалить этот комментарий",
+	"set normal mode": "включить нормальный режим",
+	"publish comment": "опубликовать комментарий",
+	"comments": "комментариев",
+	"is reply": "это ответ",
+	"remove": "удалить",
+	"reply": "ответить",
+
+	"subscribe to this source": "подписаться на этот источник",
+	"be aware of your interests": "будь в курсе своих интересов",
+	"If you want to receive regular newsletters with popular posts from this source (author, hub, etc), or add this source to a resource from which to create your personal tape - you can subscribe to the current resource. In the subscription, you can specify the language in which you want to receive the newsletter. Also using subscriptions you create your personal feed your interests. At any time you can unsubscribe in the profile settings."  :  "Если вы хотите получать регулярные рассылки с популярными постами из этого источника (Автор, хабы и т.д.), или добавить этот источник ресурсов, чтобы из него можно было сформировать Вашу личную ленту - вы можете подписаться на текущий ресурс. В подписке вы можете указать язык, на котором вы хотите получать рассылку. Также с помощью подписки вы сможете создать свою собственную ленту ваших интересов. В любой момент вы можете отписаться в настройках профиля.",
+	"The opportunity is only available to authorized users. Please login or register.": "Возможность доступна только для авторизованных пользователей. Пожалуйста авторизуйтесь или зарегистрируйтесь.",
+	"default language in subscribe:": "базовый язык подписки:",
+	"You have successfully subscribed to this source, to activate a broadcast email to activate your subscription. Your mail has been sent to you with instructions on how to activate. Note: even if the email sending is not activated and the subscription allows you to create your personal feed."  : "Вы успешно подписались на этот источник, вам был отправлен email для активации вашей подписки. На Вашу почту было выслано письмо с инструкцией по активации. Примечание: даже если подписка не активирована - вы можете с подпиской сформировать личную ленту интересов.",
+	"no thanks": "нет спасибо",
+
+	"the user name must be composed of latin characters without spaces": "имя пользователя должно состоять из латинских символов без пробелов",
+	"the confirmation don`t match password": "подтверждение и пароль не совпадают",
+	"captcha is required": "каптча обязательна",
+	"this username is already in use": "это имя пользователя уже используется",
+	"this email is already in use": "этот email уже используется",
+	"registration success!": "регистрация успешна!",
+	"on a specified mail sent to you with instructions on activating your account. Please activate your account to fully use all features of the portal.": "Вам отправлено письмо с инструкциями по активации аккаунта. Пожалуйста активируйте аккаунт чтобы использовать все возможности портала.",
+	"continue": "продолжить"
 }

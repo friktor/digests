@@ -4,7 +4,6 @@ define [
 
 		"remarkable",
 		"highlightjs",
-		"async"
 	], (angular, App, Remarkable, hljs) ->
 
 	"use strict";

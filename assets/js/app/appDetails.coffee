@@ -84,36 +84,34 @@ define [
 			$scope.newCommentMessage = $sce.trustAsHtml($scope.newCommentMessage)
 			return
 
-		# Get session data
-		$http.get("/utils/auth/session").success((session) ->
-			# Set auth bool value
-			$scope.auth = session.auth
-
-			# Set variables for session user data
-			if session.auth
-				$scope.username = session.username
-				$scope.fullname = session.fullname
-				$scope.avatars = session.avatars
-			return
+		if window.validUrl is window.location.toString()
 			
-		)
-
-		# Get Posts
-		$http.get("/utils/comment/get?target=post-"+window.postId).success((data) ->
-			
-			# Protected html comments and reply to comment
-			data.comments.forEach (comment, index) ->
-				comment.reply.forEach (reply, index) ->
-					reply.message = $sce.trustAsHtml reply.message
-					return
-				# Protect
-				comment.message = $sce.trustAsHtml comment.message
+			# Get session data
+			$http.get("/utils/auth/session").success (session) ->
+				# Set auth bool value
+				$scope.auth = session.auth
+	
+				# Set variables for session user data
+				if session.auth
+					$scope.username = session.username
+					$scope.fullname = session.fullname
+					$scope.avatars = session.avatars
 				return
-
-			$scope.comments = data.comments
-			return
-		)
-
+			
+			# Get Posts
+			$http.get("/utils/comment/get?target=post-"+window.postId).success (data) ->
+				
+				# Protected html comments and reply to comment
+				data.comments.forEach (comment, index) ->
+					comment.reply.forEach (reply, index) ->
+						reply.message = $sce.trustAsHtml reply.message
+						return
+					# Protect
+					comment.message = $sce.trustAsHtml comment.message
+					return
+	
+				$scope.comments = data.comments
+				return
 
 		return
 	]

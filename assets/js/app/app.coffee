@@ -12,7 +12,6 @@ define [
 		"ng-lazyload",
 		
 		"textAngular",
-		"js/options/textEditor",
 
 		"ng-tags-input"
 	], (angular) ->

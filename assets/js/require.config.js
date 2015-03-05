@@ -20,7 +20,7 @@ require.config({
         textAngular: "libs/textAngular/src/textAngular",
         "textAngular-sanitize": "libs/textAngular/src/textAngular-sanitize",
         "textAngular-rangy": "libs/textAngular/dist/textAngular-rangy.min",
-        textAngularSetup: "libs/textAngular/src/textAngularSetup",
+        textAngularSetup: "js/options/textAngularSetup",
         "vc-angular-recaptcha": "libs/vc-angular-recaptcha/release/angular-recaptcha",
         hammerjs: "libs/hammerjs/hammer",
         "angular-translate-loader-url": "libs/angular-translate-loader-url/angular-translate-loader-url",
@@ -29,6 +29,8 @@ require.config({
         "semantic-ui": "libs/semantic-ui/dist/semantic",
         "semantic-modules": "libs/semantic-ui/dist/components",
         "jquery-bridget": "libs/jquery-bridget/jquery.bridget",
+        async: "libs/async/lib/async",
+        lodash: "libs/lodash/lodash"
     },
     shim: {
         angular: {
@@ -123,6 +125,12 @@ require.config({
             deps: [
                 "jquery",
                 "semantic-modules/transition"
+            ]
+        },
+        "semantic-modules/modal": {
+            deps: [
+                "jquery",
+                "semantic-modules/dimmer"
             ]
         }
     },

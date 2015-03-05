@@ -12,6 +12,7 @@ define [
  	 	"js/app/editPostApp",
  	 	"js/app/addPostApp",
  	 	"js/app/appSubscribe",
+ 	 	"js/app/appSubscriptions",
  	 	"js/app/appHome",
 
  	 	"js/actions/habsMasonry",

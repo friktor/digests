@@ -2,7 +2,7 @@ define [
 		"angular",
 		"js/app/app",
 
-   		"js/app/settings/updatePersonal",
+   	"js/app/settings/updatePersonal",
 		"js/app/settings/uploadAvatar",
 		"js/app/settings/uploadHeader"
 	], (angular, App) ->
