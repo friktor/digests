@@ -14,11 +14,11 @@ module.exports = {
 	},
 
 	// Main
-	"get /rss/newest.xml": {
-	  controller: "rss", action: "newest"
+	"get /rss/latest.xml": {
+	  controller: "rss", action: "latest"
 	},
 
-	"get /rss/newest.:locale.xml": {
-	  controller: "rss", action: "newest"
+	"get /rss/latest/:locale.xml": {
+	  controller: "rss", action: "latest"
 	},
 };
