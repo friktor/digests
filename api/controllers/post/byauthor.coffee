@@ -21,7 +21,7 @@ module.exports = (req, res) ->
 
 	if !username then res.notFound()
 
-	User.findOneByUsername(username).populate("avatarImg")
+	User.findOneByUsername(username).populate("avatarImg").populate("headingImg")
 
 	.then((user) ->
 		if !user then throw new notExists() else
@@ -38,22 +38,49 @@ module.exports = (req, res) ->
 
 	.spread((user, postsByThisUser, numberOfSubscribers) ->
 
-		# If !posts and page > 1 response 404
-		if !postsByThisUser[0] and page > 1 then res.notFound() else
-			
-			# Completed formin object with title and etc..
-			completed =
-				title: req.__("Posts by %s", "#{user.firstname} #{user.lastname}") + " · Digests.me"
-				numberOfSubscribers: numberOfSubscribers
-				posts: postsByThisUser
-				user: user
-				page: page
+		numberOfComments = Comment.count(where: author: user.id).then (numberOf) -> numberOf
+		numberOfPosts = Post.count(where: author: user.id).then (numberOf) -> numberOf
 
-			# if param json is true - send json, else send html
-			if req.param("json") is "true"
-				res.json completed
-			else
-				res.view completed
+		Promise.join numberOfComments, numberOfPosts, (numberOfComments, numberOfPosts) ->
+
+			# If !posts and page > 1 response 404
+			if !postsByThisUser[0] and page > 1 then res.notFound() else
+				
+				# Completed formin object with title and etc..
+				completed =
+					title: req.__("Posts by %s", "#{user.firstname} #{user.lastname}") + " · Digests.me"
+					numberOfSubscribers: numberOfSubscribers
+					numberOfComments: numberOfComments
+					numberOfPosts: numberOfPosts
+					posts: postsByThisUser
+					page: page
+					
+					user: _.merge user, 
+	
+						# Autofind full avatar
+						"avatarImg": try
+							_.find(user.avatarImg, "restrict": "full").link
+						catch e
+							"/images/avatar.png"
+		
+						# Autofind full avatar
+						"headingImg": try
+							_.find(user.headingImg, "restrict": "full").link
+						catch e
+							"/images/profile.jpg"
+	
+						"navbarBg": try
+							_.find(user.headingImg, "restrict": "navbarBg").link
+						catch e
+							"/images/profile.navbar.jpg"
+						
+	
+				# if param json is true - send json, else send html
+				if req.param("json") is "true"
+					res.json completed
+				else
+					res.view completed
+		return
 	)
 
 	.caught(notExists, (e) ->

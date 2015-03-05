@@ -15,7 +15,7 @@ module.exports = {
 	  controller: "profile", action: "edit"
 	},
 
-	"/profile/:username/subscription": {
+	"/profile/:username/subscriptions": {
 	  controller: "profile", action: "subscription"
 	},
 };

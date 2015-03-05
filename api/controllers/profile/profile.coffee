@@ -20,20 +20,38 @@ module.exports = (req, res) ->
 		if type(user) is "undefined"
 			throw new notExists "User does not exists"
 		else
-			latestRecord = Post.find().sort("createdAt desc").limit(1).then (posts) -> posts[0]
 			numberOfComments = Comment.count(where: author: user.id).then (numberOf) -> numberOf
 			numberOfPosts = Post.count(where: author: user.id).then (numberOf) -> numberOf
-			[user, latestRecord, numberOfPosts, numberOfComments]
+			[user, numberOfPosts, numberOfComments]
 	)
 
-	.spread((user, latestRecord, numberOfPosts, numberOfComments) ->
+	.spread((user, numberOfPosts, numberOfComments) ->
 		
 		responseObject = 
 			title: req.__("Profile %s", username)+" · Digests.me"
 			numberOfComments: numberOfComments
 			numberOfPosts: numberOfPosts
-			latestRecord: latestRecord
-			user: user
+			user: _.merge(user, 
+
+				# Autofind full avatar
+				"avatarImg": try
+					_.find(user.avatarImg, "restrict": "full").link
+				catch e
+					"/images/avatar.png"
+
+				# Autofind full avatar
+				"headingImg": try
+					_.find(user.headingImg, "restrict": "full").link
+				catch e
+					"/images/profile.jpg"
+
+				# Navbarbg
+				"navbarBg": try
+					_.find(user.headingImg, "restrict": "navbarBg").link
+				catch e
+					"/images/profile.navbar.jpg"					
+				
+			)
 
 		widget = req.param "widget", "false"
 
