@@ -9,7 +9,13 @@ module.exports = (imageSize, workDir, filepath, cb) ->
 	filename = "#{randomString(length: 8)}.full.jpg"
 	filedisk = "#{workDir}/#{filename}"
 	
-	gm(filepath).resize(1600).crop(1600, 350, 0, 450).autoOrient().write filedisk, (error) ->
+	gm(filepath).resize(1600)
+	.autoOrient()
+	.quality(87)
+	
+	.crop(1600, 800, 0, 0)
+
+	.write filedisk, (error) ->
 		$image = 
 			filesize: (fs.statSync(filedisk)).size
 			filetype: "image/jpeg"

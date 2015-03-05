@@ -57,6 +57,20 @@ module.exports = (req, res) ->
 	)
 
 	.spread((user, images) ->
+		if !images then throw new Error "Images resized not exists or found" else
+			
+			workDir = sails.config.upload.dir+"/personal/#{user.username}/headingImg"
+			fullImageFiledisk = _.find(images, "restrict": "full")
+
+			cropNavbarBgAndForming = common.cropAndBlurNavbarBg(fullImageFiledisk.filedisk, workDir)
+				.then (navbarBgImage) -> 
+					images.push navbarBgImage
+					return images
+
+			[user, cropNavbarBgAndForming]
+	)
+
+	.spread((user, images) ->
 
 		if !images then throw new Error "Images not resized" else
 
