@@ -58,13 +58,24 @@ module.exports = (req, res, next) ->
 				# @Habs parse & find habs
 				Habs = map(post.hab.split(/\s*,\s*/), _.partial(common.iteratorHab, locale)).then (habs) -> habs
 
-				[post, Author, Habs]
+				CountComments = Comment.count({target: "post-"+post.numericId, reply: false}).then (count) -> count
+
+				[post, Author, Habs, CountComments]
 		)
 
-		.spread((post, author, habs) ->
+		.spread((post, author, habs, CountComments) ->
 			# response rendered html
 			res.view
+				CountComments: CountComments
 				title  : post.title + " · Digests.me"
+				
+				description: xss post.content.substr(0, 200)+"...",
+					stripIgnoreTagBody: ['script']
+					stripIgnoreTag: true
+					whiteList: []
+
+				keywords: post.tags
+
 				author : author
 				post   : post
 				habs   : habs
