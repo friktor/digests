@@ -17,10 +17,9 @@ define [
 					return
 				return
 
-			if window.validUrl is window.location.toString()
-				$http.get("/profile/#{window.username}/subscriptions?ajax=true").success (response) ->
-					$scope.subscriptions = response.subscriptions
-					$scope.user = response.user
-					return			
+			$http.get("/profile/#{window.username}/subscriptions?ajax=true").success (response) ->
+				$scope.subscriptions = response.subscriptions
+				$scope.user = response.user
+				return			
 			return
 		]
