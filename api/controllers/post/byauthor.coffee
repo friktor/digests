@@ -27,7 +27,7 @@ module.exports = (req, res) ->
 		if !user then throw new notExists() else
 
 			# Number if subscribers by this user.
-			numberOfSubscribers = Subscribe.count({from: "Author", by: user.id}).then (numberOf) -> numberOf
+			numberOfSubscribers = Subscribe.count({type: "author", purpose: user.id}).then (numberOf) -> numberOf
 
 			# Posts by user
 			postsByThisUser = common.FindAndRenderPostsByThisUser(user.id, page).then (posts) -> posts
