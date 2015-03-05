@@ -38,13 +38,13 @@ module.exports = (req, res) ->
 		
 		_paramSearch = 
 			user: req.session.user.id
-			from: "Hab"
+			type: "hab"
 		
 		UserHabsSubscribtions = Subscribe.find(_paramSearch)
 			.then((subscribes) ->
 				tapeId = []
 				subscribes.forEach (subscribe) ->
-					tapeId.push subscribe.by
+					tapeId.push subscribe.purpose
 					return
 
 				Hab.find(tapeId).populate("headingImg").sort("createdAt desc").limit(6)

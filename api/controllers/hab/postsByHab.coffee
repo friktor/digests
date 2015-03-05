@@ -66,7 +66,7 @@ module.exports = (req, res) ->
 	.spread((hab, posts) ->
 		if !posts[0] then throw new notExists() else
 			forming =
-				title: req.__("Hab %s", hab.name)+ " · Digests.me · " + req.__("page %s", page)
+				title: req.__("Hab %s", hab.name)+ " · Digests.me · " + req.__("%s page", page)
 				locale: locale
 				posts: posts
 				page: page
