@@ -28,6 +28,8 @@
 	</div>
 	
 	<div class="ui basic segment" ng-controller="subscribe">
+		<div ng-include="'/partials/elements/subscribe.modal.html'"></div>
+
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
@@ -146,16 +148,6 @@
 											<img src="<%= hab.headingImage.link || '' %>" alt="">
 											<div class="actions">
 												<div class="buttons">
-													<md-button class="subscribe" 
-														ng-click="subscribe({ 
-															email: <%= req.session.user ? '"'+req.session.user.email+'"' : null %>,
-															user: <%= req.session.user ? '"'+req.session.user.id+'"' : null %>, 
-															auth: <%= req.session.auth ? req.session.auth : false %>, 
-															parentElement: '.modal.area',
-															purpose: '<%= hab.id %>', 
-															type: 'hab', 
-														})"
-													><i class="fa fa-envelope-o"></i> {{ 'subscribe' | translate}}</md-button>
 													<md-button class="feed" href="/rss/hab/<%= hab.translitName %>/<%= req.getLocale() %>.xml"><i class="fa fa-rss"></i> {{ 'rss feed' | translate}}</md-button>
 												</div>
 											</div>

@@ -5,6 +5,21 @@
 	footer {
 		margin-top: 0;
 	}
+
+	.profile.homepage.block .header {
+		background: url('<% if (session.auth && session.user.headingImg.length > 0) {%><%= (_.find(session.user.headingImg, {"restrict": "sidebar"})).link %><%} else {%>/images/profile.jpg<%};%>') no-repeat;
+	}
+
+	body.pushable {
+		background: url("/images/homepage.bg.jpg") no-repeat center center fixed !important;
+		min-height: 100% !important;
+		height: auto !important;
+		background-size: cover;
+	}
+
+	body.pushable .pusher {
+		background: transparent !important;
+	}
 </style>
 
 <div class="page homepage" ng-controller="homepage">
@@ -12,26 +27,45 @@
 
 	<div class="ui basic segment">
 		<div class="row">
-			<div class="col-md-8 col-sm-5">
-				<h1>{{ 'We will deprive your brain' | translate}}</h1>
+			<div class="col-lg-8 col-md-7 col-sm-5">
+				<h1>{{ 'Deprive your brain of virginity' | translate}}</h1>
 			</div>
-			<div class="col-md-4 col-sm-7">
+			<div class="col-lg-4 col-md-5 col-sm-7">
+				
+				<% if (!session.auth) {%>
 				<login-form ng-show="isShow('login')"></login-form>
 				<register-form ng-show="isShow('register')"></register-form>
 				
 				<div ng-show="isShow('login')" class="ui segment text center Desc">
 					<h4>{{ 'For the first time to "Digests"?' | translate}}</h4>
-					<md-button ng-click="changeForm('register')">{{ 'join' | translate}}</md-button>
+					<md-button ng-click="changeForm('register')">{{ 'join now' | translate}}</md-button>
 				</div>
 
 				<div ng-show="isShow('register')" class="ui segment text center Desc">
 					<h4>{{ 'With us already?' | translate}}</h4>
 					<md-button ng-click="changeForm('login')">{{ 'login' | translate}}</md-button>
 				</div>				
+				<%};%>
 
+				<% if (session.auth) {%>
+					<div class="profile homepage block">
+						<div class="header">
+							<div class="avatar img ui image circular">
+								<% var avatarImg = _.find(session.user.avatarImg, {"restrict": "full"}); %>
+								<img src="<% if (avatarImg) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="" class="ui image circular">
+							</div>
+							<h4><%= session.user.firstname %> <%= session.user.lastname %></h4>
+						</div>
+						<div class="actions list">
+							<md-button href="/myfeed"><i class="fa fa-newspaper-o"></i> {{ 'my personal feed' | translate | capitalize:'first' }}</md-button>
+							<md-button href="/profile/<%= session.user.username %>/subscriptions"><i class="fa fa-bookmark"></i> {{ 'my subscriptions' | translate | capitalize:'first' }}</md-button>
+							<md-button href="/profile/<%= session.user.username %>"><i class="fa fa-user"></i> {{ 'my profile' | translate | capitalize:'first' }}</md-button>
+							<md-button href="/logout"><i class="fa fa-power-off"></i>{{ 'logout' | translate | capitalize:'first' }}</md-button>
+						</div>
+					</div>
+				<%};%>
 			</div>
 		</div>
 	</div>
 	
 </div>
-<%- partial("partials/footer.ejs") %>

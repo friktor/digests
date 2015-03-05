@@ -1,17 +1,16 @@
 <script>
 	window.thisPage = <%= page %>;
-	window.postsPage = "/hab/<%= hab.translitName %>";
+	window.postsPage = "/byauthor/<%= user.username %>";
 	window.locale = "<%= locale %>";
 </script>
 
 <style>
-	.posts.hab.header {
-		background: url('<%= hab.headingImage.link %>') no-repeat fixed top;
-		height: 730px;
+	.byauthor.header {
+		background: url('<%= user.headingImg %>') no-repeat fixed top;
 	}
 
-	.posts.hab.header .blured {
-		background: url('<%= hab.navbarImage %>') no-repeat fixed top;
+	.byauthor.header .blured {
+		background: url('<%= user.navbarBg %>') no-repeat fixed top;
 		position: absolute;
 		height: 60px;
 		width: 100%;
@@ -19,30 +18,54 @@
 	}
 </style>
 
-<div class="posts hab header">
+<div class="byauthor header">
 	<%- partial("../partials/menu.ejs") %>
-	
-	<h2><%= hab.name %></h2>
+
 	<div class="content">
-		<p><%= hab.description %></p>
-		
-		<div class="ui icon top left pointing dropdown basic button">
-			<i class="world icon"></i>
-			<div class="menu">
-				<a href="?locale=ru" class="item">{{ 'russian' | translate | capitalize:'all'}}</a>
-				<a href="?locale=en" class="item">{{ 'english' | translate | capitalize:'all'}}</a>
-				<a href="?locale=pl" class="item">{{ 'polish'	 | translate | capitalize:'all'}}</a>
-			</div>	
+		<div class="header avatar text center">
+			<img class="ui image circular" src="<%= user.avatarImg %>" alt="">
+			<h4><%= user.firstname %> <%= user.lastname %></h4>
 		</div>
 	
+		<div class="header stats ui basic segment">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="ui statistics">
+						<div class="statistic">
+							<div class="value">
+								<%= numberOfPosts %>
+							</div>
+							<div class="label">
+								{{ 'posted in blog' | translate | capitalize:'first'}}
+							</div>
+						</div>
+						<div class="statistic">
+							<div class="value">
+								<%= numberOfSubscribers %>
+							</div>
+							<div class="label">
+								{{ 'users have signed up' | translate | capitalize:'first'}}
+							</div>
+						</div>
+						<div class="statistic">
+							<div class="value">
+								<%= numberOfComments %>
+							</div>
+							<div class="label">
+								{{ 'comments left' | translate | capitalize:'first'}}
+							</div>
+						</div>
+					</div>					
+				</div>	
+				<div class="col-md-2"></div>
+			</div>
+		</div>		
 	</div>
 
-	<div class="text center">
-		<i class="fa fa-angle-double-down"></i>
-	</div>
 </div>
 
-<div class="buttons actions hab text center" ng-controller="subscribe">
+<div class="buttons actions byauthor text center" ng-controller="subscribe">
 	<div ng-include="'/partials/elements/subscribe.modal.html'"></div>
 	
 	<md-button class="md-fab green" aria-label="button actions"
@@ -50,22 +73,21 @@
 			email: <%= req.session.user ? '"'+req.session.user.email+'"' : null %>,
 			user: <%= req.session.user ? '"'+req.session.user.id+'"' : null %>, 
 			auth: <%= req.session.auth ? req.session.auth : false %>, 
-			parentElement: '.buttons.actions.hab',
-			purpose: '<%= hab.id %>', 
-			type: 'hab', 
+			parentElement: '.buttons.actions.byauthor',
+			purpose: '<%= user.id %>', 
+			type: 'author', 
 		})"
 		>
-		<md-tooltip>{{ 'subscribe to this hab' | translate | capitalize:'first'}}</md-tooltip>
+		<md-tooltip>{{ 'subscribe to this author' | translate | capitalize:'first'}}</md-tooltip>
 		<i class="fa fa-envelope"></i>
 	</md-button>
 	<md-button class="md-fab indigo" aria-label="button actions"
-		ng-click="openLink('/rss/hab/<%= hab.translitName %>/<%= locale %>.xml')"
+		ng-click="openLink('/rss/author/<%= user.username %>.xml')"
 	>
-		<md-tooltip>{{ 'RSS feeds by this hab' | translate}}</md-tooltip>
+		<md-tooltip>{{ 'RSS feeds by this author' | translate}}</md-tooltip>
 		<i class="fa fa-rss"></i>
 	</md-button>
 </div>
-
 <div class="posts lists main" ng-controller="PostsCtrl">
 	<div class="ui basic segment">
 		<div class="row">
@@ -74,7 +96,9 @@
 			<!-- End -->
 			
 			<!-- Client rendered post in posts -->
-			<div masonry-brick ng-repeat="post in posts | orderBy: '-createdAt' " class="col-lg-3 col-md-3 col-sm-6 col-sm-12 masonry-brick">
+			<div masonry-brick ng-repeat="post in posts | orderBy: '-createdAt' " 
+				class="col-lg-3 col-md-3 col-sm-6 col-sm-12 masonry-brick"
+			>
 				<div class="post">		
 					<a ng-show="post.previewImage" class="heading image" href="/details/{{post.numericId}}">
 						<img post-img ng-src="{{ post.previewImage }}" alt="">

@@ -1,26 +1,42 @@
 <script async>window.username = "<%= req.param("username") %>";</script>
 
+<style>
+	.profile.header {
+		background: url('<%= user.headingImg %>') no-repeat !important;
+	}
+
+	.profile.page .blured {
+		background: url('<%= user.navbarBg %>') no-repeat;
+		position: absolute;
+		height: 60px;
+		width: 100%;
+		z-index: 5;	
+	}
+</style>
+
 <div class="page profile" ng-controller="ProfileCtrl">
 
 	<!-- Header Profile -->
-	<div class="profile header" 
-		style="background: url(<% if (user.headingImg.length > 0) {%><%= (_.find(user.headingImg, {"restrict": "full"})).link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;">
+	<div class="profile header">
 		<%- partial("../partials/menu.ejs") %>
-		<div class="avatar text center">
-			<% var avatarImg = _.find(user.avatarImg, {"restrict": "full"}); %>
-			<img class="ui image circular" src="<% if (user.avatarImg.length>0) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="">
-			<h4 class="ui header"><%= user.firstname %> <%= user.lastname %></h4>
-		</div>
 	</div>
 
 	<!-- Content -->
 	<div class="ui basic segment ProfileMain"> 
 		<div class="row">
 			
-			<div class="col-md-3">
-				<!-- Actions in this profile -->
-				<div class="ui actions" ng-controller="subscribe">
-					<md-button class="md-fab green" aria-label="button actions"
+			<div class="col-md-3 col-sm-5" ng-controller="subscribe">
+				<div ng-include="'/partials/elements/subscribe.modal.html'"></div>
+
+				<div class="avatar profile text center">
+					<img class="ui image circular" 
+						src="<%= user.avatarImg %>"
+					>
+					<h4 class="ui header">
+						<%= user.firstname %> <%= user.lastname %>
+					</h4>
+					
+					<md-button aria-label="button actions"
 						ng-click="subscribe({ 
 							email: <%= req.session.user ? '"'+req.session.user.email+'"' : null %>,
 							user: <%= req.session.user ? '"'+req.session.user.id+'"' : null %>, 
@@ -31,25 +47,28 @@
 						})"
 						>
 						<md-tooltip>{{ 'subscribe to this author' | translate | capitalize:'first'}}</md-tooltip>
-						<i class="fa fa-envelope"></i>
+						<i class="fa fa-envelope"></i> {{ 'subscribe' | translate}}
 					</md-button>
-					<md-button ng-click="redirectAllPosts()" class="md-fab blue">
-      			<md-tooltip>
-      			  <%= __("All posts from this user") %>
-      			</md-tooltip>
-						<i class="fa fa-newspaper-o"></i>
-					</md-button>
+					
+
 				</div>
-				<!-- End Actions -->
+				
+				<md-button ng-click="openLink('/byauthor/<%= user.username %>')" class="byauthor">
+					<md-tooltip>
+						{{ 'all posts by this user' | translate | capitalize:'first'}}
+					</md-tooltip>
+					<i class="fa fa-newspaper-o"></i> {{ 'posts this author' | translate}}
+				</md-button>
+
 			</div>
 
-			<div class="col-md-9">
+			<div class="col-md-9 col-sm-7">
 				<!-- About & Activities -->
 				<div class="ui segment content">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="ui header text center">
-								<%= __("About me") %>
+								{{ "about me" | translate | capitalize:'first'}}
 								<div class="ui horizontal divider">
 									<i class="fa fa-child"></i>
 								</div>
@@ -60,7 +79,7 @@
 						</div>
 						<div class="col-md-6">
 							<div class="ui header text center">
-								<%= __("Activities me") %>
+								{{ "activities me" | translate | capitalize:'first'}}
 								<div class="ui horizontal divider">
 									<i class="fa fa-cogs"></i>
 								</div>
@@ -72,9 +91,6 @@
 					</div>
 				</div>
 				<!-- End About & Activities -->
-
-				<!-- Directive Post By User -->
-				<posts-by-user></posts-by-user>
 			</div>
 		</div>
 	</div>

@@ -39,13 +39,13 @@
 			<i class="fa fa-user"></i> {{ 'my profile' | translate | capitalize:'first' }}
 		</a>
 
-        <a href="/profile/<%= session.user.username %>/subscribes" class="item">
+        <a href="/profile/<%= session.user.username %>/subscriptions" class="item">
           <i class="fa fa-bookmark"></i> {{ 'my subscriptions' | translate | capitalize:'first' }}
         </a>
         <%};%>
         
         <a href="/myfeed" class="item">
-         <i class="fa fa-users"></i> {{ 'my personal feed' | translate | capitalize:'first' }}
+         <i class="fa fa-newspaper-o"></i> {{ 'my personal feed' | translate | capitalize:'first' }}
         </a>
         
         <a href="/popular" class="item">

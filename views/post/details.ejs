@@ -1,9 +1,11 @@
-<script type="text/javascript" src="http://share.pluso.ru/pluso-like.js" async></script>
+<script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
 <script src="/js/hPatterns/<%= post.locale %>.js"></script>
 
 <script>
 	window.postLocale = "<%= post.locale %>";
 	window.postId = "<%= post.numericId %>";
+
+	window.validUrl = "http://127.0.0.1/details/<%= post.numericId %>";
 </script>
 
 <div class="page details">
@@ -15,13 +17,9 @@
 			<div class="col-md-8">
 				<div class="ui segment post">
 					<% var headerImg = _.find(post.headerImg, {"restrict": "full"}); %>
+					<% var headerImgPreview = _.find(post.headerImg, {"restrict": "preview"}); %>
 					<% if (headerImg) {%>
 					<div class="post header image text center">
-						<% if (session.auth && session.user.username === author.username) {%>
-							<a href="/profile/<%= author.username %>/edit/<%= post.numericId %>">
-								<i class="fa fa-pencil-square-o"></i> {{ 'edit' | translate}}
-							</a>
-						<%};%>
 						<img src="<%= headerImg.link %>" alt="">
 					</div>
 					<%};%>
@@ -32,14 +30,19 @@
 
 					<div class="post info text center">
 						<span class="views">
-							<i class="fa fa-eye"></i> <%= __("%s views", post.showed) %>
+							<i class="fa fa-eye"></i> <%= post.showed %> {{ '- showed' | translate | capitalize:'first'}}
 						</span>
 						<span class="createdDate">
-							<i class="fa fa-calendar"></i> <%= __("added - %s", post.createdAt) %>
-						</span>
+							<i class="fa fa-calendar"></i> {{ 'added -' | translate | capitalize:'first'}} <%= post.createdAt %>
+ 						</span>
 						<span class="nofcomments">
-							<i class="fa fa-comment"></i> 5 comments
+							<i class="fa fa-comment"></i> <%= CountComments %> {{ '- comments' | translate}}
 						</span>
+						<% if (session.auth && session.user.username === author.username) {%>
+						<a href="/profile/<%= author.username %>/edit/<%= post.numericId %>">
+							<i class="fa fa-pencil-square-o"></i> {{ 'edit' | translate}}
+						</a>
+						<%};%>						
 					</div>
 
 
@@ -50,7 +53,15 @@
 					</div>
 					
 					<div class="text center">
-						<div data-description="<%= xss("" + (post.content.substr(0, 250)) + "...", {stripIgnoreTagBody: ['script'],stripIgnoreTag: true,whiteList: []}) %>" data-title="<%= post.title %>" data-url="http://digests.me/<%= post.numericId %>" class="pluso" data-background="#ebebeb" data-options="medium,round,line,horizontal,counter,theme=04" data-services="vkontakte,facebook,twitter,google,email"></div>
+						<div class="yashare-auto-init" 
+							data-yashareQuickServices="vkontakte,facebook,twitter" 
+							data-yashareTheme="counter" 
+							data-yashareL10n="<%= post.locale %>" 
+							data-yashareTitle="<%= post.title %>" 
+							data-yashareLink="http://digests.me/details/<%= post.numericId %>"  
+							data-yashareImage="<% if (headerImgPreview) {%><%= headerImgPreview.link %><%};%>" 
+							data-yashareDescription="<%= description %>"
+						></div>							
 					</div>
 
 					<main class="post content">

@@ -6,16 +6,25 @@
 		</title>
 
 		<%- meta("viewport", "width=device-width, initial-scale=1, maximum-scale=1") %>
-		<%- meta("description", sails.config.app.description) %>
-		<%- meta("keywords", sails.config.app.keywords) %>
+		
+		<!-- meta description -->
+		<meta name="description" 
+			content="<% if (typeof description !== 'undefined') {%><%= description %><%} else {%><%= sails.config.app.description %><%};%>"
+		/>
 
+		<!-- meta keywords -->
+		<meta name="keywords" 
+			content="<% if (typeof keywords !== 'undefined') {%><%= keywords %><%} else {%><%= sails.config.app.keywords %><%};%>"
+		/>
+
+		<!-- Set locale -->
 		<script>window.i18nLocale = "<%= req.getLocale() %>";</script>
 		
  		<link rel="stylesheet" href="/resources/styles.css">
 		<script src="/resources/js.js"></script>
 	</head>
 
-	<body>
+	<body class="pushable">
 		<% "body content" %>
 		<%- partial("partials/sidebar.left.ejs") %>
 		<% if (!session.auth) {%>

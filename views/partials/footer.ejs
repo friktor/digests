@@ -2,27 +2,27 @@
 	<div class="ui basic segment">
 		<div class="row">
 			<div class="col-md-4 col-sm-4">
-				<h4><%= __("Site") %></h4>
+				<h4>{{ "site" | translate | capitalize:'first' }}</h4>
 				<ul>
-					<li><a href="/about"><%= __("About us") %></a></li>
-					<li><a href="#"><%= __("Authors") %></a></li>
-					<li><a href="#"><%= __("Partners") %></a></li>
-					<li><a href="#"><%= __("Contribute") %></a></li>
+					<li><a href="/about">{{ "about us" | translate | capitalize:'first' }}</a></li>
+					<li><a href="#">{{ "for authors" | translate | capitalize:'first' }}</a></li>
+					<li><a href="#">{{ "partners" | translate | capitalize:'first' }}</a></li>
+					<li><a href="#">{{ "contribute" | translate | capitalize:'first' }}</a></li>
 				</ul>
 			</div>
 			<div class="col-md-4 col-sm-4">
-				<h4><%= __("Other") %></h4>
+				<h4>{{ "other" | translate | capitalize:'first' }}</h4>
 				<ul>
-					<li><a href="#"><%= __("Help translate") %></a></li>
-					<li><a href="mailto:support@digests.me"><%= __("Support") %></a></li>
-					<li><a href="#"><%= __("FAQ") %></a></li>
-					<li><a href="mailto:info@digests.me"><%= __("Feedback") %></a></li>
+					<li><a href="#">{{ "help translate" | translate | capitalize:'first' }}</a></li>
+					<li><a href="mailto:support@digests.me">{{ "support" | translate | capitalize:'first' }}</a></li>
+					<li><a href="#">{{ "FAQ" }}</a></li>
+					<li><a href="mailto:info@digests.me">{{ "feedback" | translate | capitalize:'first' }}</a></li>
 				</ul>
 			</div>
 			<div class="col-md-4 col-sm-4">
-				<h4><%= __("Social") %></h4>
+				<h4>{{ "social" | translate | capitalize:'all'}}</h4>
 				<p>&copy; Copyright <a href="http://digests.me">Digests.me</a>.</p>
-				<p> <%= __("All right reserved.") %></p>
+				<p> {{ "all right reserved" | translate | capitalize:'first' }}</p>
 				<!-- Yandex.Metrika counter -->
 				<script type="text/javascript">
 				// (function (d, w, c) {
