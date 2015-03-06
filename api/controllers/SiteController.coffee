@@ -6,6 +6,10 @@ module.exports =
 	about: (req, res) ->
 		res.view
 			title: req.__ "About us"
+
+	recovery: (req, res) ->
+		res.view 
+			title: req.__ "Recovery Account"
 			
 	_config: 
 		shortcuts: false 
