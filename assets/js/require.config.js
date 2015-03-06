@@ -20,7 +20,7 @@ require.config({
         textAngular: "libs/textAngular/src/textAngular",
         "textAngular-sanitize": "libs/textAngular/src/textAngular-sanitize",
         "textAngular-rangy": "libs/textAngular/dist/textAngular-rangy.min",
-        textAngularSetup: "js/options/textAngularSetup",
+        textAngularSetup: "libs/textAngular/src/textAngularSetup",
         "vc-angular-recaptcha": "libs/vc-angular-recaptcha/release/angular-recaptcha",
         hammerjs: "libs/hammerjs/hammer",
         "angular-translate-loader-url": "libs/angular-translate-loader-url/angular-translate-loader-url",
@@ -96,7 +96,7 @@ require.config({
         textAngular: {
             deps: [
                 "angular",
-                "textAngularSetup",
+                "js/options/textAngularSetup",
                 "textAngular-rangy",
                 "textAngular-sanitize"
             ]

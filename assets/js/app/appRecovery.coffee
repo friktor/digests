@@ -7,7 +7,7 @@ define [
 		App.directive "recoveryForm", ["$http", "$log", ($http, $log) ->
 			templateUrl: "/partials/recovery.html"
 			restrict: "E"
-			controller: ($scope) ->
+			controller: ["$scope", ($scope) ->
 				$scope.recovery = ->
 					$http.get("/csrfToken").success (token) ->
 						form = angular.extend({}, token, email: $scope.email)
@@ -21,6 +21,7 @@ define [
 						return
 					return
 				return
+			]
 							
 		]
 

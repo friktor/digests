@@ -1,7 +1,6 @@
 define [
 		"angular",
-		"js/app/app",
-		"ng-file-upload"
+		"js/app/app"
 	], (angular, App) ->
 
 	"use strict";
@@ -9,7 +8,7 @@ define [
 		($http, $upload, $timeout, $log) ->
 			templateUrl: "/partials/settings/upload-header.html"
 			restrict: "E"
-			controller: ($scope) ->
+			controller: ["$scope", ($scope) ->
 				$scope.allowUploadHeader = true
 				$scope.$watch "header", ->
 					if typeof $scope.header isnt "undefined"
@@ -52,6 +51,7 @@ define [
 					return
 					
 				return
+			]
 	]
 
 	return

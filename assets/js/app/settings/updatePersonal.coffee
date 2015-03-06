@@ -8,7 +8,7 @@ define [
 	App.directive "personal", ["$http", "$timeout", "$log", "$mdToast", ($http, $timeout, $log, $mdToast) ->
 		templateUrl: "/partials/settings/personal.html"
 		restrict: "E"
-		controller: ($scope) ->
+		controller: ["$scope", ($scope) ->
 
 			$scope.update = (form) ->
 				$scope.request = true
@@ -46,6 +46,7 @@ define [
 				return
 		
 			return	
+		]
 	]
 
 	return

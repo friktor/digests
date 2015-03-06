@@ -7,7 +7,7 @@ define [
 	App.directive "registerForm", ["$http", "$log", "vcRecaptchaService", ($http, $log, $reCaptcha) ->
 		templateUrl: "/partials/register.html"
 		restrict: "E"
-		controller: ($scope) ->
+		controller: ["$scope", ($scope) ->
 			$scope.$watch "username", ->
 				$http.get("/utils/user/isExists?username=#{$scope.username}").success (response) ->
 					$scope.isExistsUsername = response.exists
@@ -50,6 +50,7 @@ define [
 					)
 				return	
 			return
+		]
 	]
 
 	`App.directive('ngModelOnblur', function() {

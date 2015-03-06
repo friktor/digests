@@ -1,7 +1,6 @@
 define [
 		"angular",
-		"js/app/app",
-		"ng-file-upload"
+		"js/app/app"
 	], (angular, App) ->
 
 	"use strict";
@@ -9,7 +8,7 @@ define [
 		($http, $upload, $timeout, $log, $translate) ->
 			templateUrl: "/partials/settings/upload-avatar.html"
 			restrict: "E"
-			controller: ($scope) ->	
+			controller: ["$scope", ($scope) ->	
 				$scope.allowUploadAvatar = true
 	
 				$scope.$watch "avatar", ->
@@ -46,6 +45,7 @@ define [
 					return
 	
 				return
+			]
 	]
 
 	return

@@ -1,13 +1,13 @@
 define [
-	"angular"
-	"js/app/app"
+		"angular"
+		"js/app/app"
 	], (angular, App) ->
 		"use strict";
 
 		App.directive "changePassword", ["$http", "$log", ($http, $log) ->
 			templateUrl: "/partials/settings/update-password.html"
 			restrict: "E"
-			controller: ($scope) ->
+			controller: ["$scope", ($scope) ->
 				$scope.update = ->
 					$scope.process = true
 
@@ -23,4 +23,5 @@ define [
 							return
 						return
 					return
+			]
 		]
