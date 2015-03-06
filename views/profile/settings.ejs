@@ -3,7 +3,7 @@ window.sessionUsername = "<%= session.user.username %>";
 window.username = "<%= user.username %>";
 </script>
 
-<div ng-controller="SettingsCtrl as settings" class="page settings">
+<div class="page settings">
 	
 	<div class="ui segment header text center">
 		<%- partial("../partials/menu.ejs") %>
@@ -25,12 +25,19 @@ window.username = "<%= user.username %>";
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
+				
 				<div class="ui segment content page">
 					<personal></personal>
-					<div class="row" style="margin-top: 4rem;">
+				</div>
+				
+				<div class="ui segment content page" style="margin-top: 1.5rem;">
+					<div class="row">
 						<upload-avatar class="col-md-6"></upload-avatar>
 						<upload-header class="col-md-6"></upload-header>
 					</div>
+				</div>
+				<div class="ui segment content page" style="margin-top: 1.5rem;">
+					<change-password></change-password>
 				</div>
 			</div>
 			<div class="col-md-1"></div>

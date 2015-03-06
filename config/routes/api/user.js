@@ -10,5 +10,7 @@ module.exports = {
 
 	"post /utils/user/update": "UserController.update",
 
-	"post /utils/user/update_password": "UserController.updatePassword"
+	"post /utils/user/update_password": "UserController.updatePassword",
+
+	"post /utils/user/recoveryAccount": "UserController.recoveryAccount"
 }

@@ -12,4 +12,6 @@ module.exports = {
 	"get /setlocale/:locale": {
 	  controller: "auth", action: "settingLocale"
 	},
+
+	"/recovery": "SiteController.recovery",
 };
