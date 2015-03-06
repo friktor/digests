@@ -1,13 +1,13 @@
 define [
 		"angular",
-		"js/app/app"
+		"js/app/app",
+		"ng-file-upload"
 	], (angular, App) ->
 
 	"use strict";
 	App.directive "uploadAvatar", ["$http", "$upload", "$timeout", "$log", "$translate", 
 		($http, $upload, $timeout, $log, $translate) ->
 			templateUrl: "/partials/settings/upload-avatar.html"
-			controllerAs: "AvatarCtrl"
 			restrict: "E"
 			controller: ($scope) ->	
 				$scope.allowUploadAvatar = true

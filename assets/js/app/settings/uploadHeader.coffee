@@ -1,13 +1,13 @@
 define [
 		"angular",
-		"js/app/app"
+		"js/app/app",
+		"ng-file-upload"
 	], (angular, App) ->
 
 	"use strict";
 	App.directive "uploadHeader", ["$http", "$upload", "$timeout", "$log", 
 		($http, $upload, $timeout, $log) ->
 			templateUrl: "/partials/settings/upload-header.html"
-			controllerAs: "HeaderCtrl"
 			restrict: "E"
 			controller: ($scope) ->
 				$scope.allowUploadHeader = true

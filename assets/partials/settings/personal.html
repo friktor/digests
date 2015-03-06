@@ -8,7 +8,7 @@
 			<div class="col-md-4">
         <md-input-container flex>
           <label>{{ 'firstname' | translate | capitalize:'all' }}</label>
-          <input ng-model="PersonCtrl.Form.firstname" 
+          <input ng-model="Form.firstname" 
           	placeholder=""
           	required
           >
@@ -17,7 +17,7 @@
 			<div class="col-md-4">
         <md-input-container flex>
           <label>{{ 'lastname' | translate | capitalize:'all' }}</label>
-          <input ng-model="PersonCtrl.Form.lastname" 
+          <input ng-model="Form.lastname" 
           	placeholder=""
           	required
           >
@@ -26,22 +26,24 @@
 			<div class="col-md-4">
 				<md-input-container>
 					<label>{{ 'email' | translate | capitalize:'all' }}</label>
-					<input ng-model="PersonCtrl.Form.email" disabled>
+					<input ng-model="Form.email" disabled>
 				</md-input-container>
 			</div>
 		</div>
     <md-input-container flex>
       <label>{{ 'about me' | translate | capitalize:'first' }}</label>
-      <textarea ng-model="PersonCtrl.Form.aboutMe" columns="1" md-maxlength="500" maxlength="500" required></textarea>
+      <textarea ng-model="Form.aboutMe" columns="1" md-maxlength="500" maxlength="500" required></textarea>
     </md-input-container>
     <md-input-container flex>
       <label>{{ 'activities me' | translate | capitalize:'first' }}</label>
-      <textarea ng-model="PersonCtrl.Form.activitiesMe" columns="1" md-maxlength="500" maxlength="500" required></textarea>
+      <textarea ng-model="Form.activitiesMe" columns="1" md-maxlength="500" maxlength="500" required></textarea>
     </md-input-container>
 		
 		<div class="text center">
-			<md-progress-circular ng-show="PersonCtrl.request" md-mode="indeterminate" md-diameter="35"></md-progress-circular>
-			<md-button ng-hide="PersonCtrl.request" class="submit-button md-raised" ng-click="updatePersonalForm.$valid && PersonCtrl.update(PersonCtrl.Form)">
+			<div layout="row" layout-align="center center">
+				<md-progress-circular ng-show="request" md-mode="indeterminate" md-diameter="35"></md-progress-circular>
+			</div>
+			<md-button ng-hide="request" class="submit-button" ng-click="updatePersonalForm.$valid && update(Form)">
 				{{ 'update' | translate | capitalize:'first' }}
 			</md-button>
 		</div>	

@@ -3,10 +3,18 @@ define [
 		"angular",
 		"js/app/app",
 
+		"js/directives/compare",
+
+		"js/app/appRecovery",
  	 	"js/app/appRegister",
- 	 	"js/app/appProfile",
- 	 	"js/app/appSettings",
  		"js/app/appLogin",
+
+   	"js/app/settings/updatePersonal",
+		"js/app/settings/uploadAvatar",
+		"js/app/settings/uploadHeader",
+		"js/app/settings/updatePassword",
+ 	 	
+ 	 	"js/app/appProfile",
 	  "js/app/appDetails",
  	 	"js/app/appPosts",
  	 	"js/app/editPostApp",

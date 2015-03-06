@@ -27,7 +27,7 @@
 	
 	<md-input-container ng-show="password && registerForm.password.$valid">
 		<label><i class="lock icon"></i> {{ 'confirmation password' | translate | capitalize:'all'}}</label>
-		<input ng-disabled="{{disableInputs}}" name="confirm" type="password" ng-model="confirm" match-password="password" required minlength="7">
+		<input ng-disabled="{{disableInputs}}" name="confirm" type="password" ng-model="confirm" ng-compare="password" required minlength="7">
 	</md-input-container>
 	
 	<md-input-container ng-show="username && password && confirm && email">
