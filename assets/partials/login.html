@@ -31,8 +31,11 @@
 	</div>
 
 	<div class="text center">
+		<a style="display: block; color: rgba(0,0,0,0.4); margin-bottom: 5px; " href="/recovery">{{ 'forgot your password?' | translate}}</a>
+		
 		<md-button class="submit" ng-click="LoginForm.$valid && LoginCtrl.Auth(LoginCtrl.formData)" md-theme="cyan">
 			{{ 'login' | translate | capitalize:'all'}}
 		</md-button>
+
 	</div>
 </form>

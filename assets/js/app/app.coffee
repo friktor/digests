@@ -10,10 +10,8 @@ define [
 		"vc-angular-recaptcha",
 		"ng-file-upload",
 		"ng-lazyload",
-		
 		"textAngular",
-
-		"ng-tags-input"
+		"ng-tags-input",
 	], (angular) ->
 
 	"use strict";
@@ -26,12 +24,13 @@ define [
 		"vcRecaptcha",
 		"angularFileUpload",
 		"textAngular",
-		"ngTagsInput"
+		"ngTagsInput",
 	]
 
 	App = angular.module "app", depsModules
 
 	App.config ["$translateProvider", ($translateProvider) ->
+
 		$translateProvider.useStaticFilesLoader
 			prefix: "/i18n/"
 			suffix: ".json"

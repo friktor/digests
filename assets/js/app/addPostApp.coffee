@@ -27,11 +27,13 @@ define [
 						catch e
 					
 					try
-						$log.info str
+						# $log.info str
 						return hljs.highlightAuto(str).value
 					catch e
 					
 					return ""
+					
+			$scope.markdown.renderer.rules.table_open = -> "<table class=\"ui table\"></table>\n"
 
 			$scope.$on "$viewContentLoaded", ->
 				$(".ui.dropdown").dropdown()

@@ -39,6 +39,8 @@ define [
 					catch e
 					
 					return ""
+					
+			$scope.markdown.renderer.rules.table_open = -> "<table class=\"ui table\"></table>\n"
 
 			$scope.$on "$viewContentLoaded", ->
 				$(".ui.dropdown").dropdown()

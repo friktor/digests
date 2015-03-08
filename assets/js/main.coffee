@@ -4,6 +4,7 @@ define [
 		"js/app/app",
 
 		"js/directives/compare",
+		"js/app/appChangeLanguage",
 
 		"js/app/appRecovery",
 		"js/app/appRegister",

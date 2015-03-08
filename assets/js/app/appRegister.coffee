@@ -11,14 +11,14 @@ define [
 			$scope.$watch "username", ->
 				$http.get("/utils/user/isExists?username=#{$scope.username}").success (response) ->
 					$scope.isExistsUsername = response.exists
-					$log.info $scope.isExistsUsername
+					# $log.info $scope.isExistsUsername
 					return
 				return
 	
 			$scope.$watch "email", ->
 				$http.get("/utils/user/existsEmail?email=#{$scope.email}").success (response) ->
 					$scope.isExistsEmail = response.exists
-					$log.info $scope.isExistsEmail
+					# $log.info $scope.isExistsEmail
 					return
 				return
 	
