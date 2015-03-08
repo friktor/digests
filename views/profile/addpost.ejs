@@ -114,7 +114,7 @@ window.userId = "<%= user.id %>";
 						></text-angular>
 						
 						<p ng-show="setMarkupLang('markdown') && showMarkdownPreview && !successCreatePost" class="previewText">{{ 'this a preview area' | translate | capitalize:'first'}}</p>
-						<div class="ui segment" ng-show="setMarkupLang('markdown') && showMarkdownPreview && !successCreatePost" ng-bind-html="$previewMarkdown"></div>
+						<div class="ui segment previewMarkdown" ng-show="setMarkupLang('markdown') && showMarkdownPreview && !successCreatePost" ng-bind-html="$previewMarkdown"></div>
 
 						<textarea ng-show="setMarkupLang('markdown') && !successCreatePost" 
 											class="ui textarea" ng-model="postContent" 

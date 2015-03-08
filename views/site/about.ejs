@@ -1,0 +1,48 @@
+<style>
+	footer {
+		margin-top: 0;
+	}
+
+	body.pushable {
+		background: url("/images/homepage.bg.jpg") no-repeat center center fixed !important;
+		min-height: 100% !important;
+		height: auto !important;
+		background-size: cover;
+	}
+
+	body.pushable .pusher {
+		background: transparent !important;
+	}
+
+	body.pushable .pusher .ui.menu.header {
+		background: rgba(0, 0, 0, 0.2) !important;
+	}
+</style>
+
+<div class="page about">
+	<%- partial("../partials/menu.ejs") %>
+	
+	<div class="ui basic segment">
+		<div class="row">
+			<div class="col-md-2 col-sm-1"></div>
+			<div class="col-md-8 col-sm-10">
+				<div class="ui segment content">
+					<h4 class="text center">
+						{{ 'about us' | translate | capitalize:'all'}}
+					</h4>
+						<p>{{ 'My digests - is an independent international blogging platform. Our mission is to provide you with a platform to Express their thoughts and ideas.' | translate}} </p> <br> 
+						<p>{{ 'My digests - will be interesting to a large number of persons without restrictions in the form of a language barrier or interests. On our project, you can keep your personal blog or a collection of thematic information (hub) - which together with other bloggers and readers is sorted and a variety of tape information which is accessible to all. At the moment the site is fully or partially translated into 3 languages: Russian, Polish, English.' | translate}}  </p><br> 
+						<p>{{ 'This is only the beginning. But even now you can get the most diverse and interesting information which is provided only by us. On the website there are a few basic concepts.' | translate }} <br>
+						<p>{{ 'Hab - a set of information branches or separate direction. According to the idea there are several types of branching - global, local and project.' | translate }} </p> <br>
+					
+						<ul class="ui list">
+							<li>{{ 'Local: the branch from the mainstream, for example, Impressionism is the local direction from the main branch of the Art.' | translate}}</li>
+							<li>{{ 'Global: the main large for the invariant direction or complex monolithic information chain. Naprimer can be called a global hub Programming - which in turn can be divided into a number of separate local branches. Even global hubs are local wrappers other hubs.' | translate}}</li>
+							<li>{{ 'Project - the concept of the local hub distinctive feature of which is independent of the direction which can develop a group of people to explain their thoughts.' | translate}}</li>
+						</ul>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-1"></div>
+		</div>		
+	</div>
+</div>

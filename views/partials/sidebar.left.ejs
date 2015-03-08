@@ -39,42 +39,43 @@
 			<i class="fa fa-user"></i> {{ 'my profile' | translate | capitalize:'first' }}
 		</a>
 
-        <a href="/profile/<%= session.user.username %>/subscriptions" class="item">
-          <i class="fa fa-bookmark"></i> {{ 'my subscriptions' | translate | capitalize:'first' }}
-        </a>
-        <%};%>
-        
-        <a href="/myfeed" class="item">
-         <i class="fa fa-newspaper-o"></i> {{ 'my personal feed' | translate | capitalize:'first' }}
-        </a>
-        
-        <a href="/popular" class="item">
-         <i class="fa fa-newspaper-o"></i> {{ 'popular posts' | translate | capitalize:'first' }}
-        </a>
-        
-        <a href="/latest" class="item">
-         <i class="fa fa-newspaper-o"></i> {{ 'latest posts' | translate | capitalize:'first' }}
-        </a>
-        
-        <a href="/habs/projects" class="item">
-         <i class="fa fa-flask"></i> {{ 'projects' | translate | capitalize:'first' }}
-        </a>
-        
-        <a href="/habs" class="item">
-         <i class="fa fa-lightbulb-o"></i> {{ 'habs' | translate | capitalize:'first' }}
-        </a>
-        
-        <a href="/faq" class="item">
-          <i class="fa fa-life-bouy"></i> FAQ
-        </a>
-        
-        <a href="mailto:info@digests.me" class="item">
-          <i class="fa fa-at"></i> {{ 'feedback' | translate | capitalize:'first' }}
-        </a>
-        
-        <a href="/about" class="item">
-         <i class="fa fa-map-marker"></i> {{ 'about us' | translate | capitalize:'first' }}
-        </a>
+		<a href="/profile/<%= session.user.username %>/subscriptions" class="item">
+		  <i class="fa fa-bookmark"></i> {{ 'my subscriptions' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/myfeed" class="item">
+		 <i class="fa fa-newspaper-o"></i> {{ 'my personal feed' | translate | capitalize:'first' }}
+		</a>
+		<%};%>
+		
+		
+		<a href="/popular" class="item">
+		 <i class="fa fa-newspaper-o"></i> {{ 'popular posts' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/latest" class="item">
+		 <i class="fa fa-newspaper-o"></i> {{ 'latest posts' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/habs/projects" class="item">
+		 <i class="fa fa-flask"></i> {{ 'projects' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/habs" class="item">
+		 <i class="fa fa-lightbulb-o"></i> {{ 'habs' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/faq" class="item">
+		  <i class="fa fa-life-bouy"></i> FAQ
+		</a>
+		
+		<a href="mailto:info@digests.me" class="item">
+		  <i class="fa fa-at"></i> {{ 'feedback' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/about" class="item">
+		 <i class="fa fa-map-marker"></i> {{ 'about us' | translate | capitalize:'first' }}
+		</a>
 
 		<% if (session.auth && session.user) {%>
 		<a href="/logout" class="item">

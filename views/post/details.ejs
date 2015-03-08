@@ -36,7 +36,7 @@
 						<span class="nofcomments">
 							<i class="fa fa-comment"></i> <%= CountComments %> {{ '- comments' | translate}}
 						</span>
-						<% if (session.auth && session.user.username === author.username) {%>
+						<% if ((session.auth && session.user.username === author.username) || req.session.user.admin == true) {%>
 						<a href="/profile/<%= author.username %>/edit/<%= post.numericId %>">
 							<i class="fa fa-pencil-square-o"></i> {{ 'edit' | translate}}
 						</a>

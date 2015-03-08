@@ -20,17 +20,25 @@
 	body.pushable .pusher {
 		background: transparent !important;
 	}
+
+	body.pushable .pusher .ui.menu.header {
+		background: rgba(0, 0, 0, 0.2) !important;
+	}
 </style>
 
-<div class="page homepage" ng-controller="homepage">
+<div class="page homepage">
 	<%- partial("partials/menu.ejs") %>
 
 	<div class="ui basic segment">
 		<div class="row">
-			<div class="col-lg-8 col-md-7 col-sm-5">
-				<h1>{{ 'Deprive your brain of virginity' | translate}}</h1>
+			<div class="col-lg-8 col-md-7 col-sm-5" ng-controller="changeLanguage">
+				<h1>{{ 'think and act' | translate | capitalize: 'all'}}</h1>
+				<div class="text center">
+					<a class="ui button inverted basic tiny" ng-click="selectLanguage('ru')"><i class="ru flag"></i> {{ 'russian' | translate}}</a>
+					<a class="ui button inverted basic tiny" ng-click="selectLanguage('en')"><i class="gb flag"></i> {{ 'english' | translate}}</a>					
+				</div>
 			</div>
-			<div class="col-lg-4 col-md-5 col-sm-7">
+			<div class="col-lg-4 col-md-5 col-sm-7" ng-controller="homepage">
 				
 				<% if (!session.auth) {%>
 				<login-form ng-show="isShow('login')"></login-form>
