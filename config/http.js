@@ -71,7 +71,9 @@ module.exports.http = {
     },
 
     poweredBy: function poweredBy(req, res, next) {
-      res.header("X-Powered-By", "Incorrigible Alcoholics Group. With the direct participation of Anton Shramko.");
+      res.header("Core-Developer", "Anton Shramko <dev@dashline.pw>");
+      res.header("Assisted-Developer", "Dmitriy Zhdanov");
+      res.header("X-Powered-By", "Team Digests.");
       next();
     },
 

@@ -14,19 +14,20 @@ define(['angular'], function(angular){
     .value('taOptions',  {
         toolbar: [
             ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'],
-            ['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo', 'clear'],
-            ['justifyLeft','justifyCenter','justifyRight','indent','outdent'],
+            ['bold', 'italics', 'underline', 'strikeThrough'], 
+            ['ul', 'ol', 'redo', 'undo', 'clear'],
+            ['justifyLeft','justifyCenter','justifyRight'], ['indent','outdent'],
             ['html', 'insertImage', 'insertLink', 'insertVideo', 'wordcount', 'charcount']
         ],
         classes: {
             focussed: "focussed",
-            toolbar: "ui basic segment",
-            toolbarGroup: "ui buttons tiny",
+            toolbar: "ui basic segment toolbar",
+            toolbarGroup: "ui buttons basic tiny",
             toolbarButton: "ui button",
             toolbarButtonActive: "active",
             disabled: "disabled",
-            textEditor: 'ui basic segment',
-            htmlEditor: 'ui basic segment'
+            textEditor: 'ui basic segment editor',
+            htmlEditor: 'ui basic segment editor'
         },
         setup: {
             // wysiwyg mode
