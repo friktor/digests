@@ -47,8 +47,10 @@ module.exports = (req, res, next) ->
 				moment.locale(locale)
 				post.createdAt = moment(post.createdAt).format("LL")
 
+				rendered = common.markdown.render(post.content)
+
 				# Render and protect content
-				post.content = xss common.markdown.render(post.content),
+				post.content = xss rendered,
 					whiteList: sails.config.xss
 					stripIgnoreTag: false
 

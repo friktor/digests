@@ -7,8 +7,8 @@ require "coffee-script/register"
 
 module.exports = 
 	create: require "./comment/create.coffee"
-	update: require "./comment/update.coffee"
 	remove: require "./comment/remove.coffee"
+	# update: require "./comment/update.coffee"
 	get   : require "./comment/get.coffee"
 
 	_config: 

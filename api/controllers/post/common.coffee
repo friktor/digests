@@ -26,6 +26,8 @@ markdown = new Remarkable "full",
 		
 		return ""
 
+markdown.renderer.rules.table_open = -> "<table class=\"ui table\">\n"
+
 module.exports = 
 
 	markdown: markdown
