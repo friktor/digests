@@ -1,4 +1,7 @@
 {
+	"think and act": "think and act",
+	"forgot your password?": "forgot your password?",
+	
 	"login": "login",
 	"All Settings": "All Settings",
 	"personal": "personal",
@@ -21,6 +24,9 @@
 	"projects": "projects",
 	"become a blogger": "become a blogger",
 	"add post": "add post",
+
+	"personal tape posts": "personal tape posts",
+	"this tape formed according to your preferences and formed from your subscriptions.": "this tape formed according to your preferences and formed from your subscriptions.",
 
 	"Auth on Digests.me": "Auth on Digests.me",
 	"select file": "select file",

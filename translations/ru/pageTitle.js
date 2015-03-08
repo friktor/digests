@@ -12,4 +12,7 @@ module.exports = {
 	"Latest": "Новое",
 	"Hab %s": "Хаб %s",
 	"Habs": "Хабы",
+
+	"About us": "О Нас",
+	"Recovery Account": "Восстановить Аккаунт"
 };

@@ -1,4 +1,7 @@
 {
+	"think and act": "мыслить и действовать",
+	"forgot your password?": "забыли пароль?",
+
 	"login": "войти",
 	"All Settings": "Все настройки",
 	"personal": "личное",
@@ -21,6 +24,9 @@
 	"projects": "проекты",
 	"become a blogger": "стать блоггером",
 	"add post": "добавить пост",
+
+	"personal tape posts": "персональная лента постов",
+	"this tape formed according to your preferences and formed from your subscriptions.": "эта лента формируется в соответствии с вашими предпочтениями и образована из ваших подписок.",
 
 	"Auth on Digests.me": "Авторизация на Digests.me",
 	"select file": "выбрать файл",

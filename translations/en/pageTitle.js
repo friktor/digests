@@ -12,4 +12,6 @@ module.exports = {
 	"Latest": "Latest",
 	"Hab %s": "Hab %s",
 	"Habs": "Habs",
+	"About us": "About us",
+	"Recovery Account": "Recovery Account"
 };
