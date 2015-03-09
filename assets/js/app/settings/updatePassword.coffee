@@ -8,7 +8,7 @@ define [
 			templateUrl: "/partials/settings/update-password.html"
 			restrict: "E"
 			controller: ["$scope", ($scope) ->
-				$scope.update = ->
+				$scope.updatePassword = ->
 					$scope.process = true
 
 					form = 

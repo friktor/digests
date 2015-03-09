@@ -15,8 +15,6 @@ require.config({
         "ng-tags-input": "libs/ng-tags-input/ng-tags-input.min",
         remarkable: "libs/remarkable/dist/remarkable",
         requirejs: "libs/requirejs/require",
-        // "sails.io": "libs/sails.io.js/dist/sails.io",
-        // "socket.io": "libs/socket.io/index",
         textAngular: "libs/textAngular/src/textAngular",
         "textAngular-sanitize": "libs/textAngular/src/textAngular-sanitize",
         "textAngular-rangy": "libs/textAngular/dist/textAngular-rangy.min",
@@ -31,12 +29,14 @@ require.config({
         "jquery-bridget": "libs/jquery-bridget/jquery.bridget",
         async: "libs/async/lib/async",
         lodash: "libs/lodash/lodash",
+        "angular-translate-storage-cookie": "libs/angular-translate-storage-cookie/angular-translate-storage-cookie",
+        "sails.io": "libs/sails.io.js/dist/sails.io",
+        "socket.io": "libs/socket.io/index"
     },
     shim: {
         angular: {
             exports: "angular"
         },
-        
         "angular-animate": {
             deps: [
                 "angular"
@@ -69,7 +69,6 @@ require.config({
                 "angular-translate"
             ]
         },
-        
         "angular-translate-loader-url": {
             deps: [
                 "angular-translate"

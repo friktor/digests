@@ -53,7 +53,7 @@ module.exports =
 						subscribe.activated = true
 						subscribe.save()
 
-						res.view()
+						res.redirect "/"
 					else
 						throw new brokenTokenError "request subscribe is exists, but request token isnt valid"
 				else

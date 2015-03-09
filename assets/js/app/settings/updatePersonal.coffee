@@ -10,7 +10,7 @@ define [
 		restrict: "E"
 		controller: ["$scope", ($scope) ->
 
-			$scope.update = (form) ->
+			$scope.updatePersonal = (form) ->
 				$scope.request = true
 		
 				$http.get("/csrfToken").success((token) ->

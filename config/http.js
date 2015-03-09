@@ -67,7 +67,8 @@ module.exports.http = {
 
     custom: function (req, res, next) {
       // req.session.$injectedScripts = [];
-      return next();
+      //sails.log(req.params.all());
+       return next();
     },
 
     poweredBy: function poweredBy(req, res, next) {
