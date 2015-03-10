@@ -13,10 +13,17 @@ common = require "./common.coffee"
 notExists = require "../errors/notExists.coffee"
 
 module.exports = (req, res) ->
-	habId = req.param "habId"
+	id = req.param "id"
 
-	Hab.findOne(habId).populate("headingImg").then((hab) ->
-		if !hab then throw new notExists() else hab.toObject()
+	#sails.log("'"+id+"'");
+
+	Hab.findOne("id": id).populate("headingImg")
+
+	.then((hab) ->
+		#sails.log.info hab
+		if !hab
+			throw new notExists("Hab not exists") 
+		else hab.toObject()
 	)
 	
 	.then((hab) ->

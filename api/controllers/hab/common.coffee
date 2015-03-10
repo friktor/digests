@@ -15,5 +15,8 @@ module.exports =
 				link: imageHeading.link
 			catch e
 				false
-			navbarImage: navbarBg.link 
+			navbarImage: try
+				navbarBg.link
+			catch
+				"" 
 		return
