@@ -24,7 +24,10 @@ module.exports = function(grunt) {
                 name: "js/main",
                 include: ["libs/requirejs/require"],
                 insertRequire: ["js/main"],
-                
+                paths: {
+                    googleRecaptchaApi: "empty:"
+                },
+
                 optimize: "uglify2",
                 generateSourceMaps: true,
                 preserveLicenseComments: false,

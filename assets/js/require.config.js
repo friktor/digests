@@ -31,7 +31,9 @@ require.config({
         lodash: "libs/lodash/lodash",
         "angular-translate-storage-cookie": "libs/angular-translate-storage-cookie/angular-translate-storage-cookie",
         "sails.io": "libs/sails.io.js/dist/sails.io",
-        "socket.io": "libs/socket.io/index"
+        "socket.io": "libs/socket.io/index",
+
+        "googleRecaptchaApi": "//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecapthaApiLoaded&hl=" + window.i18nLocale
     },
     shim: {
         angular: {
@@ -76,7 +78,8 @@ require.config({
         },
         "vc-angular-recaptcha": {
             deps: [
-                "angular"
+                "angular",
+                "googleRecaptchaApi"
             ]
         },
         "ng-file-upload": {
