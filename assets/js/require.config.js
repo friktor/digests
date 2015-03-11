@@ -33,7 +33,7 @@ require.config({
         "sails.io": "libs/sails.io.js/dist/sails.io",
         "socket.io": "libs/socket.io/index",
 
-        "googleRecaptchaApi": "//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecapthaApiLoaded&hl=" + window.i18nLocale
+        "googleRecaptchaApi": "//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecapthaApiLoaded&hl=ru"
     },
     shim: {
         angular: {
