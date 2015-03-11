@@ -40,9 +40,9 @@
 		<input ng-disabled="{{disableInputs}}" type="text" ng-model="lastname" required>
 	</md-input-container>
 
-	<div class="text center" ng-show="username && password && confirm && email && firstname && lastname">
+<!-- 	<div class="text center" ng-show="username && password && confirm && email && firstname && lastname">
 		<div vc-recaptcha key="'6LddyQETAAAAAGJDlf6tUU3No3WVJaS84FMaJean'"></div>
-	</div>
+	</div> -->
 
 	<div layout="row" layout-sm="column" layout-align="space-around">
 		<md-switch class="md-primary" ng-init="agreeTerms = false" ng-model="agreeTerms" aria-label="Terms">
@@ -54,7 +54,7 @@
 		<ul>
 			<li ng-show="registerForm.username.$error.pattern">{{ 'the user name must be composed of latin characters without spaces' | translate | capitalize:'first'}}</li>
 			<li ng-show="registerForm.confirm.$invalid">{{ 'the confirmation don`t match password' | translate | capitalize:'first'}}</li>
-			<li ng-show="registerForm.$error.recaptcha">{{ 'captcha is required' | translate | capitalize:'first'}}</li>
+			<!-- <li ng-show="registerForm.$error.recaptcha">{{ 'captcha is required' | translate | capitalize:'first'}}</li> -->
 			<li ng-show="isExistsUsername">{{ 'this username is already in use' | translate | capitalize:'first'}}</li>
 			<li ng-show="isExistsEmail">{{ 'this email is already in use' | translate | capitalize:'first'}}</li>
 		</ul>

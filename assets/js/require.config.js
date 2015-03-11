@@ -33,7 +33,7 @@ require.config({
         "sails.io": "libs/sails.io.js/dist/sails.io",
         "socket.io": "libs/socket.io/index",
 
-        "googleRecaptchaApi": "//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecapthaApiLoaded&hl=ru"
+        // "googleRecaptchaApi": "//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecapthaApiLoaded&hl=ru"
     },
     shim: {
         angular: {
@@ -76,12 +76,12 @@ require.config({
                 "angular-translate"
             ]
         },
-        "vc-angular-recaptcha": {
-            deps: [
-                "angular",
-                "googleRecaptchaApi"
-            ]
-        },
+        // "vc-angular-recaptcha": {
+        //     deps: [
+        //         "angular",
+        //         "googleRecaptchaApi"
+        //     ]
+        // },
         "ng-file-upload": {
             deps: [
                 "angular"
