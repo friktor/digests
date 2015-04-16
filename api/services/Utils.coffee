@@ -1,5 +1,7 @@
 fs = require "fs"
 Q = require "q"
+moment = require "moment"
+randomString = require "random-string"
 
 module.exports = {
 	type : (obj) ->
@@ -31,5 +33,25 @@ module.exports = {
 		return deferred.promise;
 	,
 	defer: (fn) ->
-		setTimeout(fn, 0)		
+		setTimeout(fn, 0)	
+
+	updateFieldAllRecord: ->
+		Post.find()
+
+		.then (posts) ->
+
+			async.each posts, (post, cb) ->
+				Post.findOne(post.id).then (p) ->
+					p.numericId = moment(p.createdAt).format("DD.MM.YY")+"-"+randomString(
+						special: false
+						letters: false
+						numeric: true
+						length: 10
+					)
+					p.save()
+					sails.log("success: #{p.id}")
+					return
+					cb()
+			, (err) ->
+				sails.log.info("Success!") 
 };

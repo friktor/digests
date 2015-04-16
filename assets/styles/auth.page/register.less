@@ -1,0 +1,42 @@
+.page.register {
+
+	margin-top: 3.5rem;
+
+	.register.form {
+		.padding(2rem, 1.5rem, 2rem, 1.5rem);
+		transition: all 0.3s ease;
+		.material-shadow();
+		background: #FFF;
+
+		md-input-container.md-default-theme label, md-input-container.md-default-theme .md-placeholder {
+			color: rgba(0, 0, 0, 0.75);
+		}
+
+		md-input-container.md-default-theme .md-input {
+			border-color: rgba(0, 0, 0, 0.4);
+		}
+
+		md-input-container.md-default-theme.md-input-invalid label {
+		    color: #F44336 !important;
+		}
+
+		md-input-container.md-default-theme.md-input-invalid .md-input {
+		    border-color: #F44336 !important;
+		}
+
+		div[vc-recaptcha=""] > div > div {
+			width: 100% !important;
+		}
+
+		.ui.inverted.red.segment {
+			ul {
+				margin-top: 0; margin-bottom: 0;
+			}
+			border-radius: 0;
+		}
+
+		.md-button.submit {
+			color: #3F51B5;
+		}
+	}
+}

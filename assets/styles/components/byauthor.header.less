@@ -1,0 +1,101 @@
+.byauthor.header {
+	margin-bottom: 2rem;
+	height: 700px;
+
+	header {
+		overflow-y: hidden;
+		position: relative;
+		height: 60px;
+		
+		.ui.menu {
+			background: rgba(0, 0, 0, 0.20) !important;
+			position: absolute;
+			text-align: left;
+			width: 100%;
+			z-index: 10;
+
+			.brand {
+				color: #FFF;
+			}
+
+			a.item, div.item {
+				opacity: 1 !important;
+				color: #FFF;
+
+				.ui.button {
+					color: #FFF !important;
+					&:hover {
+						background: transparent !important;
+					}
+				}
+			}
+		}
+	}	
+
+	.content {
+		background: rgba(0, 0, 0, 0.12);
+		padding-top: 1rem;
+		margin-top: 120px;
+	}
+
+	.header.avatar {
+		.ui.image {
+			display: inline-block;
+		}
+
+		h4 {
+			text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+			margin: 15px 0 0 0;
+			font-weight: 400;
+			font-size: 16px;
+			color: #FFF;
+		}
+	}
+
+	.header.stats {
+		.ui.statistics {
+			text-align: center !important;
+
+			.statistic {
+				display: inline-block;
+				max-width: none;
+				float: none;
+				width: 180px;
+
+				.value {
+					text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+					color: #FFF !important
+				}
+
+				.label {
+					color: rgba(255, 255, 255, 0.8) !important;
+					text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+				}
+			}
+		}
+	}
+}
+
+.buttons.actions.byauthor {
+	margin-top: -4rem;
+	
+	.md-button.md-fab {
+		height: 66px;
+		width: 66px;
+
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.byauthor.header {
+		.content {
+			margin-top: 0px;
+		}
+	}
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.byauthor.header {
+		background-attachment: scroll !important;
+	}
+}

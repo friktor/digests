@@ -73,9 +73,13 @@ User =
 		  delete $User.hashedPassword
 		  delete $User.socialNetwork
 		  delete $User.subscription
-		  delete $User.privileges
+		  # delete $User.activation
+		  # delete $User.privileges
 		  delete $User.password
-		  delete $User.admin
+		  delete $User.online
+		  delete $User.createdAt
+		  delete $User.updatedAt
+		  # delete $User.admin
 		  # delete $User.email
 		  return $User
 
@@ -84,10 +88,14 @@ User =
 ###
 
 #@ Изображение шапка профиля
-User.attributes.headingImg = model: "file"
+User.attributes.headingImg = 
+	via: "headingImg"
+	collection: "file"
 
 #@ Изображение аватар	
-User.attributes.avatarImg = model: "file"
+User.attributes.avatarImg = 
+	via: "avatarImg"
+	collection: "file"
 
 #@ Комментарии
 User.attributes.comments =

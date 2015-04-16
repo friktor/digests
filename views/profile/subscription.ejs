@@ -1,0 +1,47 @@
+<script>
+	window.username = "<%= req.param('username') %>";
+</script>
+
+<%- partial("../partials/menu.ejs") %>
+
+<div class="ui basic segment" ng-controller="subscriptions">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="comment list" style="background: #FFF;">
+				<h4 class="ui header text center">
+					{{ 'my subscriptions' | translate | uppercase}}
+				</h4>
+				<p class="text center" ng-show="subscriptions.length <= 0">
+					{{ 'no subscriptions' | translate}}
+				</p>
+				<div class="subscriptions ui comments" ng-show="subscriptions.length > 0">
+					<div class="comment" ng-repeat="subscription in subscriptions">
+						<a ng-href="{{subscription.purpose.link}}" class="avatar">
+							<img ng-src="{{subscription.purpose.image}}" alt="">
+						</a>
+						<div class="content">
+							<a ng-href="{{ subscription.purpose.link }}" class="author">
+								{{ subscription.purpose.header }}
+							</a>
+							<div class="metadata">
+								<span class="ui label" style="color: rgba(0,0,0,0.8); font-weight: 400;">
+									{{subscription.type | translate}}
+								</span>
+							</div>
+							<div class="text">
+								{{ subscription.purpose.description | translate}}
+							</div>
+							<div class="actions">
+								<a ng-click="unsubscribe(subscription.id)">
+									{{'unsubscribe' | translate | capitalize:'all'}}
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>		
+		</div>
+		<div class="col-md-2"></div>
+	</div>	
+</div>

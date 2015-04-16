@@ -1,0 +1,35 @@
+<% _.each(posts, function (post) { %>
+	<div class="col-lg-3 col-md-3 col-sm-6 col-sm-12 masonry-brick">
+		
+		<div class="post">
+			
+			<!-- Post heading image -->
+			<% if (post.previewImage) {%> 
+				<a class="heading image" href="/details/<%= post.numericId %>">
+					<img post-img src="<%= post.previewImage %>" alt="">
+				</a> 
+			<% }; %>
+			
+			<!-- Post title link -->
+			<div class="title">
+				<a href="/details/<%= post.numericId %>">
+					<%= post.title %>
+				</a>
+			</div>
+			
+			<!-- Post Sinopsis -->
+			<div class="sinopsis">
+				<%= post.content %>
+			</div>
+
+			<!-- Post button share&read -->
+			<div class="button group">
+				<a href="/details/<%= post.numericId %>" class="read">
+					{{ 'read' | translate}}
+				</a>
+			</div>
+
+		</div>
+
+	</div>
+<% }); %>

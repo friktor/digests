@@ -1,188 +1,35 @@
 {
-	"Activate": "Activate",
-	"Activate your new account on {{website}}": "Activate your new account on {{website}}",
-	"Welcome to our website {{firstname}} {{lastname}}! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link." : "Welcome to our website {{firstname}} {{lastname}}! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link.",
-	"You have successfully updated your password on {{website}}": "You have successfully updated your password on {{website}}",
-	"Your new password on the site - {{password}}": "Your new password on the site - {{password}}",
-
 	"Forbidden": "Forbidden",
 	"Access denied": "Access denied",
 	"You don't have permission to see the page you're trying to reach.": "You don't have permission to see the page you're trying to reach.",
-
 	"Page not found": "Page not found",
 	"The page you were trying to reach doesn't exist.": "The page you were trying to reach doesn't exist.",
-
 	"Server Error": "Server Error",
 	"There was a server error, please try again later.": "There was a server error, please try again later.",
-
-	"Search": "Search",
-
-	"Register": "Register",
-	"Login": "Login",
-
-	"Projects and Habs": "Projects and Habs",
-	"Search on Site": "Search on Site",
-	"My Subscribes": "My Subscribes",
-	"Add Article": "Add Article",
-	"My Favorites": "My Favorites",
-	"My Profile": "My Profile",
-	"Feedback": "Feedback",
-	"Logout": "Logout",
-
-	"I agree with the rules of the resource": "I agree with the rules of the resource",
-	"confirmation password": "confirmation password",
-	"firstname": "firstname",
-	"lastname": "lastname",
-	"username": "username",
-	"password": "password",
-	"or": "or",
-
-	"Warning! You have not activated your account via email. If you want to use all the features of the service - you need to activate your account via the link in the email sent to your email. If after 24 hours you do not activate your account - it will be removed.": "Warning! You have not activated your account via email. If you want to use all the features of the service - you need to activate your account via the link in the email sent to your email. If after 24 hours you do not activate your account - it will be removed.",
-	"not specified": "not specified",
-	"latest post": "latest post",
-	"activities": "activities",
-	"all posts": "all posts",
-	"about me": "about me",
-	"read": "read",
-	"share": "share",
-
-	"social network": "social network",
-	"comments": "comments",
-	"karma": "karma",
-	"posts": "posts",
-
-	"PROJECTS": "PROJECTS",
-	"POPULAR": "POPULAR",
-	"NEW": "NEW",
-
-	"Subscribe": "Subscribe",
-
-	"Comments": "Comments",
-	"%s comments": {
-		"one": "one comment",
-		"other": "%s comments"
-	},
-	
-	"Read Full": "Rad Full",
-	"Add comment": "Add comment",
-
-	"Profile %s": "Profile %s",
-
-
-	"Enter the title of your article. Length up to 120 characters.": "Enter the title of your article. Length up to 120 characters.",
-	"Enter a link to an image header of the article. Acceptable formats: JPG, PNG.": "Enter a link to an image header of the article. Acceptable formats: JPG, PNG.",
-	"Enter your post. Markup language Markdown. Learn other information and tutorials in FAQ.": "Enter your post. Markup language Markdown. Learn other information and tutorials in FAQ.",
-
-	"This is a draft?": "This is a draft?",
-	"Publish": "Publish",
-	"Preview": "Preview",
-
-	"Language": "Language",
-	"English": "English",
-	"Russian": "Russian",
-	"Polish": "Polish",
-
-	"Hab": "Hab",
-	"Author": "Author",
-
-	"Popular Today": "Popular Today",
-	"page": "page",
-
-	"Subscribers": "Subscribers",
-	"Posts by %s": "Posts by %s",
-	"RSS Feed": "RSS Feed",
-	"Exit": "Exit",
-
-	"You are not logged in. To use the more advanced functionality subscriptions login or register. To receive the newsletter without registration, enter your email.": "You are not logged in. To use the more advanced functionality subscriptions login or register. To receive the newsletter without registration, enter your email.",
-	"Are you sure you want to subscribe to the publication by this author?": "Are you sure you want to subscribe to the publication by this author?",
-
-
-	"Subscribe to author": "Subscribe to author",
-	"Your email": "Your email",
-
-	"Settings %s": "Settings %s",
-	"Settings": "Settings",
-
-	"Change avatar": "Change avatar",
-	"Select file": "Select file",
-	"Avatar": "Avatar",
-	
-	"Upload heading profile image": "Upload heading profile image",
-	"Not accepted file types.": "Not accepted file types.",
-	"Change heading profile": "Change heading profile",
-	"File size is too big.": "File size is too big.",
-	"Retype new password":"Retype new password",
-	"Enter new password": "Enter new password",
-	"Change password": "Change password",
-	"Update password": "Update password",
-	"Personal": "Personal",
-	"Upload": "Upload",
-	"Update": "Update",
-
-	"RSS Feed «New» in the World Digest": "RSS Feed «New» in the World Digest",
-	"Personal RSS with posts from %s %s": "Personal RSS with posts from %s %s",
-	"Newest posts. World Digests": "Newest posts. World Digests",
-	"Interesting for your habs.": "Interesting for your habs.",
-	"RSS feed by user %s": "RSS feed by user %s",
-	"Personal RSS with posts by %s %s": "Personal RSS with posts by %s %s",
-	"To read in another language.": "To read in another language.",
-
-	"Enter your query here": "Enter your query here",
-	"Error! Please refresh this page, and try again": "Error! Please refresh this page, and try again",
-	"success": "success",
-	"Posts in hab": "Posts in hab",
-
-	"Have any server error. Check the connection to the Internet and try again.": "Have any server error. Check the connection to the Internet and try again.",
-	"Authorization failed, please check the data entered, or register.": "Authorization failed, please check the data entered, or register.",
-	"You have successfully logged into the system. Redirect...": "You have successfully logged into the system. Redirect...",
-
-	"No more entries" : "No more entries",
-	"Next page": "Next page",
-
 	"Edit post “%s” by %s %s": "Edit post “%s” by %s %s",
-	"My subscriptions": "My subscriptions",
-	"unsubscribe": "unsubscribe",
-	"Subscription user %s": "Subscription user %s",
-	"%s subscriptions": "%s subscriptions",
-	"Edit Article": "Edit Article",
-	"Success. Now you will be redirected to the page of your post.": "Success. Now you will be redirected to the page of your post.",
-	"Error! Please try again.": "Error! Please try again.",
-	"Leave comment": "Leave comment",
-	"For the record, no comments.": "For the record, no comments.",
-	"Enter your comment here. You can use Markdown": "Enter your comment here. You can use Markdown",
-	"submit": "submit",
-	"Subscribe to this hab": "Subscribe to this hab",
-	"Are you sure you want to subscribe to the publication by this hab?": "Are you sure you want to subscribe to the publication by this hab?",
-	"You are an authorized user.": "You are an authorized user.",
-	"Congratulations! You request a subscription. To your email sent instructions to activate your subscription.": "Congratulations! You request a subscription. To your email sent instructions to activate your subscription.",
-	"Error! Subscribe is exists.": "Error! Subscribe is exists.",
-	"Edit": "Edit",
-	"activities me": "activities me",
-	"Enter the tag entries with a comma": "Enter the tag entries with a comma",
-
-	"Site": "Site",
+	"Digests.me Homepage": "Digests.me Homepage",
+	"My personal feed": "My personal feed",
+	"Add new post": "Add new post",
+	"Settings %s": "Settings %s",
+	"Posts by %s": "Posts by %s",
+	"Profile %s": "Profile %s",
+	"Habs - %s": "Habs - %s",
+	"Popular": "Popular",
+	"%s page": "%s page",
+	"Latest": "Latest",
+	"Hab %s": "Hab %s",
+	"Habs": "Habs",
 	"About us": "About us",
-	"Authors": "Authors",
-	"Partners": "Partners",
-	"Contribute": "Contribute",
-	"Other": "Other",
-	"Help translate": "Help translate",
-	"Support": "Support",
-	"FAQ": "FAQ",
-	"Social": "Social",
-	"All right reserved.": "All right reserved.",
-	"Share": "Share",
-	"Tags": "Tags",
-
-	"Please activate your subscribe on Digests.me": "Please activate your subscribe on Digests.me",
-	"Please activate your subscribe on Digests.me. For activate - click to link «Activate».": "Please activate your subscribe on Digests.me. For activate - click to link «Activate».",
-
-	"Please update this page for view your comment.": "Please update this page for view your comment.",
-	
-	"Your subscribe has been activate.": "Your subscribe has been activate.",
-	"Activation success": "Activation success",
-	"<h1>The daily flow</h1>\n<h2>of your interests</h2>": "<h1>The daily flow</h1>\n<h2>of your interests</h2>",
-
-	"Digests.me is an international independent collective blog. The aim of the project is to create a convenient platform for the expression of their thoughts, and to share experiences in various fields.<br>Digests.me - this is a project which can be interesting to a large number of persons without limitations as to the language barrier or lack of areas of creativity and activity.<br>On our project, you can keep your personal blog or a collection of thematic information (hub) - which together with other bloggers and readers is sorted and a variety of tape information which is accessible to all.<br>At the moment the site is fully or partially translated into 3 languages: Russian, Polish, English. This is only the beginning. But even now you can get the most diverse and interesting information which is provided only by us.<br>On the website there are a few basic concepts:<br><br>Hub - a set of information branches or separate direction than in either. According to the idea there are several types of branching - global and local.<br>* Local: the branch from the mainstream, for example Impressionism is the local direction from the main branch of the Art.<br>* Global: the main large for the invariant direction or complex monolithic information chain. For example, you can call the global hub Programming - which in turn can be divided into a number of separate local branches. Even global hubs are local soprovojdeniye other hubs.<br>* Project - the concept of the local hub distinctive feature of which is independent of the direction which can develop one group of people to explain their thoughts.<br><br>At the moment the site is in alpha mode. At this point, you can write your blog in hubs that are already built on the site. Until such work is unstable functions as an independent branch and the Association of local and global hubs. There is no possibility to use several global branches to select the direction of entry, but at the moment this problem is solved by using the tags.": "Digests.me is an international independent collective blog. The aim of the project is to create a convenient platform for the expression of their thoughts, and to share experiences in various fields.<br>Digests.me - this is a project which can be interesting to a large number of persons without limitations as to the language barrier or lack of areas of creativity and activity.<br>On our project, you can keep your personal blog or a collection of thematic information (hub) - which together with other bloggers and readers is sorted and a variety of tape information which is accessible to all.<br>At the moment the site is fully or partially translated into 3 languages: Russian, Polish, English. This is only the beginning. But even now you can get the most diverse and interesting information which is provided only by us.<br>On the website there are a few basic concepts:<br><br>Hub - a set of information branches or separate direction than in either. According to the idea there are several types of branching - global and local.<br>* Local: the branch from the mainstream, for example Impressionism is the local direction from the main branch of the Art.<br>* Global: the main large for the invariant direction or complex monolithic information chain. For example, you can call the global hub Programming - which in turn can be divided into a number of separate local branches. Even global hubs are local soprovojdeniye other hubs.<br>* Project - the concept of the local hub distinctive feature of which is independent of the direction which can develop one group of people to explain their thoughts.<br><br>At the moment the site is in alpha mode. At this point, you can write your blog in hubs that are already built on the site. Until such work is unstable functions as an independent branch and the Association of local and global hubs. There is no possibility to use several global branches to select the direction of entry, but at the moment this problem is solved by using the tags."
-	
+	"Recovery Account": "Recovery Account",
+	"Activate your new account on Digests.me": "Activate your new account on Digests.me",
+	"Congratulations on your registration!": "Congratulations on your registration!",
+	"Account Activation": "Account Activation",
+	"Welcome": "Welcome",
+	"Welcome to our website %s %s! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link.": "Welcome to our website %s %s! To make full use of your account, you must verify your email address. So you activate your account - and be able to use the full functionality. To do this, click on the appropriate link.",
+	"Activate": "Activate",
+	"Please activate your subscription on %s": "Please activate your subscription on %s",
+	"Hello user! This letter notifies you that your subscription was successfully created. But it starts to work and you could regularly receive alerts about new interesting things you have to activate it. To activate a subscription - simply click on the \"Activate\" button.": "Hello user! This letter notifies you that your subscription was successfully created. But it starts to work and you could regularly receive alerts about new interesting things you have to activate it. To activate a subscription - simply click on the \"Activate\" button.",
+	"If you have not signed up on our website and this letter has come to you by chance - just ignore it.": "If you have not signed up on our website and this letter has come to you by chance - just ignore it.",
+	"Authorization failed, please check the data entered, or register.": "Authorization failed, please check the data entered, or register.",
+	"You have successfully logged into the system. Redirect...": "You have successfully logged into the system. Redirect..."
 }

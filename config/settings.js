@@ -1,3 +1,3 @@
 module.exports.settings = {
-	fileFolder: "/home/anton/digests.me/assets"
+	fileFolder: "/Users/hh/Dev/git/digests/assets"
 }

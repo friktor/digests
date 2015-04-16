@@ -1,0 +1,88 @@
+<div id="mainLeftSidebar" class="ui left vertical sidebar wide segment">
+	
+	<% if (!session.auth == true) {%>
+		<div class="ui heading unauth">
+			<div class="ui vertical buttons">
+				<a href="/login" class="ui button green">
+					{{ 'login' | translate | capitalize:'first'}}
+				</a>
+				<a href="/register" class="ui button blue">
+					{{ 'register' | translate | capitalize:'first'}}
+				</a>
+			</div>
+		</div>
+	<% } else if (session.auth && session.user) { %>
+		<div class="ui heading auth" style="background: url(<% if (session.user.headingImg.length > 0) {%><%= (_.find(session.user.headingImg, {"restrict": "sidebar"})).link %><%} else {%>/images/profile.jpg<%};%>) no-repeat;">
+			<div class="ui avatar">
+				<% var avatarImg = _.find(session.user.avatarImg, {"restrict": "preview"}); %>
+				<img src="<% if (avatarImg) {%><%= avatarImg.link %><%} else {%>/images/avatar.png<%}%>" alt="" class="ui image circular">
+			</div>
+			<div class="ui panel profile">
+				<img src="<% if (session.user.headingImg) {%><%= session.user.headingImg.link %><%} else {%>/images/profile.jpg<%};%>" alt="">
+				<div class="darker">
+					<span><%= session.user.firstname %> <%= session.user.lastname %></span>
+					<a href="/profile/<%= session.user.username %>"><i class="fa fa-user"></i></a>
+					<a href="/profile/<%= session.user.username %>/settings"><i class="fa fa-gear"></i></a>
+				</div>
+			</div>
+		</div>
+	<% } %>
+	
+			
+	<div class="ui list ">
+		<% if (session.auth && session.user) {%>
+		<a href="/profile/<%= session.user.username %>/addpost" class="item">
+			<i class="fa fa-plus"></i> {{ 'add new post' | translate | capitalize:'first' }}
+		</a>
+
+		<a href="/profile/<%= session.user.username %>" class="item">
+			<i class="fa fa-user"></i> {{ 'my profile' | translate | capitalize:'first' }}
+		</a>
+
+		<a href="/profile/<%= session.user.username %>/subscriptions" class="item">
+		  <i class="fa fa-bookmark"></i> {{ 'my subscriptions' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/myfeed" class="item">
+		 <i class="fa fa-newspaper-o"></i> {{ 'my personal feed' | translate | capitalize:'first' }}
+		</a>
+		<%};%>
+		
+		
+		<a href="/popular" class="item">
+		 <i class="fa fa-newspaper-o"></i> {{ 'popular posts' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/latest" class="item">
+		 <i class="fa fa-newspaper-o"></i> {{ 'latest posts' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/habs/projects" class="item">
+		 <i class="fa fa-flask"></i> {{ 'projects' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/habs" class="item">
+		 <i class="fa fa-lightbulb-o"></i> {{ 'habs' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/faq" class="item">
+		  <i class="fa fa-life-bouy"></i> FAQ
+		</a>
+		
+		<a href="mailto:info@digests.me" class="item">
+		  <i class="fa fa-at"></i> {{ 'feedback' | translate | capitalize:'first' }}
+		</a>
+		
+		<a href="/about" class="item">
+		 <i class="fa fa-map-marker"></i> {{ 'about us' | translate | capitalize:'first' }}
+		</a>
+
+		<% if (session.auth && session.user) {%>
+		<a href="/logout" class="item">
+			<i class="fa fa-power-off"></i>
+			{{ 'logout' | translate | capitalize:'first' }}
+		</a>
+		<% } %>
+	</div>
+	
+</div>

@@ -3,19 +3,48 @@
  # @description :: Server-side logic for managing auths
  # @help        :: See http://links.sailsjs.org/docs/controllers
 bcrypt = require "bcrypt-nodejs"
+_ = require "lodash"
 
 module.exports = 
 	
 	login: (req, res) ->
-		title = req.__ "Login"
-		res.view
-			title: title
+		if req.session.auth is true then res.redirect "/" else
+			title = req.__ "Login"
+			res.view
+				title: title
 
 	register: (req, res) ->
 		title = req.__ "Register"
 
 		res.view 
 			title: title
+
+	session: (req, res) ->
+		if req.session.auth and req.session.user
+			$user = req.session.user
+			avatars = _.find($user.avatarImg, "restrict": "preview")
+
+			res.json 
+				fullname: $user.firstname+" "+$user.lastname
+				username: $user.username
+				auth: true
+				avatars: try
+					avatars.link
+				catch e
+					false			
+		else
+			res.json
+				auth: false
+
+
+	isLoggedIn: (req, res) ->
+		res.json 
+			auth: if req.session.auth is true
+				true 
+			else false
+			message: if req.session.auth is true
+				req.__ "The user is already authenticated"
+			else undefined
 
 	auth: (req, res) ->
 		username = req.param "username"
@@ -34,40 +63,33 @@ module.exports =
 
 		.then((user) ->
 			# sails.log "User #{user.username} is exists\n"
-			if !user
+			if Utils.type(user) is "undefined"
 				res.json
-					status: false
-					user: null
+					message: req.__ "Authorization failed, please check the data entered, or register."
+					success: false
 				return
-			
-			else user
+			else 
+				user
 		)
 
 		.then((user) ->
+
 			isMatch = bcrypt.compareSync password, user.hashedPassword
 			# sails.log "is match: #{isMatch}\n"
 
 			if !isMatch
 				res.json
-					status: false
-					user: null
+					message: req.__ "Authorization failed, please check the data entered, or register."
+					success: false
 				return
 			else
 				req.session.user = user
 				req.session.auth = true
 
-				user.online = true
-				
-				user.save (error, user) ->
-					User.publishUpdate user.id, 
-						username: user.username
-						action: "has logged in"
-						id: user.id
-
-					res.json
-						user: user.toJSON()
-						status: true
-					return
+				res.json
+					message: req.__ "You have successfully logged into the system. Redirect..."
+					username: user.username
+					success: true
 				return
 		)
 		return

@@ -1,0 +1,25 @@
+<form name="recoveryForm" class="ui segment" novalidate>
+	<h4 ng-show="!success" class="ui header text center">
+		{{ 'forgot your password?' | translate | capitalize:'first'}}
+	</h4>
+	<p ng-show="!success">{{ 'enter your email address specified during registration' | capitalize:'first'}}</p>
+	<md-input-container ng-show="!success">
+		<label><i class="mail icon"></i> {{ 'email' | translate}}</label>
+		<input type="email" ng-model="email" required>
+	</md-input-container>
+	<div class="text center">
+		<div class="ui image large" ng-show="success">
+			<img src="/images/icons/cat_slippers.png" style="display: inline-block; width: 120px;">
+		</div>
+		<p ng-show="success">{{ 'Ready! Email sent information to log on to the website.' | translate}}</p>
+		<p ng-show="throw" style="color: #F44336;">{{ 'the account with the specified email address does not exist' | translate | capitalize:'first'}}</p>
+		
+		<md-button ng-show="success" href="/">
+			<i class="fa fa-home"></i> {{ 'to home' | translate}}
+		</md-button>
+
+		<md-button ng-show="!success" ng-disabled="success" ng-click="recoveryForm.$valid && recovery()">
+			{{ 'continue' | translate}}
+		</md-button>
+	</div>
+</form>

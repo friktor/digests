@@ -3,15 +3,17 @@
  # @description :: TODO: You might write a short summary of how this model works and what it represents here.
  # @docs		  :: http://sailsjs.org/#!documentation/models
 
+randomString = require "random-string"
+moment = require "moment"
 xss = require "xss"
 
 Post =
 
 	attributes: 
 
-		headerImg: 
-			type: "string"
-			required: false
+		headerImg:
+			collection: "file"
+			via: "postHeaderImage"
 		
 		title:
 			type: "string"
@@ -58,19 +60,20 @@ Post =
 Post.beforeCreate = ($Post, next) ->
 
 	# XSS protect title - to plain text
-	$protect_title = xss($Post.title, XSS_opt.plainText);
-	$Post.title = $protect_title;
+	$Post.title = xss $Post.title, 
+		stripIgnoreTagBody: ["script"]
+		stripIgnoreTag: true
+		whiteList: []
 
-	# # XSS protect html content
-	# $protect_sinopsis = xss($Post.sinopsis, XSS_opt.HtmlProtect);
-	# $protect_content = xss($Post.content, XSS_opt.HtmlProtect);
-
-	# # Replace Data
-	# $Post.sinopsis = $protect_sinopsis;
-	# $Post.content = $protect_content;
+	$Post.numericId = moment().format("DD.MM.YY")+"-"+randomString(
+		special: false
+		letters: false
+		numeric: true
+		length: 6
+	)
 
 	# If title is empty after XSS replace - throw new error
-	return next(new Error("title is empty after xss protect")) if $protect_title is "" or $protect_title is null
+	return next(new Error("title is empty after xss protect")) if $Post.title.length <= 0
 
 	next()
 

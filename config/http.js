@@ -9,6 +9,7 @@
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.http.html
  */
 var Remarkable = require('remarkable');
+var _ = require("lodash");
 
 function trimmedSpace(str) {
   return str.replace(/^\s+|\s+$/g, "")
@@ -27,14 +28,9 @@ module.exports.http = {
   ****************************************************************************/
 
   // Locals to EJS
-  locals: {
-    translit: require('transliteration'),
-    hljs: require("highlight.js"),
-    trimmedSpace: trimmedSpace,
-    moment: require("moment"),
-    remarkable: Remarkable,
-    xss: require("xss"),
-  },
+  locals: _.merge(require("./Helpers/index.js"), {
+    xss: require("xss")
+  }),
 
   middleware: {
 
@@ -49,7 +45,7 @@ module.exports.http = {
       'startRequestTimer',
       'cookieParser',
       'session',
-      'myRequestLogger',
+      'custom',
       'bodyParser',
       'handleBodyParserError',
       'compress',
@@ -69,15 +65,17 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-    myRequestLogger: function (req, res, next) {
-        req.session.description = "";
-        req.session.keywords = "";
-        return next();
+    custom: function (req, res, next) {
+      // req.session.$injectedScripts = [];
+      //sails.log(req.params.all());
+       return next();
     },
 
     poweredBy: function poweredBy(req, res, next) {
-	res.header("X-Powered-By", "Incorrigible Alcoholics Group. With the direct participation of Anton Shramko.");
-	next();
+      res.header("Core-Developer", "Anton Shramko <dev@dashline.pw>");
+      res.header("Assisted-Developer", "Dmitriy Zhdanov");
+      res.header("X-Powered-By", "Team Digests.");
+      next();
     },
 
 

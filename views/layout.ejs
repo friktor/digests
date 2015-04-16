@@ -1,83 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>
-      <% if (title) { %>
-        <%= title %>
-      <% } else {%>
-        <%= sails.config.application.name %>
-      <%}; %>
-    </title>
+	<head>
+		<title>		
+			<%= title || sails.config.app.name %>
+		</title>
 
-    <!-- Main meta for SEO -->
-    <meta name="keywords" content="<% if (typeof keywords_ !== "undefined") {%> <%= keywords_ %> <%} else {%><%};%>">
-    <meta name="description" content="<% if (typeof description_ !== "undefined") {%> <%= description_ %> <%} else {%><%};%>">
-    
-		<!-- VK img for share link -->
-    <% if (typeof post !== "undefined" && post.headerImg) {%>
-		<link rel="image_src" href="_<%= post.headerImg %>" />
-    <%};%>
+		<%- meta("viewport", "width=device-width, initial-scale=1, maximum-scale=1") %>
+		
+		<!-- meta description -->
+		<meta name="description" 
+			content="<% if (typeof description !== 'undefined') {%><%= description %><%} else {%><%= sails.config.app.description %><%};%>"
+		/>
 
-    <!-- Facebook meta tags -->
-		<% if (typeof post !== "undefined" && typeof description_ !== "undefined") {%>
-		<meta property="og:title" content="<%= post.title %>"/>
-		<meta property="og:description" content="<%= description_ %>"/>
-		<meta property="og:image" content="<%= post.headerImg %>"/>
-		<%};%>
+		<!-- meta keywords -->
+		<meta name="keywords" 
+			content="<% if (typeof keywords !== 'undefined') {%><%= keywords %><%} else {%><%= sails.config.app.keywords %><%};%>"
+		/>
 
-    <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="/bower_components/waves/dist/waves.min.css">
-    <link rel="stylesheet" href="/fonts/iconfontcustom/style.css">
-    <link rel="stylesheet" href="/styles/importer.css">
-    
-    <!-- Utils and Lib Javascript -->
-    <script src="/stagging/bluebird/bluebird.min.js"></script>
-    <script src="/bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="/js/plugin/EJS.js"></script>
-    <script src="/js/utils.js"></script>
-    
-    <!-- Required dependencies -->
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <!--<script src="/bower_components/jquery.cookie/jquery.cookie.js"></script>-->
-    <script src="/bower_components/waves/dist/waves.min.js"></script>
-    <script src="/stagging/semantic/semantic.min.js"></script>
+		<!-- Set locale -->
+		<script>window.i18nLocale = "<%= req.getLocale() %>";</script>
+		
+ 		<link rel="stylesheet" href="/resources/styles.css">
+		<script src="/resources/js.js"></script>
+	</head>
 
-    <% if (typeof posts !== "undefined" || typeof habs !== "undefined") {%>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
-    <script src="http://imagesloaded.desandro.com/imagesloaded.pkgd.min.js"></script>
-    <script src="/bower_components/masonry/dist/masonry.pkgd.min.js"></script>
-    <%}; %>
-
-    <script>
-      var isLoggedIn = <% if (session.auth && session.auth == true) {%>true<%} else {%>false<%};%>; 
-      
-      $(document).ready(function () {
-        $(".ui.vertical.sidebar").first()
-          .sidebar("attach events", "#sidebar")
-        ;
-    
-        $(".ui.vertical.sidebar")
-          .sidebar({
-            overlay: true,
-            duration: 50,
-          })
-        ;
-    
-        var w = Waves;
-        w.displayEffect();
-      });
-    </script>
-  
-  </head>
-
-  <body>
-    <%- partial("partials/sidebar/sidebar.main.ejs") %>
-    <%- partial("partials/navbar.ejs") %>
-    <%- body %>
-    
-    <script src="/js/dependencies/sails.io.js"></script>
-  </body>
+	<body class="pushable">
+		<% "body content" %>
+		<%- partial("partials/sidebar.left.ejs") %>
+		<% if (!session.auth) {%>
+		<%- partial("partials/sidebar.top.login.ejs") %>
+		<%}%>
+		<div class="pusher">
+			<%- body %>
+		</div>
+	</body>
 </html>

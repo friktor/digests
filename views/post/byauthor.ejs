@@ -1,0 +1,151 @@
+<script>
+	window.thisPage = <%= page %>;
+	window.postsPage = "/byauthor/<%= user.username %>";
+	window.locale = "<%= locale %>";
+</script>
+
+<style>
+	.byauthor.header {
+		background: url('<%= user.headingImg %>') no-repeat fixed top;
+	}
+
+	.byauthor.header .blured {
+		background: url('<%= user.navbarBg %>') no-repeat fixed top;
+		position: absolute;
+		height: 60px;
+		width: 100%;
+		z-index: 5;	
+	}
+</style>
+
+<div class="byauthor header">
+	<%- partial("../partials/menu.ejs") %>
+
+	<div class="content">
+		<div class="header avatar text center">
+			<img class="ui image circular" src="<%= user.avatarImg %>" alt="">
+			<h4><%= user.firstname %> <%= user.lastname %></h4>
+		</div>
+	
+		<div class="header stats ui basic segment">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="ui statistics">
+						<div class="statistic">
+							<div class="value">
+								<%= numberOfPosts %>
+							</div>
+							<div class="label">
+								{{ 'posted in blog' | translate | capitalize:'first'}}
+							</div>
+						</div>
+						<div class="statistic">
+							<div class="value">
+								<%= numberOfSubscribers %>
+							</div>
+							<div class="label">
+								{{ 'users have signed up' | translate | capitalize:'first'}}
+							</div>
+						</div>
+						<div class="statistic">
+							<div class="value">
+								<%= numberOfComments %>
+							</div>
+							<div class="label">
+								{{ 'comments left' | translate | capitalize:'first'}}
+							</div>
+						</div>
+					</div>					
+				</div>	
+				<div class="col-md-2"></div>
+			</div>
+		</div>		
+	</div>
+
+</div>
+
+<div class="buttons actions byauthor text center" ng-controller="subscribe">
+	<div ng-include="'/partials/elements/subscribe.modal.html'"></div>
+	
+	<md-button class="md-fab green" aria-label="button actions"
+		ng-click="subscribe({ 
+			email: <%= req.session.user ? '"'+req.session.user.email+'"' : null %>,
+			user: <%= req.session.user ? '"'+req.session.user.id+'"' : null %>, 
+			auth: <%= req.session.auth ? req.session.auth : false %>, 
+			parentElement: '.buttons.actions.byauthor',
+			purpose: '<%= user.id %>', 
+			type: 'author', 
+		})"
+		>
+		<md-tooltip>{{ 'subscribe to this author' | translate | capitalize:'first'}}</md-tooltip>
+		<i class="fa fa-envelope"></i>
+	</md-button>
+	<md-button class="md-fab indigo" aria-label="button actions"
+		ng-click="openLink('/rss/author/<%= user.username %>.xml')"
+	>
+		<md-tooltip>{{ 'RSS feeds by this author' | translate}}</md-tooltip>
+		<i class="fa fa-rss"></i>
+	</md-button>
+</div>
+<div class="posts lists main" ng-controller="PostsCtrl">
+	<div class="ui basic segment">
+		<div class="row">
+			<!-- Server rendered post in posts -->
+			<%- partial("../partials/posts.ejs") %>
+			<!-- End -->
+			
+			<!-- Client rendered post in posts -->
+			<div masonry-brick ng-repeat="post in posts | orderBy: '-createdAt' " 
+				class="col-lg-3 col-md-3 col-sm-6 col-sm-12 masonry-brick"
+			>
+				<div class="post">		
+					<a ng-show="post.previewImage" class="heading image" href="/details/{{post.numericId}}">
+						<img post-img ng-src="{{ post.previewImage }}" alt="">
+					</a> 	
+					<!-- Post title link -->
+					<div class="title">
+						<a href="/details/{{post.numericId}}">
+							{{ post.title }}
+						</a>
+					</div>	
+					<!-- Post Sinopsis -->
+					<div class="sinopsis">
+						{{post.content}}
+					</div>
+					<!-- Post button share&read -->
+					<div class="button group">
+						<a href="/details/{{post.numericId}}" class="read">
+							{{"read" | translate}}
+						</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		
+
+	</div>
+
+	<div class="text center">
+		<div ng-show="notify" class="notify">
+			<div class="ui basic segment">
+				<div class="row">
+					<div class="col-md-4 col-sm-3 hidden-xs"></div>
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<div class="ui inverted red segment">
+							{{ notify | translate}}
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-3 hidden-xs"></div>
+				</div>
+			</div>
+		</div>
+		<md-button ng-click="loadPosts()" class="md-fab mdLoadPostsButton">
+			<i class="fa fa-plus"></i>
+		</md-button>
+	</div>
+
+</div>
+
+<%- partial("../partials/footer.ejs") %>

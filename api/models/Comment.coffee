@@ -4,35 +4,31 @@
  # @docs        :: http://sailsjs.org/#!documentation/models
 
 Comment =
+	attributes:
 
-  attributes: {
-		
-		author: { # Id author
+		# @author: "string". Association with user model.
+		author:
+			required: true 
 			model: "user"
-		},
 
-		message: { # main message string
-			type: "string", 
+		# @message: "string". Content message with comment
+		message:
+			type: "string"
 			required: true
-		},
+			maxLength: 300
 
-		reply: {
-			type: "array", # reply for comment, Example: [{author: "_uuid", message: "@message"}, etc...]
-			defaultsTo: [], 
-		},
+		# @reply: "bool". This comment is reply to comment?
+		reply:
+			type: "boolean"
+			defaultsTo: false
 
-		post: {
-			type: "string", # post uuid
-			required: true,
-		},
+		# @replyTarget: "string". Id target reply comment.
+		replyTarget:
+			type: "string"
 
-		rating: {
-			type: "integer", # rating for comment (Test field)
-			defaultsTo: 0,
-		},
-  }
-
-Comment.beforeCreate = ($Comment, next) ->
-  next()
+		# @target: "string". Target for list comment. Post id, page and other...
+		target:
+			type: "string"
+			required: true
 
 module.exports = Comment;

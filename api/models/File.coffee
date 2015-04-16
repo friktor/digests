@@ -21,22 +21,34 @@ File =
 			type: "string"
 			required: true
 
-		meta: # Example: {for: "post", _uuid: "@id"}
-			type: "object"
-			required: false
-
 		size: 
 			type: "integer"
-			required: true 
+			required: true
+
+		postHeaderImage:
+			model: "post"
+
+		activated: 
+			type: "boolean"
+			defaultsTo: false
+
+		imagesize: 
+			type: "object"
+
 
 ###
-Ассоциации
+Associations
 ###
 
-#@ Профиль аватар изображение
+#@ Profile avatar image
 File.attributes.avatarImg  = model: "user"
 
-#@ Профиль шапка изображение
+#@ Profile header image
 File.attributes.headingImg = model: "user"
+
+#@ Project Images
+File.attributes.projectImage = model: "hab"
+
+#@ Post header image
 
 module.exports = File;

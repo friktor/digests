@@ -1,0 +1,38 @@
+<div class="ui basic segment">
+	<div class="ui header text center">
+		{{ 'upload avatar' | translate | capitalize:'first'}}
+	</div>
+	
+	<div  ng-file-drop 
+				drag-over-class="dragover" 
+				ng-model="avatar" 
+				allow-dir="false" 
+				multiple="false" 
+				class="drop zone">
+	
+		<p>{{ '* - drop image here. Allow format - jpg, png.' | translate}}</p>
+		<p>{{ '* - max size of 500kb.' | translate}}</p>
+
+		<md-button ng-file-select ng-model="avatar" multiple="false">
+			<span>
+				<i class="fa fa-file-image-o"></i>
+				{{ 'select file'| translate}}
+			</span>
+		</md-button>
+
+		<md-button ng-disabled="allowUploadAvatar" ng-click="uploadAvatar()">
+			<span>
+				<i class="fa fa-cloud-upload"></i>
+				{{ 'upload' | translate}}
+			</span>
+		</md-button>	
+
+    <div ng-show="!allowUploadAvatar" layout="row" layout-sm="column" layout-align="space-around">
+      <md-progress-linear md-mode="determinate" value="{{avatarUploadProgress || 0}}"></md-progress-linear>
+    </div>
+
+    <p style="margin-top: 7px; color: #3F51B5;" ng-show="avatarUploadProgress === 100">{{ 'upload success!' | translate | capitalize:'first' }}</p>
+
+	</div>
+		
+</div>

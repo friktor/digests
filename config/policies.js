@@ -36,7 +36,8 @@ module.exports.policies = {
   },
 
   CommentController: {
-    create: ["pushCommentAllow"]
+    create: ["pushCommentAllow"],
+    remove: ["pushCommentAllow"],
   },
 
   UserController: {
@@ -46,7 +47,10 @@ module.exports.policies = {
   },
 
   UploadController: {
-    "*": ["accessPersonalForUser"]
+    uploadProfileHeadingImage: "accessPersonalForUser",
+    uploadPostHeaderImages: "allowUploadPostHeader",
+    uploadAvatarImage: "accessPersonalForUser",
+    uploadHabHeader: true
   },
 
   PostController: {
@@ -58,10 +62,5 @@ module.exports.policies = {
     create: "allowAddSubscribe",
     destroy: "allowDestroySubscribe"
   },
-
-  HabController: {
-    create: true
-  },
-
     
 };
